@@ -25,7 +25,7 @@ public class NpcController : MonoBehaviour
         newPosition = transform.position + randomPosition;
 
         meshAgent.SetDestination(newPosition);
-        StartCoroutine(Move());
+        StartCoroutine("Move");
     }
 
     IEnumerator Move()
@@ -42,14 +42,23 @@ public class NpcController : MonoBehaviour
         yield return null;
     }
 
-    public void GoTalk()
+    public void GoTalk(Vector3 playerPosition)
     {
         Debug.Log($"{gameObject.name} : can talk");
+        newPosition = transform.position;
+        meshAgent.SetDestination(newPosition);
+
+        animator.SetFloat("Speed", 0f);
+        Debug.Log(playerPosition);
+        transform.LookAt(playerPosition);
+        
+        StopCoroutine("Move");
     }
 
     public void StopTalk()
     {
         Debug.Log($"{gameObject.name} : can not talk");
+        FindNextPosition();
     }
 
 }

@@ -22,7 +22,17 @@ public class JsonManager : MonoBehaviour
         if (File.Exists(streaminAssetsPath))
         {
             jsonText = File.ReadAllText(streaminAssetsPath);
-            GameInfo.Instance.jsonData = JsonUtility.FromJson<JsonData>(jsonText);
+            JsonData jsonData = JsonUtility.FromJson<JsonData>(jsonText);
+
+            foreach (var conversation in jsonData.conversation)
+            {
+                GameInfo.Instance.conversationList.Add(conversation.key, conversation);
+            }
+
+            foreach (var npc in jsonData.npc)
+            {
+                GameInfo.Instance.npcInfos.Add(npc.npcName, npc);
+            }
         }
 
         yield return null;

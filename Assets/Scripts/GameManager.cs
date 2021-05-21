@@ -14,12 +14,14 @@ public class GameManager : MonoBehaviour
     private Dictionary<string, NpcController> npcControllers;
 
     HashSet<int> randomNum;
+    bool[] childSpawnPoint;
 
-    private void Awake()
+    private void Start()
     {
         chat = GetComponent<Chat>();
 
         randomNum = new HashSet<int>();
+ 
         npcControllers = new Dictionary<string, NpcController>();
 
         GameObject player = Instantiate(playerPrefab, startPoint.position, startPoint.rotation);
@@ -28,12 +30,29 @@ public class GameManager : MonoBehaviour
 
         player.transform.GetChild(GameInfo.Instance.CharacterIndex).gameObject.SetActive(true);
 
-        for (int i = 0; i < transform.childCount; i++)
+        childSpawnPoint = new bool[transform.childCount];
+        for (int i = 0; i < childSpawnPoint.Length; i++)
         {
-            Transform child = transform.GetChild(i);
-            GameObject npc = Instantiate(npcPrefab, child.position, child.rotation);
+            childSpawnPoint[i] = false;
+        }
+
+
+        foreach (var npcInfo in GameInfo.Instance.npcInfos)
+        {
+            //위치
+            int spawnPoint;
+            do
+            {
+                spawnPoint = Random.Range(0, transform.childCount);
+            }
+            while (childSpawnPoint[spawnPoint]);
+
+            childSpawnPoint[spawnPoint] = true;
+
+            GameObject npc = Instantiate(npcPrefab, transform.GetChild(spawnPoint).position, transform.GetChild(spawnPoint).rotation);
             NpcController npcController = npc.GetComponent<NpcController>();
-            
+
+            //모양
             int randomIndex;
             do
             {
@@ -46,7 +65,7 @@ public class GameManager : MonoBehaviour
             Transform childObj = npc.transform.GetChild(randomIndex);
             childObj.gameObject.SetActive(true);
             string[] words = childObj.name.Split('_');
-            npc.name = $"NPC_{words[2]}{words[3]}";
+            npc.name = $"NPC_{npcInfo.Key}";
 
             npcControllers.Add(npc.name, npcController);
         }
@@ -56,10 +75,11 @@ public class GameManager : MonoBehaviour
     {
         if (npcControllers.ContainsKey(npcName))
         {
-            npcControllers[npcName].GoTalk();
+            npcControllers[npcName].GoTalk(PlayerController.transform.position);
             chat.OpenChat();
-            JsonData jsonData  = GameInfo.Instance.jsonData;
-            chat.SetText(jsonData.conversation[0].talk);
+
+            string[] names = npcName.Split('_');
+           chat.SetText(names[1]);
         }
 
     }

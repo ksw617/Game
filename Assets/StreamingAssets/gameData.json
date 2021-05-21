@@ -1,80 +1,524 @@
 {
   "conversation": [
     {
-      "key": "npc_0",
-      "talk": "너무 반갑고"
+      "key": "DuckBae_0",
+      "talk": "너무 반갑고",
+      "buttonCount": 1,
+      "answer1": "next",
+      "answer2": null,
+      "answer3": null,
+      "next1": "DuckBae_1",
+      "next2": null,
+      "next3": null
     },
     {
-      "key": "npc_1",
-      "talk": "안녕! 이곳은 처음이니?"
+      "key": "DuckBae_1",
+      "talk": "안녕! 이곳은 처음이니?",
+      "buttonCount": 2,
+      "answer1": "처음이야",
+      "answer2": "아니!",
+      "answer3": null,
+      "next1": "DuckBae_2",
+      "next2": "DuckBae_3",
+      "next3": null
     },
     {
-      "key": "npc_2",
-      "talk": "어서오고"
+      "key": "DuckBae_2",
+      "talk": "어서오고",
+      "buttonCount": 2,
+      "answer1": "반갑다",
+      "answer2": "어쩌라고",
+      "answer3": null,
+      "next1": "DuckBae_8",
+      "next2": "DuckBae_9",
+      "next3": null
     },
     {
-      "key": "npc_3",
-      "talk": "어이어이 이곳은 처음이냐고"
+      "key": "DuckBae_3",
+      "talk": "어이어이 이곳은 처음이냐고",
+      "buttonCount": 2,
+      "answer1": "그래",
+      "answer2": "아니",
+      "answer3": null,
+      "next1": "DuckBae_18",
+      "next2": "DuckBae_17",
+      "next3": null
     },
     {
-      "key": "npc_4",
-      "talk": "싸우자"
+      "key": "DuckBae_4",
+      "talk": "싸우자",
+      "buttonCount": 3,
+      "answer1": "잠깐만...!화장실좀...",
+      "answer2": "뭐야?",
+      "answer3": "덤벼라",
+      "next1": "DuckBae_7",
+      "next2": "DuckBae_12",
+      "next3": "DuckBae_6"
     },
     {
-      "key": "npc_5",
-      "talk": "올때 메로나"
+      "key": "DuckBae_5",
+      "talk": "올때 메로나",
+      "buttonCount": 1,
+      "answer1": "또 먹어?",
+      "answer2": null,
+      "answer3": null,
+      "next1": "DuckBae_15",
+      "next2": null,
+      "next3": null
     },
     {
-      "key": "npc_6",
-      "talk": "너로 정했다! 피카츄!"
+      "key": "DuckBae_6",
+      "talk": "너로 정했다! 피카츄!",
+      "buttonCount": 2,
+      "answer1": "피카피카",
+      "answer2": "왜 이러는걸까요",
+      "answer3": null,
+      "next1": "DuckBae_14",
+      "next2": "DuckBae_11",
+      "next3": null
     },
     {
-      "key": "npc_7",
-      "talk": "올때 월드콘"
+      "key": "DuckBae_7",
+      "talk": "올때 월드콘",
+      "buttonCount": 2,
+      "answer1": "좋지",
+      "answer2": "고건 좀",
+      "answer3": null,
+      "next1": "DuckBae_5",
+      "next2": "DuckBae_5",
+      "next3": null
     },
     {
-      "key": "npc_8",
-      "talk": "인상이 좋아보이시는데..."
+      "key": "DuckBae_8",
+      "talk": "인상이 좋아보이시는데...",
+      "buttonCount": 2,
+      "answer1": "도를 믿지 않습니다.",
+      "answer2": "당신도요.",
+      "answer3": null,
+      "next1": "DuckBae_10",
+      "next2": "DuckBae_13",
+      "next3": null
     },
     {
-      "key": "npc_9",
-      "talk": "..?"
+      "key": "DuckBae_9",
+      "talk": "..?",
+      "buttonCount": 0,
+      "answer1": null,
+      "answer2": null,
+      "answer3": null,
+      "next1": null,
+      "next2": null,
+      "next3": null
     },
     {
-      "key": "npc_10",
-      "talk": "..!"
+      "key": "DuckBae_10",
+      "talk": "..!",
+      "buttonCount": 1,
+      "answer1": "저희 누군지 아세요?",
+      "answer2": null,
+      "answer3": null,
+      "next1": "DuckBae_16",
+      "next2": null,
+      "next3": null
     },
     {
-      "key": "npc_11",
-      "talk": "그만큼 신나시는 거지"
+      "key": "DuckBae_11",
+      "talk": "그만큼 신나시는 거지",
+      "buttonCount": 1,
+      "answer1": "...?",
+      "answer2": null,
+      "answer3": null,
+      "next1": "DuckBae_12",
+      "next2": null,
+      "next3": null
     },
     {
-      "key": "npc_12",
-      "talk": "무야호~"
+      "key": "DuckBae_12",
+      "talk": "무야호~",
+      "buttonCount": 1,
+      "answer1": "...?!",
+      "answer2": null,
+      "answer3": null,
+      "next1": "DuckBae_13",
+      "next2": null,
+      "next3": null
     },
     {
-      "key": "npc_13",
-      "talk": "김덕배입니다"
+      "key": "DuckBae_13",
+      "talk": "김덕배입니다",
+      "buttonCount": 1,
+      "answer1": "아 네..",
+      "answer2": null,
+      "answer3": null,
+      "next1": "DuckBae_14",
+      "next2": null,
+      "next3": null
     },
     {
-      "key": "npc_14",
-      "talk": "키햐앙ㅋ"
+      "key": "DuckBae_14",
+      "talk": "키햐앙ㅋ",
+      "buttonCount": 0,
+      "answer1": null,
+      "answer2": null,
+      "answer3": null,
+      "next1": null,
+      "next2": null,
+      "next3": null
     },
     {
-      "key": "npc_15",
-      "talk": "배고프다"
+      "key": "DuckBae_15",
+      "talk": "배고프다",
+      "buttonCount": 1,
+      "answer1": "어휴",
+      "answer2": null,
+      "answer3": null,
+      "next1": "DuckBae_14",
+      "next2": null,
+      "next3": null
     },
     {
-      "key": "npc_16",
-      "talk": "저희도 많이보죠"
+      "key": "DuckBae_16",
+      "talk": "저희도 많이보죠",
+      "buttonCount": 2,
+      "answer1": "무한~",
+      "answer2": "도전~",
+      "answer3": null,
+      "next1": "DuckBae_12",
+      "next2": "DuckBae_11",
+      "next3": null
     },
     {
-      "key": "npc_17",
-      "talk": "멍청하게 생긴 사람이랑은 대화하지 않는다네"
+      "key": "DuckBae_17",
+      "talk": "멍청하게 생긴 사람이랑은 대화하지 않는다네",
+      "buttonCount": 0,
+      "answer1": null,
+      "answer2": null,
+      "answer3": null,
+      "next1": null,
+      "next2": null,
+      "next3": null
     },
     {
-      "key": "npc_18",
-      "talk": "퇴근하고 싶다"
+      "key": "DuckBae_18",
+      "talk": "퇴근하고 싶다",
+      "buttonCount": 0,
+      "answer1": null,
+      "answer2": null,
+      "answer3": null,
+      "next1": null,
+      "next2": null,
+      "next3": null
+    },
+    {
+      "key": "SangDuck_0",
+      "talk": "안녕?",
+      "buttonCount": 1,
+      "answer1": "안녕하세요.",
+      "answer2": null,
+      "answer3": null,
+      "next1": "SangDuck_1",
+      "next2": null,
+      "next3": null
+    },
+    {
+      "key": "SangDuck_1",
+      "talk": "이 곳은 처음이니?",
+      "buttonCount": 2,
+      "answer1": "넵",
+      "answer2": "아니요",
+      "answer3": null,
+      "next1": "SangDuck_4",
+      "next2": "SangDuck_9",
+      "next3": null
+    },
+    {
+      "key": "SangDuck_2",
+      "talk": "(╬▔皿▔)╯",
+      "buttonCount": 1,
+      "answer1": "..?",
+      "answer2": null,
+      "answer3": null,
+      "next1": "SangDuck_3",
+      "next2": null,
+      "next3": null
+    },
+    {
+      "key": "SangDuck_3",
+      "talk": "저 발표연습이 있어서 혹시 시간되시면...",
+      "buttonCount": 2,
+      "answer1": "...",
+      "answer2": "미안..",
+      "answer3": null,
+      "next1": "SangDuck_9",
+      "next2": "SangDuck_13",
+      "next3": null
+    },
+    {
+      "key": "SangDuck_4",
+      "talk": "나랑 눈사람 만들래?",
+      "buttonCount": 3,
+      "answer1": "네",
+      "answer2": "아니오",
+      "answer3": "눈이 안 오는데?",
+      "next1": "SangDuck_2",
+      "next2": "SangDuck_5",
+      "next3": "SangDuck_15"
+    },
+    {
+      "key": "SangDuck_5",
+      "talk": "낚시할줄 아나?",
+      "buttonCount": 2,
+      "answer1": "네",
+      "answer2": "아니요",
+      "answer3": null,
+      "next1": "SangDuck_6",
+      "next2": "SangDuck_15",
+      "next3": null
+    },
+    {
+      "key": "SangDuck_6",
+      "talk": "와",
+      "buttonCount": 1,
+      "answer1": "샌즈!",
+      "answer2": null,
+      "answer3": null,
+      "next1": "SangDuck_11",
+      "next2": null,
+      "next3": null
+    },
+    {
+      "key": "SangDuck_7",
+      "talk": "난.. ㄱㅏ끔 눈물을 흘린ㄷr..",
+      "buttonCount": 1,
+      "answer1": "뭐야?",
+      "answer2": null,
+      "answer3": null,
+      "next1": "SangDuck_8",
+      "next2": null,
+      "next3": null
+    },
+    {
+      "key": "SangDuck_8",
+      "talk": "3000만큼 사랑해",
+      "buttonCount": 2,
+      "answer1": "네??",
+      "answer2": "저두요!",
+      "answer3": null,
+      "next1": "SangDuck_7",
+      "next2": "SangDuck_4",
+      "next3": null
+    },
+    {
+      "key": "SangDuck_9",
+      "talk": "상덕입니다",
+      "buttonCount": 1,
+      "answer1": "갑자기?",
+      "answer2": null,
+      "answer3": null,
+      "next1": "SangDuck_12",
+      "next2": null,
+      "next3": null
+    },
+    {
+      "key": "SangDuck_10",
+      "talk": "살아있네!",
+      "buttonCount": 0,
+      "answer1": null,
+      "answer2": null,
+      "answer3": null,
+      "next1": null,
+      "next2": null,
+      "next3": null
+    },
+    {
+      "key": "SangDuck_11",
+      "talk": "아시는 구나!",
+      "buttonCount": 0,
+      "answer1": null,
+      "answer2": null,
+      "answer3": null,
+      "next1": null,
+      "next2": null,
+      "next3": null
+    },
+    {
+      "key": "SangDuck_12",
+      "talk": "느그 아부지 머하시노?",
+      "buttonCount": 3,
+      "answer1": "조폭 이십니다",
+      "answer2": "건담입니다",
+      "answer3": "콘뎅싱!!만들어요",
+      "next1": "SangDuck_10",
+      "next2": "SangDuck_15",
+      "next3": "SangDuck_6"
+    },
+    {
+      "key": "SangDuck_13",
+      "talk": "어데 최씹니꺼?",
+      "buttonCount": 1,
+      "answer1": "....",
+      "answer2": null,
+      "answer3": null,
+      "next1": "SangDuck_14",
+      "next2": null,
+      "next3": null
+    },
+    {
+      "key": "SangDuck_14",
+      "talk": "경주최씨 충렬공파 33대손!!",
+      "buttonCount": 2,
+      "answer1": "아닌데요?",
+      "answer2": "...네?",
+      "answer3": null,
+      "next1": "SangDuck_11",
+      "next2": "SangDuck_15",
+      "next3": null
+    },
+    {
+      "key": "SangDuck_15",
+      "talk": "수고요",
+      "buttonCount": 0,
+      "answer1": null,
+      "answer2": null,
+      "answer3": null,
+      "next1": null,
+      "next2": null,
+      "next3": null
+    },
+    {
+      "key": "CheolSu_0",
+      "talk": "처음보는데 넌 누구니?",
+      "buttonCount": 2,
+      "answer1": "안녕",
+      "answer2": "넌 누구니?",
+      "answer3": null,
+      "next1": "CheolSu_2",
+      "next2": "CheolSu_9",
+      "next3": null
+    },
+    {
+      "key": "CheolSu_1",
+      "talk": "강력접착제처럼 철수책상 철책상에 앉아 서로를 액자속 사진속에 왕밤빵을 나눠먹으며 행복해 했지!",
+      "buttonCount": 2,
+      "answer1": "입에 모터가 달렸구나",
+      "answer2": "...",
+      "answer3": null,
+      "next1": "CheolSu_8",
+      "next2": "CheolSu_10",
+      "next3": null
+    },
+    {
+      "key": "CheolSu_2",
+      "talk": "이 섬에서 나가는 방법을 알려줄까?",
+      "buttonCount": 2,
+      "answer1": "꺼져",
+      "answer2": "알려줘",
+      "answer3": null,
+      "next1": "CheolSu_3",
+      "next2": "CheolSu_7",
+      "next3": null
+    },
+    {
+      "key": "CheolSu_3",
+      "talk": "뭐야?",
+      "buttonCount": 2,
+      "answer1": "랩 해봐",
+      "answer2": "넌 누구야?",
+      "answer3": null,
+      "next1": "CheolSu_1",
+      "next2": "CheolSu_7",
+      "next3": null
+    },
+    {
+      "key": "CheolSu_4",
+      "talk": "그럼 돈을 가져오라고",
+      "buttonCount": 0,
+      "answer1": null,
+      "answer2": null,
+      "answer3": null,
+      "next1": null,
+      "next2": null,
+      "next3": null
+    },
+    {
+      "key": "CheolSu_5",
+      "talk": "내 옆으로 지나가면 100만원 줘야됨",
+      "buttonCount": 1,
+      "answer1": "돈이 없는데?",
+      "answer2": null,
+      "answer3": null,
+      "next1": "CheolSu_4",
+      "next2": null,
+      "next3": null
+    },
+    {
+      "key": "CheolSu_6",
+      "talk": "넌 이미 죽어있다.",
+      "buttonCount": 1,
+      "answer1": "옆으로 비켜!",
+      "answer2": null,
+      "answer3": null,
+      "next1": "CheolSu_5",
+      "next2": null,
+      "next3": null
+    },
+    {
+      "key": "CheolSu_7",
+      "talk": "궁금하면 200원",
+      "buttonCount": 2,
+      "answer1": "안 궁금해요",
+      "answer2": "알려 주시면 안돼요?",
+      "answer3": null,
+      "next1": "CheolSu_8",
+      "next2": "CheolSu_4",
+      "next3": null
+    },
+    {
+      "key": "CheolSu_8",
+      "talk": "쳇!",
+      "buttonCount": 0,
+      "answer1": null,
+      "answer2": null,
+      "answer3": null,
+      "next1": null,
+      "next2": null,
+      "next3": null
+    },
+    {
+      "key": "CheolSu_9",
+      "talk": "떡잎마을 방범대 철수 등장!",
+      "buttonCount": 1,
+      "answer1": "...?",
+      "answer2": null,
+      "answer3": null,
+      "next1": "CheolSu_10",
+      "next2": null,
+      "next3": null
+    },
+    {
+      "key": "CheolSu_10",
+      "talk": "뭘 봐",
+      "buttonCount": 2,
+      "answer1": "싸우고싶어?",
+      "answer2": "히익! 미안..",
+      "answer3": null,
+      "next1": "CheolSu_6",
+      "next2": "CheolSu_4",
+      "next3": null
+    }
+  ],
+  "npc": [
+    {
+      "npcName": "DuckBae",
+      "conversationIndex": 0
+    },
+    {
+      "npcName": "SangDuck",
+      "conversationIndex": 0
+    },
+    {
+      "npcName": "CheolSu",
+      "conversationIndex": 0
     }
   ]
 }

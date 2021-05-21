@@ -20,9 +20,15 @@ public class Chat : MonoBehaviour
         chatWindow.SetActive(false);
     }
 
-    public void SetText(string text)
+    public void SetText(string name)
     {
-        
+        NpcInfo npcInfo = GameInfo.Instance.npcInfos[name];
+        string conversationKey = $"{npcInfo.npcName}_{npcInfo.conversationIndex}";
+        Debug.Log(conversationKey);
+        Conversation conversation = GameInfo.Instance.conversationList[conversationKey];
+
+
+        chatText.text = conversation.talk;
     }
    
 }
