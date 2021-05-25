@@ -4,71 +4,65 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    [SerializeField] Chat chat;
+    [SerializeField] private Chat chat;
+    [SerializeField] private ObjectPoolManager objectPoolManager;
 
     public Transform startPoint;
     public GameObject playerPrefab;
     public PlayerController PlayerController { get; private set; }
 
-    public GameObject npcPrefab;
-    private Dictionary<string, NpcController> npcControllers;
+    [SerializeField] private Transform npcSpawnPoint;
+    [SerializeField] private Transform enemySpawnPoint;
 
+
+    private Dictionary<string, NpcController> npcControllers;
     HashSet<int> randomNum;
-    bool[] childSpawnPoint;
+
+
+    private void Awake()
+    {
+        objectPoolManager = GetComponent<ObjectPoolManager>();
+        chat = GetComponent<Chat>();
+
+        npcControllers = new Dictionary<string, NpcController>();
+        randomNum = new HashSet<int>();
+
+        npcSpawnPoint = transform.GetChild(0);
+        enemySpawnPoint = transform.GetChild(1);
+    }
 
     private void Start()
     {
-        chat = GetComponent<Chat>();
+        CreatePlayer();
+        CreateNPC();
+    }
 
-        randomNum = new HashSet<int>();
- 
-        npcControllers = new Dictionary<string, NpcController>();
-
+    private void CreatePlayer()
+    {
         GameObject player = Instantiate(playerPrefab, startPoint.position, startPoint.rotation);
         this.PlayerController = player.GetComponent<PlayerController>();
         this.PlayerController.gameManager = this;
 
         player.transform.GetChild(GameInfo.Instance.CharacterIndex).gameObject.SetActive(true);
+    }
 
-        childSpawnPoint = new bool[transform.childCount];
-        for (int i = 0; i < childSpawnPoint.Length; i++)
+    private void CreateNPC()
+    {
+
+        for (int i = 0; i < npcSpawnPoint.childCount; i++)
         {
-            childSpawnPoint[i] = false;
+            Transform npc = objectPoolManager.GetNPC(Random.Range(0, 60), out NpcController npcController);
+            npc.position = npcSpawnPoint.GetChild(i).position;
+            //npcControllers.Add(npc.name, npcController);
         }
 
 
-        foreach (var npcInfo in GameInfo.Instance.npcInfos)
-        {
-            //위치
-            int spawnPoint;
-            do
-            {
-                spawnPoint = Random.Range(0, transform.childCount);
-            }
-            while (childSpawnPoint[spawnPoint]);
+     
+    }
 
-            childSpawnPoint[spawnPoint] = true;
-
-            GameObject npc = Instantiate(npcPrefab, transform.GetChild(spawnPoint).position, transform.GetChild(spawnPoint).rotation);
-            NpcController npcController = npc.GetComponent<NpcController>();
-
-            //모양
-            int randomIndex;
-            do
-            {
-                randomIndex = Random.Range(0, 60);
-            }
-            while (randomNum.Contains(randomIndex));
-
-            randomNum.Add(randomIndex);
-
-            Transform childObj = npc.transform.GetChild(randomIndex);
-            childObj.gameObject.SetActive(true);
-            string[] words = childObj.name.Split('_');
-            npc.name = $"NPC_{npcInfo.Key}";
-
-            npcControllers.Add(npc.name, npcController);
-        }
+    public void SetNPC(string name, NpcController npcController)
+    {
+        npcControllers.Add(name, npcController);
     }
 
     public void ConnectNPC(string npcName)
@@ -79,7 +73,7 @@ public class GameManager : MonoBehaviour
             chat.OpenChat();
 
             string[] names = npcName.Split('_');
-           chat.SetText(names[1]);
+            chat.SetText(names[1]);
         }
 
     }
@@ -89,4 +83,5 @@ public class GameManager : MonoBehaviour
         npcControllers[npcName].StopTalk();
         chat.CloseChat();
     }
+
 }
