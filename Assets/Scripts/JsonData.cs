@@ -4,7 +4,7 @@ using System;
 public class JsonData
 {
     public Conversation[] conversation;
-    public NpcInfo[] npc;
+    public CharacterInfo[] characterInfo;
 }
 
 [Serializable]
@@ -22,10 +22,16 @@ public class Conversation
 }
 
 [Serializable]
-public class NpcInfo
+public class CharacterInfo
 {
-    public string npcName;
+    public string name;
     public int conversationIndex;
+    public string weapon;
+    public float searchRegion;
+    public float moveSpeed;
+    public string occupation;
+    public string characterShape;
+
 }
 
 

@@ -507,18 +507,78 @@
       "next3": null
     }
   ],
-  "npc": [
+  "characterInfo": [
     {
-      "npcName": "DuckBae",
-      "conversationIndex": 0
+      "name": "김성훈",
+      "conversationIndex": 0,
+      "weapon": "Spear",
+      "searchRegion": 8,
+      "moveSpeed": 5,
+      "occupation": "warrior",
+      "characterShape": "Dungeon_KnightMale_01"
     },
     {
-      "npcName": "SangDuck",
-      "conversationIndex": 0
+      "name": "노지환",
+      "conversationIndex": 0,
+      "weapon": "MusketRifle",
+      "searchRegion": 7,
+      "moveSpeed": 5,
+      "occupation": "cowboy",
+      "characterShape": "Western_Cowboy_01"
     },
     {
-      "npcName": "CheolSu",
-      "conversationIndex": 0
+      "name": "서규석",
+      "conversationIndex": 0,
+      "weapon": null,
+      "searchRegion": null,
+      "moveSpeed": null,
+      "occupation": null,
+      "characterShape": null
+    },
+    {
+      "name": "이승민",
+      "conversationIndex": 0,
+      "weapon": "assault rifle",
+      "searchRegion": 7,
+      "moveSpeed": 4,
+      "occupation": "special Forces",
+      "characterShape": null
+    },
+    {
+      "name": "정명준",
+      "conversationIndex": 0,
+      "weapon": "RustedSword",
+      "searchRegion": 2,
+      "moveSpeed": 2,
+      "occupation": "person",
+      "characterShape": null
+    },
+    {
+      "name": "조성호",
+      "conversationIndex": 0,
+      "weapon": "CrystalHalberd",
+      "searchRegion": 10,
+      "moveSpeed": 1,
+      "occupation": "swordMaster",
+      "characterShape": "Chr_Western_Gunman_01"
+    },
+    {
+      "name": "성한영",
+      "conversationIndex": 0,
+      "weapon": "Lute",
+      "searchRegion": 3,
+      "moveSpeed": 3,
+      "occupation": "Singer-songwriter",
+      "characterShape": "Western_TownMan_01"
+    },
+    {
+      "name": "곽상휘",
+      "conversationIndex": 0,
+      "weapon": "Axe",
+      "searchRegion": 5,
+      "moveSpeed": 3,
+      "occupation": "farmer",
+      "characterShape": "Dungeon_GoblinWarriorMale_01"
     }
   ]
 }

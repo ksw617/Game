@@ -17,6 +17,8 @@ public class CharacterManager : MonoBehaviour
         for (int i = 0; i < characters.Length; i++)
         {
             characters[i] = character.GetChild(i).gameObject;
+            string name = characters[i].name.Remove(0, 4);
+            GameInfo.Instance.characterNames.Add(name, i);
         }
 
         SetName();

@@ -5,63 +5,46 @@ using UnityEngine;
 public class ObjectPoolManager : MonoBehaviour
 {
 
-    public GameObject enemyPrefab;
-    public List<EnemyController> enemyControllers;
+    public GameObject characterPrefab;
+    public List<Character> characters;
 
-    public GameObject npcPrefab;
-    public List<NpcController> npcControllers;
 
     private void Awake()
     {
-        enemyControllers = new List<EnemyController>();
-        npcControllers = new List<NpcController>();
+        characters = new List<Character>();
     }
 
-    public Transform GetEnemy(int index)
+    public void Test(string testName)
     {
-        Transform childObj;
-        foreach (var enemy in enemyControllers)
-        {
-            if (!enemy.gameObject.activeSelf)
-            {
-                enemy.gameObject.SetActive(true);
-                childObj = enemy.transform.GetChild(index);
-                childObj.gameObject.SetActive(true);
-                return enemy.transform;
-            }
-        }
-
-        GameObject obj = Instantiate(enemyPrefab);
-        childObj = obj.transform.GetChild(index);
-        childObj.gameObject.SetActive(true);
-        EnemyController enemyController = obj.GetComponent<EnemyController>();
-        enemyControllers.Add(enemyController);
-        return obj.transform;
-
+        Transform test = GetCharacter(testName);
     }
 
-    public Transform GetNPC(int index, out NpcController controller)
+    public Transform GetCharacter(string name)
     {
-        Transform childObj;
-        foreach (var npc in npcControllers)
+
+        if (GameInfo.Instance.characterInfos.ContainsKey(name))
         {
-            if (!npc.gameObject.activeSelf)
+            CharacterInfo characterInfo = GameInfo.Instance.characterInfos[name];
+
+            foreach (var character in characters)
             {
-                controller = npc;
-                npc.gameObject.SetActive(true);
-                childObj = npc.transform.GetChild(index);
-                childObj.gameObject.SetActive(true);
-                return npc.transform;
+                if (!character.gameObject.activeSelf)
+                {
+                    character.SetCharacterInfo(characterInfo);
+                    return character.transform;
+                }
             }
+
+            GameObject newObj = Instantiate(characterPrefab);
+            newObj.SetActive(false);
+            Character newCharacter = newObj.GetComponent<Character>();
+            newCharacter.SetCharacterInfo(characterInfo);
+            characters.Add(newCharacter);
+            
+            return newObj.transform;
         }
 
-        GameObject obj = Instantiate(npcPrefab);
-        childObj = obj.transform.GetChild(index);
-        childObj.gameObject.SetActive(true);
-        NpcController npcController = obj.GetComponent<NpcController>();
-        npcControllers.Add(npcController);
-        controller = npcController;
-        return obj.transform;
+        return null;
 
     }
 

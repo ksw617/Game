@@ -88,13 +88,12 @@ public class PlayerController : MonoBehaviour
     public void FindNPC(string npcName)
     {
         npcList.Add(npcName);
-        gameManager.ConnectNPC(npcName);
     }
 
     public void RemoveNPC(string npcName)
     {
         npcList.Remove(npcName);
-        gameManager.DisconnectNPC(npcName);
+
     }
 
 

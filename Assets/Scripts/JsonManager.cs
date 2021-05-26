@@ -8,10 +8,11 @@ public class JsonManager : MonoBehaviour
     [SerializeField] private string streaminAssetsPath;
     string jsonText;
 
-    private void Start()
+    private IEnumerator Start()
     {
         streaminAssetsPath = Path.Combine(Application.streamingAssetsPath, "gameData.json");
         StartCoroutine(LoadJson());
+        yield return null;
     }
 
     IEnumerator LoadJson()
@@ -24,14 +25,16 @@ public class JsonManager : MonoBehaviour
             jsonText = File.ReadAllText(streaminAssetsPath);
             JsonData jsonData = JsonUtility.FromJson<JsonData>(jsonText);
 
+      
+
             foreach (var conversation in jsonData.conversation)
             {
                 GameInfo.Instance.conversationList.Add(conversation.key, conversation);
             }
 
-            foreach (var npc in jsonData.npc)
+            foreach (var character in jsonData.characterInfo)
             {
-                GameInfo.Instance.npcInfos.Add(npc.npcName, npc);
+                GameInfo.Instance.characterInfos.Add(character.name, character);
             }
         }
 

@@ -7,12 +7,14 @@ public class GameInfo : GenericSingleton<GameInfo>
     public int CharacterIndex { get; set; }
 
     public Dictionary<string, Conversation> conversationList;
-    public Dictionary<string, NpcInfo> npcInfos;
+    public Dictionary<string, CharacterInfo> characterInfos;
+    public Dictionary<string, int> characterNames;
 
     protected override void Awake()
     {
         base.Awake();
-        npcInfos = new Dictionary<string, NpcInfo>();
+        characterInfos = new Dictionary<string, CharacterInfo>();
         conversationList = new Dictionary<string, Conversation>();
+        characterNames = new Dictionary<string, int>();
     }
 }

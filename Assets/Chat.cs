@@ -46,8 +46,8 @@ public class Chat : MonoBehaviour
     {
         currentNpcName = name;
 
-        NpcInfo npcInfo = GameInfo.Instance.npcInfos[name];
-        string conversationKey = $"{npcInfo.npcName}_{npcInfo.conversationIndex}";
+        CharacterInfo npcInfo = GameInfo.Instance.characterInfos[name];
+        string conversationKey = $"{npcInfo.name}_{npcInfo.conversationIndex}";
         Conversation conversation = GameInfo.Instance.conversationList[conversationKey];
 
         foreach (var button in buttons)
@@ -86,8 +86,8 @@ public class Chat : MonoBehaviour
 
     public void ClickAnswerButton(int index)
     {
-        NpcInfo npcInfo = GameInfo.Instance.npcInfos[currentNpcName];
-        string conversationKey = $"{npcInfo.npcName}_{npcInfo.conversationIndex}";
+        CharacterInfo npcInfo = GameInfo.Instance.characterInfos[currentNpcName];
+        string conversationKey = $"{npcInfo.name}_{npcInfo.conversationIndex}";
         Conversation conversation = GameInfo.Instance.conversationList[conversationKey];
 
         string next = string.Empty;
