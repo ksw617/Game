@@ -36,6 +36,12 @@ public class JsonManager : MonoBehaviour
             {
                 GameInfo.Instance.characterInfos.Add(character.name, character);
             }
+
+            foreach (var map in jsonData.mapInfo)
+            {
+                string[] npcNames = { map.npc_0, map.npc_1, map.npc_2, map.npc_3, map.npc_4 };
+                GameInfo.Instance.mapNpcInfos.Add(map.sceneName, npcNames);
+            }
         }
 
         yield return null;

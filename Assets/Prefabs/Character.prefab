@@ -8133,7 +8133,7 @@ NavMeshAgent:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1294692714669404722}
-  m_Enabled: 1
+  m_Enabled: 0
   m_AgentTypeID: 0
   m_Radius: 0.5
   m_Speed: 3.5
@@ -8160,6 +8160,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f0ac405560a93345a0cbc95d36ba1b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  meshAgent: {fileID: 0}
+  characterInfo:
+    name: 
+    conversationIndex: 0
+    weapon: 
+    searchRegion: 0
+    moveSpeed: 0
+    occupation: 
+    characterShape: 
 --- !u!1 &1294726395573644314
 GameObject:
   m_ObjectHideFlags: 0

@@ -4,24 +4,16 @@ using UnityEngine;
 
 public class ObjectPoolManager : MonoBehaviour
 {
-
     public GameObject characterPrefab;
     public List<Character> characters;
-
 
     private void Awake()
     {
         characters = new List<Character>();
     }
 
-    public void Test(string testName)
-    {
-        Transform test = GetCharacter(testName);
-    }
-
     public Transform GetCharacter(string name)
     {
-
         if (GameInfo.Instance.characterInfos.ContainsKey(name))
         {
             CharacterInfo characterInfo = GameInfo.Instance.characterInfos[name];
@@ -40,9 +32,10 @@ public class ObjectPoolManager : MonoBehaviour
             Character newCharacter = newObj.GetComponent<Character>();
             newCharacter.SetCharacterInfo(characterInfo);
             characters.Add(newCharacter);
-            
+
             return newObj.transform;
         }
+ 
 
         return null;
 

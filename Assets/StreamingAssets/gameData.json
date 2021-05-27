@@ -533,7 +533,7 @@
       "searchRegion": null,
       "moveSpeed": null,
       "occupation": null,
-      "characterShape": null
+      "characterShape": "Dungeon_KnightMale_01"
     },
     {
       "name": "이승민",
@@ -542,7 +542,7 @@
       "searchRegion": 7,
       "moveSpeed": 4,
       "occupation": "special Forces",
-      "characterShape": null
+      "characterShape": "Dungeon_GoblinWarriorMale_01"
     },
     {
       "name": "정명준",
@@ -551,7 +551,7 @@
       "searchRegion": 2,
       "moveSpeed": 2,
       "occupation": "person",
-      "characterShape": null
+      "characterShape": "Western_Gunman_01"
     },
     {
       "name": "조성호",
@@ -560,7 +560,7 @@
       "searchRegion": 10,
       "moveSpeed": 1,
       "occupation": "swordMaster",
-      "characterShape": "Chr_Western_Gunman_01"
+      "characterShape": "Western_Gunman_01"
     },
     {
       "name": "성한영",
@@ -579,6 +579,25 @@
       "moveSpeed": 3,
       "occupation": "farmer",
       "characterShape": "Dungeon_GoblinWarriorMale_01"
+    },
+    {
+      "name": "정호준",
+      "conversationIndex": 0,
+      "weapon": "ShieldHalf",
+      "searchRegion": 3,
+      "moveSpeed": 3,
+      "occupation": "person",
+      "characterShape": "Western_TownMan_01"
+    }
+  ],
+  "mapInfo": [
+    {
+      "sceneName": "Game",
+      "npc_0": "조성호",
+      "npc_1": "성한영",
+      "npc_2": "이승민",
+      "npc_3": null,
+      "npc_4": null
     }
   ]
 }

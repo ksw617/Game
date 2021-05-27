@@ -5,6 +5,7 @@ public class JsonData
 {
     public Conversation[] conversation;
     public CharacterInfo[] characterInfo;
+    public MapInfo[] mapInfo;
 }
 
 [Serializable]
@@ -32,6 +33,17 @@ public class CharacterInfo
     public string occupation;
     public string characterShape;
 
+}
+
+[Serializable]
+public class MapInfo
+{
+    public string sceneName;
+    public string npc_0;
+    public string npc_1;
+    public string npc_2;
+    public string npc_3;
+    public string npc_4;
 }
 
 
