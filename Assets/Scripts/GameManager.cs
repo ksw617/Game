@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+    public MiniMapCamera minimapCamera;
     [SerializeField] private ObjectPoolManager objectPoolManager;
 
     public Transform startPoint;
@@ -31,6 +32,7 @@ public class GameManager : MonoBehaviour
     private void CreatePlayer()
     {
         GameObject player = Instantiate(playerPrefab, startPoint.position, startPoint.rotation);
+        minimapCamera.target = player.transform;
         this.PlayerController = player.GetComponent<PlayerController>();
         this.PlayerController.gameManager = this;
 

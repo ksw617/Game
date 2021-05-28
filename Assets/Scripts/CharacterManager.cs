@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
 public class CharacterManager : MonoBehaviour
 {
     public Text nameText;
@@ -63,6 +62,8 @@ public class CharacterManager : MonoBehaviour
 
     public void GoToGame()
     {
-        SceneManager.LoadScene("Game");
+        SceneController.Instance.GoToScene("Game");
+       
     }
+
 }

@@ -1,88 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &1764859208
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1764859209}
-  - component: {fileID: 1764859211}
-  - component: {fileID: 1764859210}
-  m_Layer: 0
-  m_Name: Camera
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1764859209
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1764859208}
-  m_LocalRotation: {x: 0.2164396, y: -0, z: -0, w: 0.97629607}
-  m_LocalPosition: {x: 0, y: 3.4, z: -3}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 3666316651621225200}
-  m_RootOrder: 61
-  m_LocalEulerAnglesHint: {x: 25, y: 0, z: 0}
---- !u!20 &1764859211
-Camera:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1764859208}
-  m_Enabled: 1
-  serializedVersion: 2
-  m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
-  m_projectionMatrixMode: 1
-  m_GateFitMode: 2
-  m_FOVAxisMode: 0
-  m_SensorSize: {x: 36, y: 24}
-  m_LensShift: {x: 0, y: 0}
-  m_FocalLength: 50
-  m_NormalizedViewPortRect:
-    serializedVersion: 2
-    x: 0
-    y: 0
-    width: 1
-    height: 1
-  near clip plane: 0.3
-  far clip plane: 1000
-  field of view: 60
-  orthographic: 0
-  orthographic size: 5
-  m_Depth: 0
-  m_CullingMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_RenderingPath: -1
-  m_TargetTexture: {fileID: 0}
-  m_TargetDisplay: 0
-  m_TargetEye: 3
-  m_HDR: 1
-  m_AllowMSAA: 1
-  m_AllowDynamicResolution: 0
-  m_ForceIntoRT: 0
-  m_OcclusionCulling: 1
-  m_StereoConvergence: 10
-  m_StereoSeparation: 0.022
---- !u!81 &1764859210
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1764859208}
-  m_Enabled: 1
 --- !u!1 &3668228967068367742
 GameObject:
   m_ObjectHideFlags: 0
@@ -92,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3666200317901792278}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: thumb_01_r
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -124,7 +41,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3674514665356192362}
   - component: {fileID: 3676906181631852212}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Chr_Dungeon_RockGolem_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -244,7 +161,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3666474861561925440}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: eyes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -274,7 +191,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3674694162847091082}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: thumb_03_l
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -305,7 +222,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3666303229583263532}
   - component: {fileID: 3676361405043952976}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Chr_Pirates_Gentleman_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -425,7 +342,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3674504720440809726}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: hand_r
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -458,7 +375,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3674758434095746836}
   - component: {fileID: 3676901467822792006}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Chr_Dungeon_GoblinFemale_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -578,7 +495,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3666190608760861212}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: toes_r
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -608,7 +525,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3665945352623263640}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: thigh_l
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -640,7 +557,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3674932034179128368}
   - component: {fileID: 3677262923851582680}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Chr_Fantasy_Witch_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -761,7 +678,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3674701816088140704}
   - component: {fileID: 3677340084757639600}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Chr_Dungeon_KnightMale_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -881,7 +798,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3666154721758300814}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: middle_01_r
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -913,7 +830,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3666093748611695332}
   - component: {fileID: 3677304481157198466}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Chr_Fantasy_Sorcerer_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1034,7 +951,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3674487895186603212}
   - component: {fileID: 3677465012610437190}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Chr_Samurai_Sensei_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1155,7 +1072,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3666200257472373180}
   - component: {fileID: 3677701346722412726}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Chr_Pirates_Blackbeard_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1275,7 +1192,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3674563757508980526}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: neck_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1307,7 +1224,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3666365652121677676}
   - component: {fileID: 3676977223265104032}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Chr_Vikings_ShieldMaiden_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1427,7 +1344,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3666455868615143432}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1460,7 +1377,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3666046952713167468}
   - component: {fileID: 3676718438104081400}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Chr_Adventure_Viking_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1580,7 +1497,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3666452468207188030}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: upperarm_l
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1612,7 +1529,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3666010183684818526}
   - component: {fileID: 3676391524549620142}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Chr_Fantasy_MalePeasant_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1732,7 +1649,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3666194703159030800}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: pelvis
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1765,7 +1682,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3666125489638318870}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: thigh_r
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1797,7 +1714,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3666202127183622412}
   - component: {fileID: 3677613559175423276}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Chr_Fantasy_Bard_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1918,7 +1835,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3674469541788347296}
   - component: {fileID: 3677295728828720632}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Chr_Western_Cowboy_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2038,7 +1955,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3666217886231239132}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: hand_l
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2070,7 +1987,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3674437533399717402}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: spine_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2101,7 +2018,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3666141418735297708}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: spine_02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2133,7 +2050,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3666313051028148444}
   - component: {fileID: 3676367811882786980}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Chr_Pirates_EnglishSoldier_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2254,7 +2171,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3674408869013073016}
   - component: {fileID: 3677722765397884598}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Chr_Dungeon_SkeletonKnight_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2375,7 +2292,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3674479498671175614}
   - component: {fileID: 3677719130665244682}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Chr_Dungeon_SkeletonSoldier_02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2495,7 +2412,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3666455085797821468}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: foot_r
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2527,7 +2444,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3674455124433111332}
   - component: {fileID: 3677056914209668786}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Chr_Knights_Light_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2648,7 +2565,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3666389203243721030}
   - component: {fileID: 3677112014690197884}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Chr_Pirates_FemalePirate_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2769,7 +2686,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3674665456666297630}
   - component: {fileID: 3677219720515474356}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Chr_Samurai_VillageWoman_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2890,7 +2807,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3674411666229207882}
   - component: {fileID: 3677076774247241048}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Chr_Adventure_Warrior_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3011,7 +2928,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3674512154284030724}
   - component: {fileID: 3677105306314082718}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Chr_Samurai_VillageMan_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3132,7 +3049,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3666373916289444386}
   - component: {fileID: 3676933558932529306}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Chr_Pirates_GovDaughter_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3252,7 +3169,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3674715219222765988}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: clavicle_l
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3284,7 +3201,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3666347944363888906}
   - component: {fileID: 3677365804971663680}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Chr_Dungeon_SkeletonSoldier_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3404,7 +3321,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3674545477410619916}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: calf_r
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3436,7 +3353,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3674583712741226980}
   - component: {fileID: 3676634108922087108}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Chr_Vikings_Warrior_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3557,7 +3474,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3666027676454764118}
   - component: {fileID: 3677287156732348834}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Chr_Western_Woman_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3677,7 +3594,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3674661937197811800}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: ball_l
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3709,7 +3626,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3666313937447849698}
   - component: {fileID: 3676936653508993254}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Chr_Western_Gunman_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3830,7 +3747,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3666086484385258044}
   - component: {fileID: 3677038322443624716}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Chr_Adventure_Peasant_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3951,7 +3868,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3674757101890553684}
   - component: {fileID: 3677334627258423724}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Chr_Samurai_Geisha_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4072,7 +3989,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3674758826580612528}
   - component: {fileID: 3676942228394369322}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Chr_Vikings_Warrior_02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4193,7 +4110,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3674809651961717008}
   - component: {fileID: 3677280375826699840}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Chr_Adventure_ShopKeeper_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4314,7 +4231,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3665937885014263674}
   - component: {fileID: 3676361985344995480}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Chr_Fantasy_Druid_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4435,7 +4352,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3674508080095309986}
   - component: {fileID: 3676982865820082234}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Chr_Dungeon_GoblinWarriorMale_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4555,7 +4472,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3666005257639677480}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: thumb_02_r
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4586,7 +4503,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3666044944881676374}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: toes_l
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4617,7 +4534,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3666033852250148866}
   - component: {fileID: 3677693745848626126}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Chr_Samurai_SamuraiWarrior_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4737,7 +4654,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3666427027821967376}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: middle_01_l
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4769,7 +4686,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3674519781565059038}
   - component: {fileID: 3676951266858651948}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Chr_Fantasy_Queen_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4890,7 +4807,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3666033796276718320}
   - component: {fileID: 3677103259720864786}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Chr_Samurai_Grunt_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5010,7 +4927,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3666071711251453834}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: upperarm_r
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5041,7 +4958,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3674871592360842266}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: ball_r
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5073,7 +4990,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3666448492052995558}
   - component: {fileID: 3677383303096982760}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Chr_Dungeon_KnightFemale_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5193,7 +5110,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3674496089048048346}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: spine_03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5227,7 +5144,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3674798098033820802}
   - component: {fileID: 3677708032821530410}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Chr_Dungeon_GoblinMale_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5347,7 +5264,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3666288134058659242}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: eyebrows
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5378,7 +5295,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3666122210083391896}
   - component: {fileID: 3677276415479083220}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Chr_Western_TownMan_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5499,7 +5416,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3674457223638691286}
   - component: {fileID: 3676992046459498646}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Chr_Knights_Soldier_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5620,7 +5537,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3674835352008621088}
   - component: {fileID: 3676698686545630898}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Chr_Pirates_Firstmate_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5741,7 +5658,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3674495356531331432}
   - component: {fileID: 3676399584445138226}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Chr_Fantasy_RougeMale_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5862,7 +5779,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3666103374065318684}
   - component: {fileID: 3677113200229101790}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Chr_Dungeon_GoblinChief_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5982,7 +5899,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3674859287860064620}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: lowerarm_l
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6013,7 +5930,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3666077246729895338}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: clavicle_r
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6045,7 +5962,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3674485216299896934}
   - component: {fileID: 3676778980198173832}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Chr_Samurai_Ninja_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6166,7 +6083,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3666462233552388484}
   - component: {fileID: 3676632332413633384}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Chr_Dungeon_GoblinWarriorFemale_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6286,7 +6203,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3666095947540598956}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: middle_02_r
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6317,7 +6234,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3674662241871813384}
   - component: {fileID: 3677400306460981566}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Chr_Pirates_EnglishCaptain_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6438,7 +6355,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3674487580820151520}
   - component: {fileID: 3676344727340151778}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Chr_Fantasy_FemalePeasant_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6559,7 +6476,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3674802817457222658}
   - component: {fileID: 3677730875341058940}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Chr_Pirates_Captain_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6678,7 +6595,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3674920682861770516}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: thumb_03_r
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6708,7 +6625,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3666413591618131004}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: calf_l
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6740,7 +6657,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3674910883700433702}
   - component: {fileID: 3676771664103949120}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Chr_Vikings_Chief_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6861,7 +6778,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3666003037236669450}
   - component: {fileID: 3677730962797089804}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Chr_Western_WorkingGirl_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6982,7 +6899,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3674396779583374566}
   - component: {fileID: 3676862368241244876}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Chr_Fantasy_King_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7103,7 +7020,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3666139991836896426}
   - component: {fileID: 3677313485554720880}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Chr_Dungeon_GoblinShaman_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7223,7 +7140,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3674550369301000194}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: thumb_02_l
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7255,7 +7172,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3666410287689168656}
   - component: {fileID: 3676414865874821076}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Chr_Dungeon_Skeleton_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7376,7 +7293,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3666087345109117722}
   - component: {fileID: 3677422067387941716}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Chr_Western_Cowgirl_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7496,7 +7413,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3674404710887645602}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: root
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7528,7 +7445,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3674492881464540072}
   - component: {fileID: 3676375731423640962}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Chr_Fantasy_PeasantWoman_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7648,7 +7565,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3674928170185762604}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: thumb_01_l
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7680,7 +7597,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3674669538853155224}
   - component: {fileID: 3676852462475236114}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Chr_Western_Sheriff_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7804,7 +7721,7 @@ GameObject:
   - component: {fileID: 5482198106975910081}
   - component: {fileID: 3830738574314893089}
   - component: {fileID: 3670221478468836007}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -7883,7 +7800,6 @@ Transform:
   - {fileID: 3666027676454764118}
   - {fileID: 3666003037236669450}
   - {fileID: 3674404710887645602}
-  - {fileID: 1764859209}
   - {fileID: 3238096541752135780}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -7968,7 +7884,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3674426979803762272}
   - component: {fileID: 3677115839106892392}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Chr_Fantasy_Wizard_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8088,7 +8004,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3674559256516597496}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: foot_l
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8120,7 +8036,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3666151786921566632}
   - component: {fileID: 3677217014774657156}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Chr_Fantasy_Gypsy_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8240,7 +8156,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3666312494472316154}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: middle_02_l
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8271,7 +8187,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3674848847123586074}
   - component: {fileID: 3677151913010965044}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Chr_Western_Badguy_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8391,7 +8307,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3666412069780185048}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: lowerarm_r
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8423,7 +8339,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3665964693347158290}
   - component: {fileID: 3677011341594907432}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Chr_Pirates_Deckhand_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8544,7 +8460,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3666131271790445722}
   - component: {fileID: 3676850488389714854}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Chr_Knights_Dark_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8667,7 +8583,7 @@ GameObject:
   - component: {fileID: 1937306611382036157}
   - component: {fileID: 7210497347966366836}
   - component: {fileID: 1734852302991718283}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Radar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8686,7 +8602,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3666316651621225200}
-  m_RootOrder: 62
+  m_RootOrder: 61
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!135 &1937306611382036157
 SphereCollider:
