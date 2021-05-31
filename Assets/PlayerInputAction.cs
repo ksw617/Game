@@ -158,6 +158,44 @@ public class @PlayerInputAction : IInputActionCollection, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""Camera"",
+            ""id"": ""a1f88529-cbb2-4d87-b669-de213daa8e73"",
+            ""actions"": [
+                {
+                    ""name"": ""Rotate"",
+                    ""type"": ""Value"",
+                    ""id"": ""2c9f65a6-03df-446c-a4f4-68024264b094"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""cd074f95-7a77-4479-9d60-59ede48e0fa9"",
+                    ""path"": """",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""InputControl"",
+                    ""action"": ""Rotate"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""27dc2366-7ec0-4eb6-9e2c-a682d5474e4d"",
+                    ""path"": ""<Mouse>/delta"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Mouse"",
+                    ""action"": ""Rotate"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": [
@@ -176,6 +214,17 @@ public class @PlayerInputAction : IInputActionCollection, IDisposable
                     ""isOR"": false
                 }
             ]
+        },
+        {
+            ""name"": ""Mouse"",
+            ""bindingGroup"": ""Mouse"",
+            ""devices"": [
+                {
+                    ""devicePath"": ""<Mouse>"",
+                    ""isOptional"": false,
+                    ""isOR"": false
+                }
+            ]
         }
     ]
 }");
@@ -183,6 +232,9 @@ public class @PlayerInputAction : IInputActionCollection, IDisposable
         m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
         m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
         m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
+        // Camera
+        m_Camera = asset.FindActionMap("Camera", throwIfNotFound: true);
+        m_Camera_Rotate = m_Camera.FindAction("Rotate", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -269,6 +321,39 @@ public class @PlayerInputAction : IInputActionCollection, IDisposable
         }
     }
     public PlayerActions @Player => new PlayerActions(this);
+
+    // Camera
+    private readonly InputActionMap m_Camera;
+    private ICameraActions m_CameraActionsCallbackInterface;
+    private readonly InputAction m_Camera_Rotate;
+    public struct CameraActions
+    {
+        private @PlayerInputAction m_Wrapper;
+        public CameraActions(@PlayerInputAction wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Rotate => m_Wrapper.m_Camera_Rotate;
+        public InputActionMap Get() { return m_Wrapper.m_Camera; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(CameraActions set) { return set.Get(); }
+        public void SetCallbacks(ICameraActions instance)
+        {
+            if (m_Wrapper.m_CameraActionsCallbackInterface != null)
+            {
+                @Rotate.started -= m_Wrapper.m_CameraActionsCallbackInterface.OnRotate;
+                @Rotate.performed -= m_Wrapper.m_CameraActionsCallbackInterface.OnRotate;
+                @Rotate.canceled -= m_Wrapper.m_CameraActionsCallbackInterface.OnRotate;
+            }
+            m_Wrapper.m_CameraActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @Rotate.started += instance.OnRotate;
+                @Rotate.performed += instance.OnRotate;
+                @Rotate.canceled += instance.OnRotate;
+            }
+        }
+    }
+    public CameraActions @Camera => new CameraActions(this);
     private int m_InputControlSchemeIndex = -1;
     public InputControlScheme InputControlScheme
     {
@@ -278,9 +363,22 @@ public class @PlayerInputAction : IInputActionCollection, IDisposable
             return asset.controlSchemes[m_InputControlSchemeIndex];
         }
     }
+    private int m_MouseSchemeIndex = -1;
+    public InputControlScheme MouseScheme
+    {
+        get
+        {
+            if (m_MouseSchemeIndex == -1) m_MouseSchemeIndex = asset.FindControlSchemeIndex("Mouse");
+            return asset.controlSchemes[m_MouseSchemeIndex];
+        }
+    }
     public interface IPlayerActions
     {
         void OnMove(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
+    }
+    public interface ICameraActions
+    {
+        void OnRotate(InputAction.CallbackContext context);
     }
 }
