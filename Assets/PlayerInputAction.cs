@@ -170,20 +170,17 @@ public class @PlayerInputAction : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""ZoomInOut"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""7981e5bf-4d01-4e37-81ac-90cbafeba0eb"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
-                {
-                    ""name"": """",
-                    ""id"": ""cd074f95-7a77-4479-9d60-59ede48e0fa9"",
-                    ""path"": """",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""InputControl"",
-                    ""action"": ""Rotate"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
                 {
                     ""name"": """",
                     ""id"": ""27dc2366-7ec0-4eb6-9e2c-a682d5474e4d"",
@@ -192,6 +189,17 @@ public class @PlayerInputAction : IInputActionCollection, IDisposable
                     ""processors"": """",
                     ""groups"": ""Mouse"",
                     ""action"": ""Rotate"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""73bc3a76-29e2-4ee6-8a8c-5d63b4159e8a"",
+                    ""path"": ""<Mouse>/scroll/y"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Mouse"",
+                    ""action"": ""ZoomInOut"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -235,6 +243,7 @@ public class @PlayerInputAction : IInputActionCollection, IDisposable
         // Camera
         m_Camera = asset.FindActionMap("Camera", throwIfNotFound: true);
         m_Camera_Rotate = m_Camera.FindAction("Rotate", throwIfNotFound: true);
+        m_Camera_ZoomInOut = m_Camera.FindAction("ZoomInOut", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -326,11 +335,13 @@ public class @PlayerInputAction : IInputActionCollection, IDisposable
     private readonly InputActionMap m_Camera;
     private ICameraActions m_CameraActionsCallbackInterface;
     private readonly InputAction m_Camera_Rotate;
+    private readonly InputAction m_Camera_ZoomInOut;
     public struct CameraActions
     {
         private @PlayerInputAction m_Wrapper;
         public CameraActions(@PlayerInputAction wrapper) { m_Wrapper = wrapper; }
         public InputAction @Rotate => m_Wrapper.m_Camera_Rotate;
+        public InputAction @ZoomInOut => m_Wrapper.m_Camera_ZoomInOut;
         public InputActionMap Get() { return m_Wrapper.m_Camera; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -343,6 +354,9 @@ public class @PlayerInputAction : IInputActionCollection, IDisposable
                 @Rotate.started -= m_Wrapper.m_CameraActionsCallbackInterface.OnRotate;
                 @Rotate.performed -= m_Wrapper.m_CameraActionsCallbackInterface.OnRotate;
                 @Rotate.canceled -= m_Wrapper.m_CameraActionsCallbackInterface.OnRotate;
+                @ZoomInOut.started -= m_Wrapper.m_CameraActionsCallbackInterface.OnZoomInOut;
+                @ZoomInOut.performed -= m_Wrapper.m_CameraActionsCallbackInterface.OnZoomInOut;
+                @ZoomInOut.canceled -= m_Wrapper.m_CameraActionsCallbackInterface.OnZoomInOut;
             }
             m_Wrapper.m_CameraActionsCallbackInterface = instance;
             if (instance != null)
@@ -350,6 +364,9 @@ public class @PlayerInputAction : IInputActionCollection, IDisposable
                 @Rotate.started += instance.OnRotate;
                 @Rotate.performed += instance.OnRotate;
                 @Rotate.canceled += instance.OnRotate;
+                @ZoomInOut.started += instance.OnZoomInOut;
+                @ZoomInOut.performed += instance.OnZoomInOut;
+                @ZoomInOut.canceled += instance.OnZoomInOut;
             }
         }
     }
@@ -380,5 +397,6 @@ public class @PlayerInputAction : IInputActionCollection, IDisposable
     public interface ICameraActions
     {
         void OnRotate(InputAction.CallbackContext context);
+        void OnZoomInOut(InputAction.CallbackContext context);
     }
 }
