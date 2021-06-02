@@ -32,19 +32,24 @@ public class CameraController : MonoBehaviour, PlayerInputAction.ICameraActions
         processing = false;
         xRotation = 0f;
         parent = transform.parent;
+        player = parent.parent;
         playerInputAction = new PlayerInputAction();
         playerInputAction.Camera.SetCallbacks(this);
 
         myCamera = GetComponent<Camera>();
-
     }
 
     void Start()
     {
+        newObj = new GameObject();
+        newObj.transform.SetParent(player);
+
         newObj.transform.position = transform.position;
         newObj.transform.LookAt(player);
 
         myDistance = Vector3.Distance(newObj.transform.position, player.position);
+
+
     }
 
 
@@ -58,36 +63,7 @@ public class CameraController : MonoBehaviour, PlayerInputAction.ICameraActions
         playerInputAction.Camera.Disable();
     }
 
-    //void FixedUpdate()
-    //{
-    //    newObj.transform.position = transform.position;
-    //    newObj.transform.LookAt(player);
-    //
-    //    Vector3 fwd = newObj.transform.TransformDirection(Vector3.forward);
-    //
-    //    distance = Vector3.Distance(newObj.transform.position, player.position);
-    //
-    //    RaycastHit hit;
-    //    if (Physics.Raycast(newObj.transform.position, fwd, out hit, distance, layerMask))
-    //    {
-    //
-    //        newObj.transform.Translate(Vector3.forward * Time.fixedDeltaTime * 5f);
-    //        transform.position = newObj.transform.position;
-    //       
-    //    }
-    //    else // 수정할꺼임
-    //    {
-    //
-    //        if (myDistance - distance > 0.1f )
-    //        {
-    //            newObj.transform.Translate(Vector3.back * Time.fixedDeltaTime * 5f);
-    //            transform.position = newObj.transform.position;
-    //        }
-    //    }
-    //
-    //
-    //}
-
+ 
     public void OnRotate(InputAction.CallbackContext context)
     {
 
@@ -115,10 +91,8 @@ public class CameraController : MonoBehaviour, PlayerInputAction.ICameraActions
         {
             processing = true;
             StartCoroutine("Test", fwd);
-    //
-    //        newObj.transform.Translate(Vector3.forward * Time.fixedDeltaTime * 5f);
-    //        transform.position = newObj.transform.position;
-    //       
+
+   
         }
 
     }

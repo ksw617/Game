@@ -5,7 +5,6 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    public Transform playerCamera;
     public MiniMapCamera minimapCamera;
     [SerializeField] private ObjectPoolManager objectPoolManager;
 
@@ -38,7 +37,6 @@ public class GameManager : MonoBehaviour
         this.PlayerController.gameManager = this;
 
         player.transform.GetChild(GameInfo.Instance.CharacterIndex).gameObject.SetActive(true);
-        playerCamera.SetParent(player.transform);
     }
 
     private void CreateNPC()

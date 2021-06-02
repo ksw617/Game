@@ -15,6 +15,7 @@ public class GameInfo : GenericSingleton<GameInfo>
 
     //dictionary들 초기화
 
+
     public Dictionary<string, string[]> mapNpcInfos;
     protected override void Awake()
     {
@@ -24,4 +25,6 @@ public class GameInfo : GenericSingleton<GameInfo>
         characterNames = new Dictionary<string, int>();
         mapNpcInfos = new Dictionary<string, string[]>();
     }
+
+    
 }
