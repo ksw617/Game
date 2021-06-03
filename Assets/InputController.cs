@@ -6,12 +6,10 @@ using UnityEngine.InputSystem;
 public class InputController : MonoBehaviour, PlayerInputAction.IPlayerActions
 {
     PlayerInputAction playerInputAction;
-    [SerializeField] private GameManager gameManager;
+    public PlayerController playerController;
 
     void Awake()
     {
-        gameManager = GetComponent<GameManager>();
-
         playerInputAction = new PlayerInputAction();
         playerInputAction.Player.SetCallbacks(this);
     }
@@ -35,7 +33,7 @@ public class InputController : MonoBehaviour, PlayerInputAction.IPlayerActions
         }
 
         Vector2 axis = context.ReadValue<Vector2>();
-        gameManager.PlayerController.SetAxis(axis);
+        playerController.SetAxis(axis);
 
     }
 
@@ -43,7 +41,7 @@ public class InputController : MonoBehaviour, PlayerInputAction.IPlayerActions
     {
         if (context.started)
         {
-            gameManager.PlayerController.TryJump();
+            playerController.TryJump();
         }
     }
 }
