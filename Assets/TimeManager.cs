@@ -2,8 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System;
+
 public class TimeManager : MonoBehaviour
 {
+    public Action changeDay;
     public Text text;
     public Transform sun;
 
@@ -14,10 +17,10 @@ public class TimeManager : MonoBehaviour
     [Header("Time")]
     public int gameDayToSecond = 1;
 
-    private int dayToMonth = 31;
+    [SerializeField] private int dayToMonth = 31;
 
     [SerializeField] private float time;
-    private float dayRate;
+    [SerializeField] private float dayRate;
 
     int year;
     int month;
@@ -40,48 +43,44 @@ public class TimeManager : MonoBehaviour
     private void FixedUpdate()
     {
         CalculateDate();
-     
-       // sun.Rotate(Vector3.right * (7.2f / dayToSecond) * speed);
     }
 
     void CalculateDate()
     {
+        //Time.fixedDeltaTime * speed * dayRate(1초)
         time += Time.fixedDeltaTime * speed * dayRate;
-        int second = (int)time % 60;
-        int min = ((int)time / 60 % 60);
-        int hour = ((int)time / 3600 % 24);
+        int second = (int)time % 60;       
+        int min = ((int)time / 60 % 60);    
+        int hour = ((int)time / 3600 % 24); 
 
-        if(time >= 3600 * 24) 
+        sun.Rotate(Vector3.right * ((Time.fixedDeltaTime * speed * dayRate) / 240f));
+
+        if (time >= 3600 * 24) 
         {
-            Debug.Log("test");
-            time = 0f;
-           
+            time -= (3600 * 24);
+
+            changeDay?.Invoke();
+
             day++;
-            if (day == dayToMonth) // dayToMonth : 31 30 29 28
+
+            if (day > dayToMonth) // dayToMonth : 31 30 29 28
             {
                 day = 1;
                 month++;
                 dayToMonth = GetDayToMonth();
                 if (month == 13)
                 {
-                    month = 0;
+                    month = 1;
                     year++;
                 }
               
             }
         }
 
-       
-
-       
-
         text.text = $"{year}년{month}월{day}일 \n {hour}:{min}:{second}";
     }
-
-    //                      0       1
     int GetDayToMonth()
-    {
-        //   
+    {  
         if (month <= 7)
         {
 
