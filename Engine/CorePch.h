@@ -20,3 +20,6 @@ using namespace Microsoft::WRL;
 #pragma comment(lib, "dxgi")
 #pragma comment(lib, "dxguid")
 #pragma comment(lib, "d3dcompiler")
+
+//Hello world
+void HelloWorld();

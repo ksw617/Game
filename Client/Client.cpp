@@ -1,4 +1,5 @@
-﻿#include "framework.h"
+﻿#include "pch.h"
+#include "framework.h"
 #include "Client.h"
 #include "MainGame.h"
 
