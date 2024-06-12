@@ -42,9 +42,11 @@ void SwapChain::CreateSwapChain(HWND hwnd, int width, int height, bool windowed,
 	sd.BufferDesc.RefreshRate.Denominator = 1;
 
 	//버퍼의 포맷 설정
-	sd.BufferDesc.Format = DXGI_FORMAT_R8G8_UNORM;
-	//스케일 모드 설정
+	sd.BufferDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;
+	//스캔라인 순서
 	sd.BufferDesc.ScanlineOrdering = DXGI_MODE_SCANLINE_ORDER_UNSPECIFIED;
+	//스케일 모드 설정
+	sd.BufferDesc.Scaling = DXGI_MODE_SCALING_UNSPECIFIED;
 	//멀티 샘플링 수 설정(1이면 비활성화)
 	sd.SampleDesc.Count = 1;
 	//멀티 샘플링 설정

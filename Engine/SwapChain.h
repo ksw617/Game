@@ -22,9 +22,9 @@ public:
 	//주어진 인덱스에 해당하는 렌더 타겟 버퍼를 반환
 	ComPtr<ID3D12Resource> GetRenderTarget(int index) { return rtvBuffer[index]; }
 	//현재 백 버퍼에 해당하는 렌더 타겟 버퍼를 반환
-	ComPtr<ID3D12Resource> GetBackRTVBuffer() {	return rtvBuffer[backBufferIndex];	}
+	ComPtr<ID3D12Resource> GetBackRTVBuffer() const { return rtvBuffer[backBufferIndex]; }
 	//현재 백 버퍼의 렌더 타겟 뷰(RTV) 디스크립터 핸들을 반환
-	D3D12_CPU_DESCRIPTOR_HANDLE GetBackRTV() { return rtvHandle[backBufferIndex]; }
+	D3D12_CPU_DESCRIPTOR_HANDLE GetBackRTV() const { return rtvHandle[backBufferIndex]; }
 
 public:
 	//초기화 함수, 필요한 정보와 객체를 받아 스왑체인과 관련 리소를 생성
