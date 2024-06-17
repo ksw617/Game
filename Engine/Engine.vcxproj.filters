@@ -12,6 +12,9 @@
     <Filter Include="Engine">
       <UniqueIdentifier>{3c71e7e1-6bfb-460a-90ea-d74ed7fe60e3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resources\Shader">
+      <UniqueIdentifier>{b725cef3-1f0e-4c24-8c76-99c400b75b76}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -31,6 +34,15 @@
     </ClCompile>
     <ClCompile Include="Engine.cpp">
       <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="RootSignature.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Mesh.cpp">
+      <Filter>Resources</Filter>
+    </ClCompile>
+    <ClCompile Include="Shader.cpp">
+      <Filter>Resources\Shader</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -55,5 +67,19 @@
     <ClInclude Include="Engine.h">
       <Filter>Engine</Filter>
     </ClInclude>
+    <ClInclude Include="RootSignature.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Mesh.h">
+      <Filter>Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="Shader.h">
+      <Filter>Resources\Shader</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\Resources\Shader\Default.hlsli">
+      <Filter>Resources\Shader</Filter>
+    </None>
   </ItemGroup>
 </Project>

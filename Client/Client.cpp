@@ -5,7 +5,6 @@
 
 #define MAX_LOADSTRING 100
 
-//HWND 전역 변수 선언
 HWND gHwnd;
 HINSTANCE hInst;                             
 WCHAR szTitle[MAX_LOADSTRING];                 
@@ -39,7 +38,6 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
 
     MainGame game;
-    //게임 초기화
     game.Init(gHwnd, 800, 600, true);
 
     while(true)
@@ -81,7 +79,8 @@ ATOM MyRegisterClass(HINSTANCE hInstance)
     wcex.hIcon          = LoadIcon(hInstance, MAKEINTRESOURCE(IDI_CLIENT));
     wcex.hCursor        = LoadCursor(nullptr, IDC_ARROW);
     wcex.hbrBackground  = (HBRUSH)(COLOR_WINDOW+1);
-    wcex.lpszMenuName   = MAKEINTRESOURCEW(IDC_CLIENT);
+    //wcex.lpszMenuName   = MAKEINTRESOURCEW(IDC_CLIENT);
+    wcex.lpszMenuName = nullptr;
     wcex.lpszClassName  = szWindowClass;
     wcex.hIconSm        = LoadIcon(wcex.hInstance, MAKEINTRESOURCE(IDI_SMALL));
 
@@ -104,7 +103,6 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
    ShowWindow(hWnd, nCmdShow);
    UpdateWindow(hWnd);
 
-   //전역에 값 넣어주기
    gHwnd = hWnd;
 
    return TRUE;
