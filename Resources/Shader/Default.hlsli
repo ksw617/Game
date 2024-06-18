@@ -1,33 +1,47 @@
-//Vertex Shader In
+//상수 버퍼 TEST_B0, 레지스터 b0에 바인딩
+cbuffer TEST_B0 : register(b0)
+{
+    float4 offset0; //위치 오프셋 값
+}
+
+//상수 버퍼 TEST_B1, 레지스터 b1에 바인딩
+cbuffer TEST_B1 : register(b1)
+{
+    float4 offset1; //색상 오프셋 값
+}
+
+
+
 struct VS_IN
 {
-    float3 pos : POSITION; // 정점 위치
-    float4 color : COLOR;  // 정점 색상
+    float3 pos : POSITION;
+    float4 color : COLOR; 
 };
 
-//Vetex Shader Out
 struct VS_OUT
 {
-    float4 pos : SV_Position; // 변환된 정점 위치 (클립 공간)
-    float4 color : COLOR;     // 정점 색상
+    float4 pos : SV_Position;
+    float4 color : COLOR;     
 };
 
-//Vertex Shader Main
 VS_OUT VS_Main(VS_IN input)
 {
-    VS_OUT output = (VS_OUT) 0; // 출력 구조체 초기화
-    //입력 정점 위치를 float4로 변환(w=1.0)
+    VS_OUT output = (VS_OUT) 0; 
     output.pos = float4(input.pos, 1.f);
-    //입력 정점 색상을 그대로 전달
+    
+    //위치 오프셋 추가
+    output.pos += offset0;
+    
     output.color = input.color;
     
-    return output; //출력 구조체 반환
+    //색상 오프셋 추가
+    output.color += offset1;
+    
+    return output;
 
 }
 
-//Pixel Shader Main
 float4 PS_Main(VS_OUT input) : SV_Target
 {
-     //입력 정점 색상을 그대로 반환
     return input.color;
 }

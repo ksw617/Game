@@ -44,6 +44,9 @@
     <ClCompile Include="Shader.cpp">
       <Filter>Resources\Shader</Filter>
     </ClCompile>
+    <ClCompile Include="ConstantBuffer.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h">
@@ -75,6 +78,9 @@
     </ClInclude>
     <ClInclude Include="Shader.h">
       <Filter>Resources\Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="ConstantBuffer.h">
+      <Filter>Engine</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
