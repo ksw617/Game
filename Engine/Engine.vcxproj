@@ -162,6 +162,7 @@
     <ClInclude Include="RootSignature.h" />
     <ClInclude Include="Shader.h" />
     <ClInclude Include="SwapChain.h" />
+    <ClInclude Include="TableDescriptor.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CommandQueue.cpp" />
@@ -179,6 +180,7 @@
     <ClCompile Include="RootSignature.cpp" />
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="SwapChain.cpp" />
+    <ClCompile Include="TableDescriptor.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\Resources\Shader\Default.hlsli" />

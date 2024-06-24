@@ -47,6 +47,9 @@
     <ClCompile Include="ConstantBuffer.cpp">
       <Filter>Engine</Filter>
     </ClCompile>
+    <ClCompile Include="TableDescriptor.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h">
@@ -80,6 +83,9 @@
       <Filter>Resources\Shader</Filter>
     </ClInclude>
     <ClInclude Include="ConstantBuffer.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="TableDescriptor.h">
       <Filter>Engine</Filter>
     </ClInclude>
   </ItemGroup>

@@ -3,18 +3,27 @@
 
 void RootSignature::Init(ComPtr<ID3D12Device> device)
 {
-	//두개의 루트 파라미터 배열 생성
-	CD3DX12_ROOT_PARAMETER params[2];
+	//상수 버퍼 뷰(CBV) 레이지 배열 정의
+	CD3DX12_DESCRIPTOR_RANGE ranges[] =
+	{
+		//CBV 레인지 타입, 레지스터 갯수, 기본 쉐이더 레지스터
+		CD3DX12_DESCRIPTOR_RANGE(D3D12_DESCRIPTOR_RANGE_TYPE_CBV, CBV_REGISTER_COUNT, 0)
+	};
+	
+	//루트 파라미터 배열 정의
+	CD3DX12_ROOT_PARAMETER params[1]{};
 
-	//첫번째 루트 파라미터를 상수 버퍼 뷰로 초기화, 레지스터 b0에 바이딩
-	params[0].InitAsConstantBufferView(0);  // 0번 -> b0
+	
+	//params[0].InitAsConstantBufferView(0);  // 0번 -> b0
 
-	//두번째 루트 파라미터를 상수 버퍼 뷰로 초기화, 레지스터 b1에 바이딩
-	params[1].InitAsConstantBufferView(1);	// 1번 -> b1
+	//파라미터 디스크립터 테이블로 초기화
+	//_countof(ranges) : 배열의 갯수
+	params[0].InitAsDescriptorTable(_countof(ranges), ranges);
 
 
-	//루트 시그니처 설명자 생성, 두개의 루트 파라미터 사용
-	D3D12_ROOT_SIGNATURE_DESC sigDesc = CD3DX12_ROOT_SIGNATURE_DESC(2, params);
+	//루트 시그니처 설명자 생성, 하나의 파라미터 사용
+	D3D12_ROOT_SIGNATURE_DESC sigDesc = CD3DX12_ROOT_SIGNATURE_DESC(_countof(ranges), params);
+
 	sigDesc.Flags = D3D12_ROOT_SIGNATURE_FLAG_ALLOW_INPUT_ASSEMBLER_INPUT_LAYOUT;
 
 	ComPtr<ID3DBlob> blobSignature; 

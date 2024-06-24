@@ -6,6 +6,7 @@
 #include "Mesh.h"
 #include "Shader.h"
 #include "ConstantBuffer.h"
+#include "TableDescriptor.h"
 
 class Engine
 {
@@ -36,15 +37,17 @@ private:
 	shared_ptr<CommandQueue> cmdQueue; 
 	shared_ptr<SwapChain> swapChain; 
 	shared_ptr<RootSignature> rootSignature;
-	//cosntBuffer 포인터
 	shared_ptr<ConstantBuffer> constBuffer;
+	//TableDescriptor 포인터
+	shared_ptr<TableDescriptor> tableDesc;
 public:
 	shared_ptr<Device> GetDevice() { return device; }
 	shared_ptr<CommandQueue> GetCmdQueue() { return cmdQueue; }
 	shared_ptr<SwapChain> GetSwapChain() { return swapChain; }
 	shared_ptr<RootSignature> GetRootSignature() { return rootSignature; }
-	//Get함수
 	shared_ptr<ConstantBuffer> GetConstBuffer() { return constBuffer; }
+	//Get함수
+	shared_ptr<TableDescriptor> GetTableDesc() { return tableDesc; }
 
 public:
 	void Init(HWND _hwnd, int _width, int _height, bool _windowed);

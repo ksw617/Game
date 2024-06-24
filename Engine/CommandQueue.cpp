@@ -50,10 +50,17 @@ void CommandQueue::RenderBegin(const D3D12_VIEWPORT* vp, const D3D12_RECT* rect)
 	D3D12_RESOURCE_BARRIER barrier = CD3DX12_RESOURCE_BARRIER::Transition(
 		swapChain->GetBackRTVBuffer().Get(), D3D12_RESOURCE_STATE_PRESENT, D3D12_RESOURCE_STATE_RENDER_TARGET);
 
-	//루트 시그니처 설정
+	
 	cmdList->SetGraphicsRootSignature(Engine::Get().GetRootSignature()->GetSignature().Get());
-	//ConstantBuffer Clear 호출
+	
 	Engine::Get().GetConstBuffer()->Clear();
+
+	//TableDescriptor Clear 호출
+	Engine::Get().GetTableDesc()->Clear();
+
+	//cmdList에 descHeap추가
+	ID3D12DescriptorHeap* descHeap = Engine::Get().GetTableDesc()->GetDescriptorHeap().Get();
+	cmdList->SetDescriptorHeaps(1, &descHeap);
 
 	cmdList->ResourceBarrier(1, &barrier);
 	cmdList->RSSetViewports(1, vp);

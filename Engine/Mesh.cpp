@@ -38,8 +38,10 @@ void Mesh::Render()
 	Engine::Get().GetCmdQueue()->GetCmdList()->IASetVertexBuffers(0, 1, &vertexBufferView);
 
 	//Buffer 에다가 데이터 샛팅. Buffer의 주소를 Register에다가 전송
-	Engine::Get().GetConstBuffer()->PushData(0, &transform, sizeof(transform));
-	Engine::Get().GetConstBuffer()->PushData(1, &transform, sizeof(transform));
+	Engine::Get().GetConstBuffer()->PushData(&transform, sizeof(transform));
+
+	//TableDescriptor에 테이블 커밋
+	Engine::Get().GetTableDesc()->CommitTable();
 
 
 	Engine::Get().GetCmdQueue()->GetCmdList()->DrawInstanced(vertexCount, 1, 0, 0);
