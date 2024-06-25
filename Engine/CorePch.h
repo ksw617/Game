@@ -1,4 +1,7 @@
 #pragma once
+
+#define _HAS_STD_BYTE 0
+
 #include <Windows.h>
 #include <memory>
 #include <string>
@@ -9,6 +12,8 @@
 
 using namespace std;
 
+//파일 관리 헤더
+#include <filesystem>
 
 #include "d3dx12.h"
 #include <d3d12.h>
@@ -20,6 +25,9 @@ using namespace std;
 #include <DirectXPackedVector.h>
 #include <DirectXColors.h>
 
+#include <DirectXTex/DirectXTex.h>
+#include <DirectXTex/DirectXTex.inl>
+
 using namespace DirectX;
 using namespace DirectX::PackedVector;
 using namespace Microsoft::WRL;
@@ -28,6 +36,13 @@ using namespace Microsoft::WRL;
 #pragma comment(lib, "dxgi")
 #pragma comment(lib, "dxguid")
 #pragma comment(lib, "d3dcompiler")
+
+#ifdef _DEBUG   // _DEBUG
+#pragma comment(lib, "Debug\\DirectXTex.lib")
+#else			// _RELEASE
+#pragma comment(lib, "Release\\DirectXTex.lib")
+#endif
+
 
 struct Vertex
 {
@@ -51,5 +66,5 @@ enum class CBV_REGISTER
 enum 
 {
 	 CBV_REGISTER_COUNT = CBV_REGISTER::COUNT,
-	 REGISTER_COUNT = CBV_REGISTER_COUNT, // 전체 REGISTER_COUNT는 현재는 CBV_REGISTER_COUNT 
+	 REGISTER_COUNT = CBV_REGISTER_COUNT, 
 };
