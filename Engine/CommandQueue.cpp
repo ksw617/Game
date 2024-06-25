@@ -69,7 +69,7 @@ void CommandQueue::RenderBegin(const D3D12_VIEWPORT* vp, const D3D12_RECT* rect)
 
 	D3D12_CPU_DESCRIPTOR_HANDLE backBufferView = swapChain->GetBackRTV();
 
-	cmdList->ClearRenderTargetView(backBufferView, Colors::Black, 0, nullptr);
+	cmdList->ClearRenderTargetView(backBufferView, Colors::Aqua, 0, nullptr);
 	cmdList->OMSetRenderTargets(1, &backBufferView, FALSE, nullptr);
 }
 
