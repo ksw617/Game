@@ -7,6 +7,7 @@
 #include "Shader.h"
 #include "ConstantBuffer.h"
 #include "TableDescriptor.h"
+#include "Texture.h"  //Texture 포함
 
 class Engine
 {
@@ -38,7 +39,6 @@ private:
 	shared_ptr<SwapChain> swapChain; 
 	shared_ptr<RootSignature> rootSignature;
 	shared_ptr<ConstantBuffer> constBuffer;
-	//TableDescriptor 포인터
 	shared_ptr<TableDescriptor> tableDesc;
 public:
 	shared_ptr<Device> GetDevice() { return device; }
@@ -46,7 +46,6 @@ public:
 	shared_ptr<SwapChain> GetSwapChain() { return swapChain; }
 	shared_ptr<RootSignature> GetRootSignature() { return rootSignature; }
 	shared_ptr<ConstantBuffer> GetConstBuffer() { return constBuffer; }
-	//Get함수
 	shared_ptr<TableDescriptor> GetTableDesc() { return tableDesc; }
 
 public:

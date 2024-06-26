@@ -37,28 +37,46 @@ void TableDescriptor::SetCBV(D3D12_CPU_DESCRIPTOR_HANDLE srcHandle, CBV_REGISTER
     );
 }
 
+void TableDescriptor::SetSRV(D3D12_CPU_DESCRIPTOR_HANDLE srcHandle, SRV_REGISTER reg)
+{
+    //SetCBV 복붙
+    D3D12_CPU_DESCRIPTOR_HANDLE destHandle = GetCPUHandle(reg);
+
+    UINT32 destRange = 1;
+    UINT32 srcRange = 1;
+
+    Engine::Get().GetDevice()->GetDevice()->CopyDescriptors(
+        1, &destHandle, &destRange,
+        1, &srcHandle, &srcRange,
+        D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV
+    );
+}
+
 void TableDescriptor::CommitTable()
 {
-    //디스크립터 힙의 시작 GPU 디스크립터 핸들을 가져옴
     D3D12_GPU_DESCRIPTOR_HANDLE handle = descHeap->GetGPUDescriptorHandleForHeapStart();
-
-    //현재 그룹 인덱스를 기준으로 핸들을 오프셋
     handle.ptr += currentGroupIndex * groupSize;
 
-    //CmdList에 루트 디스크립터 테이블 설정
     Engine::Get().GetCmdQueue()->GetCmdList()->SetGraphicsRootDescriptorTable(0, handle);
 
-    //다음 그룹 인덱스로 증가
     currentGroupIndex++;
 }
 
 D3D12_CPU_DESCRIPTOR_HANDLE TableDescriptor::GetCPUHandle(CBV_REGISTER reg)
 {
-    return GetCPUHandle(static_cast<UINT32>(reg));
+    //UINT8 로 변환
+    return GetCPUHandle(static_cast<UINT8>(reg));
 
 }
 
-D3D12_CPU_DESCRIPTOR_HANDLE TableDescriptor::GetCPUHandle(UINT32 reg)
+D3D12_CPU_DESCRIPTOR_HANDLE TableDescriptor::GetCPUHandle(SRV_REGISTER reg)
+{
+    //UINT8 로 변환 GetCPUHandle의 CBV_REGISTER꺼 복사
+    return GetCPUHandle(static_cast<UINT8>(reg));
+}
+
+//UINT8용으로 바꿈
+D3D12_CPU_DESCRIPTOR_HANDLE TableDescriptor::GetCPUHandle(UINT8 reg)
 {
     D3D12_CPU_DESCRIPTOR_HANDLE handle = descHeap->GetCPUDescriptorHandleForHeapStart();
 

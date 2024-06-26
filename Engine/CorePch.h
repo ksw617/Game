@@ -12,7 +12,6 @@
 
 using namespace std;
 
-//파일 관리 헤더
 #include <filesystem>
 
 #include "d3dx12.h"
@@ -48,9 +47,12 @@ struct Vertex
 {
 	XMFLOAT3 pos;
 	XMFLOAT4 color;
+
+	//uv값 추가
+	XMFLOAT2 uv;
 };
 
-enum class CBV_REGISTER
+enum class CBV_REGISTER : UINT8	 
 {
 	b0,	 
 	b1,  
@@ -58,13 +60,25 @@ enum class CBV_REGISTER
 	b3,	 
 	b4,	 
 
-	COUNT
+	END
 
 };
- 
+
+enum class SRV_REGISTER : UINT8	
+{
+	t0 = static_cast<UINT8>(CBV_REGISTER::END),
+	t1,  
+	t2,
+	t3,	
+	t4,	
+
+	END 
+};
 
 enum 
 {
-	 CBV_REGISTER_COUNT = CBV_REGISTER::COUNT,
-	 REGISTER_COUNT = CBV_REGISTER_COUNT, 
+	 CBV_REGISTER_COUNT = CBV_REGISTER::END,
+
+	 SRV_REGISTER_COUNT = static_cast<UINT8>(SRV_REGISTER::END) - CBV_REGISTER_COUNT,
+	 REGISTER_COUNT = CBV_REGISTER_COUNT + SRV_REGISTER_COUNT, 
 };
