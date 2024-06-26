@@ -54,7 +54,7 @@
       <Filter>Resources</Filter>
     </ClCompile>
     <ClCompile Include="DepthStencilBuffer.cpp">
-      <Filter>Pch</Filter>
+      <Filter>Engine</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -97,7 +97,9 @@
     <ClInclude Include="Shader.h">
       <Filter>Resources</Filter>
     </ClInclude>
-    <ClInclude Include="DepthStencilBuffer.h" />
+    <ClInclude Include="DepthStencilBuffer.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\Resources\Shader\Default.hlsli">

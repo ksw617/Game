@@ -12,7 +12,6 @@ void Shader::Init(const wstring& path)
 
 		{"POSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 0, D3D12_INPUT_CLASSIFICATION_PER_VERTEX_DATA, 0},
 		{"COLOR", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 12, D3D12_INPUT_CLASSIFICATION_PER_VERTEX_DATA, 0},
-		//텍스처 좌표 속성을 정의(2개의 32비트 float로 구성됨)
 		{"TEXCOORD", 0, DXGI_FORMAT_R32G32_FLOAT, 0, 28, D3D12_INPUT_CLASSIFICATION_PER_VERTEX_DATA, 0},
 	};
 
@@ -21,13 +20,17 @@ void Shader::Init(const wstring& path)
 
 	pipelineDesc.RasterizerState = CD3DX12_RASTERIZER_DESC(D3D12_DEFAULT);
 	pipelineDesc.BlendState = CD3DX12_BLEND_DESC(D3D12_DEFAULT);
-	pipelineDesc.DepthStencilState.DepthEnable = FALSE;
-	pipelineDesc.DepthStencilState.StencilEnable = FALSE;
+	//pipelineDesc.DepthStencilState.DepthEnable = FALSE;
+	//pipelineDesc.DepthStencilState.StencilEnable = FALSE;
+	pipelineDesc.DepthStencilState = CD3DX12_DEPTH_STENCIL_DESC(D3D12_DEFAULT); //기본값으로 설정
 	pipelineDesc.SampleMask = UINT_MAX;
 	pipelineDesc.PrimitiveTopologyType = D3D12_PRIMITIVE_TOPOLOGY_TYPE_TRIANGLE;
 	pipelineDesc.NumRenderTargets = 1;
 	pipelineDesc.RTVFormats[0] = DXGI_FORMAT_R8G8_UNORM;
 	pipelineDesc.SampleDesc.Count = 1;
+
+	//DSVFormat 설정
+	pipelineDesc.DSVFormat = Engine::Get().GetDepthStencilBuffer()->GetDSVFormat();
 
 	Engine::Get().GetDevice()->GetDevice()->CreateGraphicsPipelineState(&pipelineDesc, IID_PPV_ARGS(&pipelineState));
 

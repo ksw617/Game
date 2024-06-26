@@ -7,7 +7,8 @@
 #include "Shader.h"
 #include "ConstantBuffer.h"
 #include "TableDescriptor.h"
-#include "Texture.h"  //Texture 포함
+#include "Texture.h"  
+#include "DepthStencilBuffer.h"	 //추가
 
 class Engine
 {
@@ -40,6 +41,7 @@ private:
 	shared_ptr<RootSignature> rootSignature;
 	shared_ptr<ConstantBuffer> constBuffer;
 	shared_ptr<TableDescriptor> tableDesc;
+	shared_ptr<DepthStencilBuffer> depthStencilBuffer;	// 추가
 public:
 	shared_ptr<Device> GetDevice() { return device; }
 	shared_ptr<CommandQueue> GetCmdQueue() { return cmdQueue; }
@@ -47,6 +49,7 @@ public:
 	shared_ptr<RootSignature> GetRootSignature() { return rootSignature; }
 	shared_ptr<ConstantBuffer> GetConstBuffer() { return constBuffer; }
 	shared_ptr<TableDescriptor> GetTableDesc() { return tableDesc; }
+	shared_ptr<DepthStencilBuffer> GetDepthStencilBuffer() { return depthStencilBuffer; }
 
 public:
 	void Init(HWND _hwnd, int _width, int _height, bool _windowed);

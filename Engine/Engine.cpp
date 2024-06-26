@@ -11,7 +11,7 @@ void Engine::Init(HWND _hwnd, int _width, int _height, bool _windowed)
 	height = _height;
 	windowed = _windowed;
 
-	ResizeWindow(_width, _height);
+	
 				  
 	viewPort = { 0,0, static_cast<FLOAT>(width), static_cast<FLOAT>(height), 0.0f, 1.0f };
 
@@ -23,16 +23,18 @@ void Engine::Init(HWND _hwnd, int _width, int _height, bool _windowed)
 	rootSignature = make_shared<RootSignature>();
 	constBuffer = make_shared<ConstantBuffer>();
 	tableDesc = make_shared<TableDescriptor>();
+	depthStencilBuffer = make_shared<DepthStencilBuffer>(); // 할당
 
 	device->Init();
 	cmdQueue->Init(device->GetDevice(), swapChain);
 	swapChain->Init(hwnd, width, height, windowed, device->GetDevice(), device->GetDXGI(), cmdQueue->GetCmdQueue());
 	rootSignature->Init(device->GetDevice());
-
-	//초기화
 	constBuffer->Init(CBV_REGISTER::b0, sizeof(XMFLOAT4), 256);
-	
 	tableDesc->Init(256);
+
+
+	//아래로
+	ResizeWindow(_width, _height);
 }
 
 void Engine::Render()
@@ -62,4 +64,7 @@ void Engine::ResizeWindow(int _width, int _height)
 	AdjustWindowRect(&rect, WS_OVERLAPPEDWINDOW, false);
 
 	SetWindowPos(hwnd, 0, 100, 100, width, height, 0);
+
+	//초기화
+	depthStencilBuffer->Init(width, height);
 }
