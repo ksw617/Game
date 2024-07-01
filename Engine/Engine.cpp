@@ -21,20 +21,29 @@ void Engine::Init(HWND _hwnd, int _width, int _height, bool _windowed)
 	cmdQueue = make_shared<CommandQueue>();
 	swapChain = make_shared<SwapChain>();
 	rootSignature = make_shared<RootSignature>();
-	constBuffer = make_shared<ConstantBuffer>();
+	//constBuffer = make_shared<ConstantBuffer>();
 	tableDesc = make_shared<TableDescriptor>();
-	depthStencilBuffer = make_shared<DepthStencilBuffer>(); // 할당
+	depthStencilBuffer = make_shared<DepthStencilBuffer>(); 
+
+	input = make_shared<Input>(); 
+	timer = make_shared<Timer>();
 
 	device->Init();
 	cmdQueue->Init(device->GetDevice(), swapChain);
 	swapChain->Init(hwnd, width, height, windowed, device->GetDevice(), device->GetDXGI(), cmdQueue->GetCmdQueue());
 	rootSignature->Init(device->GetDevice());
-	constBuffer->Init(CBV_REGISTER::b0, sizeof(XMFLOAT4), 256);
+	//constBuffer->Init(CBV_REGISTER::b0, sizeof(XMFLOAT4), 256);
+
+	//CreateConstantBuffer 호출
+	CreateConstantBuffer(CBV_REGISTER::b0, sizeof(XMFLOAT4), 256);
+
 	tableDesc->Init(256);
 
 
-	//아래로
-	ResizeWindow(_width, _height);
+	input->Init(hwnd);
+	timer->Init();
+
+	ResizeWindow(width, height);
 }
 
 void Engine::Render()
@@ -42,6 +51,38 @@ void Engine::Render()
 	RenderBegin();
 
 	RenderEnd();
+}
+
+void Engine::Update()
+{
+	input->Update();
+	timer->Update();
+	ShowFPS();
+}
+
+void Engine::ShowFPS()
+{
+	UINT32 fps = timer->GetFPS();
+	wstring fpsText = L"FPS: " + to_wstring(fps);
+
+	SetWindowText(hwnd, fpsText.c_str());
+}
+
+void Engine::CreateConstantBuffer(CBV_REGISTER reg, UINT32 bufferSize, UINT32 count)
+{
+	//reg값을 UINT8 타입으로 변환
+	UINT8 typeInt = static_cast<UINT8>(reg);
+
+	//constantBuffers 벡터의 크기와 typeInt 값이 같은지 확인 (디버그 검증)
+	assert(constantBuffers.size() == typeInt);
+
+	//새로운 ConstantBuffer 객체를 만들어 주고 초기화
+	shared_ptr<ConstantBuffer> buffer = make_shared<ConstantBuffer>();
+	buffer->Init(reg, bufferSize, count);
+
+	//constantBuffers 벡터에 생성한 상수 버퍼를 추가
+	constantBuffers.push_back(buffer);
+
 }
 
 void Engine::RenderBegin()
@@ -65,6 +106,5 @@ void Engine::ResizeWindow(int _width, int _height)
 
 	SetWindowPos(hwnd, 0, 100, 100, width, height, 0);
 
-	//초기화
 	depthStencilBuffer->Init(width, height);
 }

@@ -1,4 +1,22 @@
 #pragma once
+							 
+//용도별 CONSTANT_BUFFER 타입을 정의하는 열거형
+enum class CONSTANT_BUFFER_TYPE
+{
+	TRANSFORM,	//변환 행렬을 저장하는 상수 버퍼
+	MATERIAL,	//재질 정보를 저장하는 상수 버퍼
+	END,		//상수 버퍼 타입의 끝
+
+};
+
+//상수 버퍼의 총 갯수를 정의
+enum 
+{
+	CONSTANT_BUFFER_COUNT = static_cast<UINT8>(CONSTANT_BUFFER_TYPE::END) // 상수 버퍼 타입의 총 갯수
+
+};
+
+
 class ConstantBuffer
 {
 private:
@@ -9,30 +27,26 @@ private:
 	UINT32 elementCount = 0;
 	UINT32 currentIndex = 0;
 
-	ComPtr<ID3D12DescriptorHeap> cbvDescHeap;			//CBV 디스크립터 힙
-	D3D12_CPU_DESCRIPTOR_HANDLE cpuHandleBegin = {};	//디스크립터 힙의 시작 CPU 핸들
-	UINT32 handleIncrementSize = 0;						//디스크립터 핸들의 증가 크기
+	ComPtr<ID3D12DescriptorHeap> cbvDescHeap;			
+	D3D12_CPU_DESCRIPTOR_HANDLE cpuHandleBegin = {};	
+	UINT32 handleIncrementSize = 0;						
 
-	CBV_REGISTER cbvRegister = {};						//상수 버퍼 뷰(CBV) 레지스터
+	CBV_REGISTER cbvRegister = {};						
 
 public:
 	ConstantBuffer();
 	~ConstantBuffer();
 private:
 	void CreateBuffer();
-	//View 만들기
 	void CreateView();
 public:
-	//상수 버퍼 초기화
+	D3D12_GPU_VIRTUAL_ADDRESS GetGpuVirtualAddress(UINT32 index);
+	D3D12_CPU_DESCRIPTOR_HANDLE GetCPUHandle(UINT32 index);
+public:
 	void Init(CBV_REGISTER reg, UINT32 size, UINT32 count);
-
 	void Clear();
-	//상수 버퍼에 데이터 푸시
 	void PushData(void* buffer, UINT32 size);
 
-	D3D12_GPU_VIRTUAL_ADDRESS GetGpuVirtualAddress(UINT32 index);
 
-	//CPU 디스크립터 핸들 가져오기
-	D3D12_CPU_DESCRIPTOR_HANDLE GetCPUHandle(UINT32 index);
 };
 

@@ -49,21 +49,34 @@ void MainGame::Tick()
 {
 	Engine::Get().RenderBegin();
 
+	//엔진의 업데이트 함수 호출
+	Engine::Get().Update();
+
 	shader->Update();
 
 	{
-		XMFLOAT4 transform(0.25f, 0.25f, 0.3f, 0.f);
-		mesh->SetTransform(transform);
+		static XMFLOAT4 transform = {};
 
-		mesh->SetTexture(texture);
+		//Time값 가져오기
+		float deltaTime = Engine::Get().GetTimer()->GetDeltaTime();
 
-		mesh->Render();
+		if (Engine::Get().GetInput()->GetButton(KEY_TYPE::W))
+		{
+			transform.y += 1.f * deltaTime;
+		}
+		if (Engine::Get().GetInput()->GetButton(KEY_TYPE::S))
+		{
+			transform.y -= 1.f * deltaTime;
+		}
+		if (Engine::Get().GetInput()->GetButton(KEY_TYPE::A))
+		{
+			transform.x -= 1.f * deltaTime;
+		}
+		if (Engine::Get().GetInput()->GetButton(KEY_TYPE::D))
+		{
+			transform.x += 1.f * deltaTime;
+		}
 
-	}
-
-	//하나 더 만들어 주고
-	{
-		XMFLOAT4 transform(0.f, 0.f, 0.1f, 0.f);
 		mesh->SetTransform(transform);
 
 		mesh->SetTexture(texture);
