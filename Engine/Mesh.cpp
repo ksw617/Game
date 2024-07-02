@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "Mesh.h"
 #include "Engine.h"
+//#include "Material.h"
 
 void Mesh::Init(const vector<Vertex>& vertexBuffer, const vector<UINT32>& indexBuffer)
 {
@@ -74,10 +75,10 @@ void Mesh::Render()
 
 	Engine::Get().GetCmdQueue()->GetCmdList()->IASetIndexBuffer(&indexBufferView);
 
-	Engine::Get().GetConstBuffer()->PushData(&transform, sizeof(transform));
 
-	//SRV Register에 텍스처 등록
-	Engine::Get().GetTableDesc()->SetSRV(texture->GetCpuHandle(), SRV_REGISTER::t0);
+	//제거
+	//Engine::Get().GetConstantBuffer(CONSTANT_BUFFER_TYPE::TRANSFORM)->PushData(&transform, sizeof(transform));
+	//material->Update();
 
 	Engine::Get().GetTableDesc()->CommitTable();
 

@@ -1,8 +1,7 @@
 #include "pch.h"
 #include "Engine.h"
-#include "Device.h"
-#include "CommandQueue.h"
-#include "SwapChain.h"
+#include "Material.h" 
+#include "SceneManager.h"
 
 void Engine::Init(HWND _hwnd, int _width, int _height, bool _windowed)
 {
@@ -21,7 +20,6 @@ void Engine::Init(HWND _hwnd, int _width, int _height, bool _windowed)
 	cmdQueue = make_shared<CommandQueue>();
 	swapChain = make_shared<SwapChain>();
 	rootSignature = make_shared<RootSignature>();
-	//constBuffer = make_shared<ConstantBuffer>();
 	tableDesc = make_shared<TableDescriptor>();
 	depthStencilBuffer = make_shared<DepthStencilBuffer>(); 
 
@@ -32,10 +30,12 @@ void Engine::Init(HWND _hwnd, int _width, int _height, bool _windowed)
 	cmdQueue->Init(device->GetDevice(), swapChain);
 	swapChain->Init(hwnd, width, height, windowed, device->GetDevice(), device->GetDXGI(), cmdQueue->GetCmdQueue());
 	rootSignature->Init(device->GetDevice());
-	//constBuffer->Init(CBV_REGISTER::b0, sizeof(XMFLOAT4), 256);
 
-	//CreateConstantBuffer 호출
+
+	
 	CreateConstantBuffer(CBV_REGISTER::b0, sizeof(XMFLOAT4), 256);
+	//추가
+	CreateConstantBuffer(CBV_REGISTER::b1, sizeof(MaterialParams), 256);
 
 	tableDesc->Init(256);
 
@@ -50,6 +50,8 @@ void Engine::Render()
 {
 	RenderBegin();
 
+	SceneManager::Get().Update(); // SceneManager update 호출
+
 	RenderEnd();
 }
 
@@ -57,6 +59,10 @@ void Engine::Update()
 {
 	input->Update();
 	timer->Update();
+
+	//추가
+	Render();
+
 	ShowFPS();
 }
 
@@ -70,17 +76,13 @@ void Engine::ShowFPS()
 
 void Engine::CreateConstantBuffer(CBV_REGISTER reg, UINT32 bufferSize, UINT32 count)
 {
-	//reg값을 UINT8 타입으로 변환
 	UINT8 typeInt = static_cast<UINT8>(reg);
 
-	//constantBuffers 벡터의 크기와 typeInt 값이 같은지 확인 (디버그 검증)
 	assert(constantBuffers.size() == typeInt);
 
-	//새로운 ConstantBuffer 객체를 만들어 주고 초기화
 	shared_ptr<ConstantBuffer> buffer = make_shared<ConstantBuffer>();
 	buffer->Init(reg, bufferSize, count);
 
-	//constantBuffers 벡터에 생성한 상수 버퍼를 추가
 	constantBuffers.push_back(buffer);
 
 }

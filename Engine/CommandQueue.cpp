@@ -57,7 +57,10 @@ void CommandQueue::RenderBegin(const D3D12_VIEWPORT* vp, const D3D12_RECT* rect)
 	
 	cmdList->SetGraphicsRootSignature(Engine::Get().GetRootSignature()->GetSignature().Get());
 	
-	Engine::Get().GetConstBuffer()->Clear();
+	//변경
+	Engine::Get().GetConstantBuffer(CONSTANT_BUFFER_TYPE::TRANSFORM)->Clear();
+	Engine::Get().GetConstantBuffer(CONSTANT_BUFFER_TYPE::MATERIAL)->Clear();
+
 	Engine::Get().GetTableDesc()->Clear();
 
 	ID3D12DescriptorHeap* descHeap = Engine::Get().GetTableDesc()->GetDescriptorHeap().Get();
@@ -71,16 +74,10 @@ void CommandQueue::RenderBegin(const D3D12_VIEWPORT* vp, const D3D12_RECT* rect)
 	D3D12_CPU_DESCRIPTOR_HANDLE backBufferView = swapChain->GetBackRTV();
 
 	cmdList->ClearRenderTargetView(backBufferView, Colors::Aqua, 0, nullptr);
-	//cmdList->OMSetRenderTargets(1, &backBufferView, FALSE, nullptr);
 
-
-	//깊이/스텐실 뷰의 CPU 디스크립터 핸들을 가져옴
 	D3D12_CPU_DESCRIPTOR_HANDLE depthStencilView = Engine::Get().GetDepthStencilBuffer()->GetDSVCPUHandle();
-	//출력 병합 단계에 랜더 타겟과 깊이/스탠실 뷰를 설정
-	cmdList->OMSetRenderTargets(1, &backBufferView, FALSE, &depthStencilView);
 
-	//깊이/스텐실 뷰를 초기화
-	//깊이 값을 1.0으로 초기화 하고, 스텐실 값을 0으로 초기화
+	cmdList->OMSetRenderTargets(1, &backBufferView, FALSE, &depthStencilView);
 	cmdList->ClearDepthStencilView(depthStencilView, D3D12_CLEAR_FLAG_DEPTH, 1.0f, 0, 0, nullptr);
 }
 
