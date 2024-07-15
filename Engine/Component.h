@@ -5,8 +5,9 @@ enum class COMPONENT_TYPE : UINT8
 {
 	TRANSFORM,		
 	MESH_FILTER,	
+	CAMERA, // Camera Component 추가
 
-	MONO_BEHAVIOUR, // MonoBehavior 타입 추가
+	MONO_BEHAVIOUR, 
 
 	END,			
 
@@ -15,7 +16,7 @@ enum class COMPONENT_TYPE : UINT8
 enum
 {
 
-	FIXED_COMPONENT_COUNT = static_cast<UINT8>(COMPONENT_TYPE::END) - 1 // MonoBehavior은 빼고
+	FIXED_COMPONENT_COUNT = static_cast<UINT8>(COMPONENT_TYPE::END) - 1 
 };
 
 class GameObject;
@@ -40,6 +41,7 @@ public:
 	virtual void Start() {}
 	virtual void Update() {}
 	virtual void LateUpdate() {}
+	virtual void FinalUpdate() {}
 
 public:
 	shared_ptr<GameObject> GetGameObject();

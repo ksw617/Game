@@ -27,7 +27,7 @@ public:
 
 private:
 	//Test¿ë
-	shared_ptr<Scene> LoadTestScene();
+	shared_ptr<Scene> LoadSampleScene();
 
 };
 

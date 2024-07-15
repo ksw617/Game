@@ -1,21 +1,46 @@
 #pragma once
 #include "Component.h"
-					  
-//변환 행렬을 저장하는 구조체
-struct TransformMatrix
-{
-	XMFLOAT4 offset; // 오프셋 값을 저장하는 XMFLOAT4
 
-};
 
 class Transform	: public Component
 {
-public:
-	//생성자 
-	//컴포넌트 타입을 TRANSFORM으로 설정하여 Component 생성자 호출
-	Transform() : Component(COMPONENT_TYPE::TRANSFORM) {}
+private:
+	Vector3 localPosition = {}; 
+	Vector3 localRotation = {};
+	Vector3 localScale = { 1.f, 1.f, 1.f };
 
-	//소멸자
+	Matrix matrixLocal = {};	
+	Matrix matrixWorld = {};	
+
+	weak_ptr<Transform> parent; 
+public:
+	Transform() : Component(COMPONENT_TYPE::TRANSFORM) {}
 	virtual ~Transform() {}
+
+public:
+	Vector3 GetLocalPosition() const { return localPosition; }
+	Vector3 GetLocalRotation() const { return localRotation; }
+	Vector3 GetLocalScale() const { return localScale; }
+
+	Matrix GetLocalToWorldMatrix() const { return matrixWorld; }
+	Vector3 GetWorldPosition() const { return matrixWorld.Translation(); }
+	Vector3 GetRight() const { return matrixWorld.Right(); }
+	Vector3 GetUp() const { return matrixWorld.Up(); }
+	Vector3 GetLook() const { return matrixWorld.Backward(); }
+
+	weak_ptr<Transform> GetParent() { return parent; }
+
+public:
+	void SetParent(shared_ptr<Transform> _parent) { parent = _parent; }
+	void SetLocalPosition(const Vector3 position) { localPosition = position; }
+	void SetLocalRotation(const Vector3 rotation) { localRotation = rotation; }
+	void SetLocalScale(const Vector3 scale) { localScale = scale; }
+
+public:
+	virtual void FinalUpdate() override;
+
+public:
+	//데이터를 최종적으로 GPU에 건내주기 위해
+	void PushDate();
 };
 

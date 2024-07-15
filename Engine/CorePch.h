@@ -17,6 +17,8 @@ using namespace std;
 #include "d3dx12.h"
 #include <d3d12.h>
 
+#include "SimpleMath.h" 
+
 #include <wrl.h>
 #include <d3dcompiler.h>
 #include <dxgi.h>
@@ -29,6 +31,7 @@ using namespace std;
 
 using namespace DirectX;
 using namespace DirectX::PackedVector;
+using namespace DirectX::SimpleMath; 
 using namespace Microsoft::WRL;
 
 #pragma comment(lib, "d3d12")
@@ -43,13 +46,18 @@ using namespace Microsoft::WRL;
 #endif
 
 
+//Matrix로 변경
+struct TransformMatrix
+{
+	Matrix offset;
+
+};
+
 struct Vertex
 {
-	XMFLOAT3 pos;
-	XMFLOAT4 color;
-
-	//uv값 추가
-	XMFLOAT2 uv;
+	Vector3 pos;
+	Vector4 color;
+	Vector2 uv;
 };
 
 enum class CBV_REGISTER : UINT8	 
