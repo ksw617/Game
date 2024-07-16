@@ -10,7 +10,6 @@ void Engine::Init(HWND _hwnd, int _width, int _height, bool _windowed)
 	height = _height;
 	windowed = _windowed;
 
-	
 				  
 	viewPort = { 0,0, static_cast<FLOAT>(width), static_cast<FLOAT>(height), 0.0f, 1.0f };
 
@@ -31,10 +30,8 @@ void Engine::Init(HWND _hwnd, int _width, int _height, bool _windowed)
 	swapChain->Init(hwnd, width, height, windowed, device->GetDevice(), device->GetDXGI(), cmdQueue->GetCmdQueue());
 	rootSignature->Init(device->GetDevice());
 
-
 	
 	CreateConstantBuffer(CBV_REGISTER::b0, sizeof(XMFLOAT4), 256);
-	//추가
 	CreateConstantBuffer(CBV_REGISTER::b1, sizeof(MaterialParams), 256);
 
 	tableDesc->Init(256);
@@ -50,7 +47,7 @@ void Engine::Render()
 {
 	RenderBegin();
 
-	SceneManager::Get().Update(); // SceneManager update 호출
+	SceneManager::Get().Render();  // Render 실행
 
 	RenderEnd();
 }
@@ -60,7 +57,8 @@ void Engine::Update()
 	input->Update();
 	timer->Update();
 
-	//추가
+	SceneManager::Get().Update(); // Update 실행
+
 	Render();
 
 	ShowFPS();

@@ -2,12 +2,15 @@
 #include "Camera.h"
 #include "Engine.h"
 #include "Transform.h"
+#include "Scene.h"
+#include "SceneManager.h"
+#include "GameObject.h"
+#include "MeshFilter.h"
 
-//정적 변수 초기화
+
 Matrix Camera::StaticMatrixView;
 Matrix Camera::StaticMatrixProjection;
 
-//카메라 컴포넌트 생성자 : 컴포넌트 타입을 CAMERA로 설정
 Camera::Camera() : Component(COMPONENT_TYPE::CAMERA)
 {
 }
@@ -18,22 +21,37 @@ Camera::~Camera()
 
 void Camera::FinalUpdate()
 {
-	//뷰 행렬 계산: 변환 컴포넌트의 로컬 월드 변환 행렬을 가져와서 역행렬을 구함
 	matrixView = GetTransform()->GetLocalToWorldMatrix().Invert();
 
-	//화면의 너비와 높이를 float으로 가져옴
 	float width = static_cast<float>(Engine::Get().GetWidth());
 	float height = static_cast<float>(Engine::Get().GetHeight());
 
-	//카메라 타입에 따라 투영 행렬 계산
 	if (type == PROJECTION_TYPE::PERSPECTIVE)
-		//원근 투영 행렬을 계산
 		matrixProjection = XMMatrixPerspectiveFovLH(fov, width / height, nearView, farView);
 	else
-		//직교 투영 행렬을 계산
 		matrixProjection = XMMatrixOrthographicLH(width * size, height * size, nearView, farView);
 
-	//정적 변수에 뷰 행렬과 투영 행렬을 저장
 	StaticMatrixView = matrixView;
 	StaticMatrixProjection = matrixProjection;
+}
+
+void Camera::Render()
+{
+	//현재 씬을 가져옴
+	shared_ptr<Scene> scene = SceneManager::Get().GetCurrentScene();
+
+	//현재 씬의 모든 게임 객체를 가져옴
+	const vector<shared_ptr<GameObject>>& gameObjects = scene->GetGameObjects();
+									   
+	//각 gameObject에 대한 처리
+	for (auto& gameObject : gameObjects)
+	{
+		//gameObject에 MeshFilter가 없는 경우 건너띔
+		if (gameObject->GetMeshFilter() == nullptr)
+			continue;
+
+		//gameObject의 MeshFilter 컴포넌트 Render를 실행
+		gameObject->GetMeshFilter()->Render();
+
+	}
 }

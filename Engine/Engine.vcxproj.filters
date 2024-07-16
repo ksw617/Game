@@ -9,9 +9,6 @@
       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
       <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
-    <Filter Include="Engine">
-      <UniqueIdentifier>{3c71e7e1-6bfb-460a-90ea-d74ed7fe60e3}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Resources\Shader">
       <UniqueIdentifier>{b725cef3-1f0e-4c24-8c76-99c400b75b76}</UniqueIdentifier>
     </Filter>
@@ -20,6 +17,12 @@
     </Filter>
     <Filter Include="Scene">
       <UniqueIdentifier>{98ab2aaa-a3f4-4d56-af42-12db4230a119}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine">
+      <UniqueIdentifier>{3c71e7e1-6bfb-460a-90ea-d74ed7fe60e3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TestScripts">
+      <UniqueIdentifier>{e5ad2d02-f0b9-41e4-9640-e9b7ef34eb1f}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -97,6 +100,9 @@
     </ClCompile>
     <ClCompile Include="Camera.cpp">
       <Filter>GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="CameraMoveTest.cpp">
+      <Filter>TestScripts</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -177,6 +183,9 @@
     </ClInclude>
     <ClInclude Include="Camera.h">
       <Filter>GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="CameraMoveTest.h">
+      <Filter>TestScripts</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

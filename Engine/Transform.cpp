@@ -25,9 +25,6 @@ void Transform::FinalUpdate()
 
 void Transform::PushDate()
 {
-	//월드 - 뷰 - 투영 변환 행렬 계산
 	Matrix mat = matrixWorld * Camera::StaticMatrixView * Camera::StaticMatrixProjection;
-
-	//변환 행렬 데이터를 상수 버퍼에 전달
 	Engine::Get().GetConstantBuffer(CONSTANT_BUFFER_TYPE::TRANSFORM)->PushData(&mat, sizeof(mat));
 }
