@@ -1,4 +1,5 @@
 #pragma once
+#include "Singleton.h"  // Singleton 호출
 #include "Device.h"
 #include "CommandQueue.h"
 #include "SwapChain.h"
@@ -13,21 +14,14 @@
 #include "Input.h" 
 #include "Timer.h"
 
-class Engine
+class Engine : public Singleton<Engine>
 {
+	//Singleton 클라스가 private 생성자에 접근할수 있게
+	friend class Singleton<Engine>;
+
 private:   
 	Engine() = default; 
 	~Engine() = default;
-public:
-	static Engine& Get()
-	{
-		static Engine instnace;
-		return instnace;
-	}
-
-public:
-	Engine(const Engine&) = delete;
-	Engine& operator=(const Engine&) = delete;
 
 private:
 	HWND hwnd; 
@@ -62,7 +56,6 @@ public:
 
 	shared_ptr<ConstantBuffer> GetConstantBuffer(CONSTANT_BUFFER_TYPE type) { return constantBuffers[static_cast<UINT8>(type)]; }
 
-	//가로 높이 반환
 	int GetWidth() const { return width; }
 	int GetHeight() const { return height; }
 public:

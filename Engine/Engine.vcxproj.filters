@@ -5,9 +5,6 @@
       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
       <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
-    <Filter Include="Scene">
-      <UniqueIdentifier>{98ab2aaa-a3f4-4d56-af42-12db4230a119}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Engine">
       <UniqueIdentifier>{3c71e7e1-6bfb-460a-90ea-d74ed7fe60e3}</UniqueIdentifier>
     </Filter>
@@ -26,6 +23,9 @@
     </Filter>
     <Filter Include="Shader">
       <UniqueIdentifier>{b725cef3-1f0e-4c24-8c76-99c400b75b76}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scene">
+      <UniqueIdentifier>{98ab2aaa-a3f4-4d56-af42-12db4230a119}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -109,6 +109,12 @@
     </ClCompile>
     <ClCompile Include="Object.cpp">
       <Filter>Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Singleton.cpp">
+      <Filter>Pch</Filter>
+    </ClCompile>
+    <ClCompile Include="Resources.cpp">
+      <Filter>Object\Resources</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -195,6 +201,12 @@
     </ClInclude>
     <ClInclude Include="Object.h">
       <Filter>Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Singleton.h">
+      <Filter>Pch</Filter>
+    </ClInclude>
+    <ClInclude Include="Resources.h">
+      <Filter>Object\Resources</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

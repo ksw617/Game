@@ -177,11 +177,13 @@
     <ClInclude Include="MonoBehaviour.h" />
     <ClInclude Include="Object.h" />
     <ClInclude Include="pch.h" />
+    <ClInclude Include="Resources.h" />
     <ClInclude Include="RootSignature.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SceneManager.h" />
     <ClInclude Include="Shader.h" />
     <ClInclude Include="SimpleMath.h" />
+    <ClInclude Include="Singleton.h" />
     <ClInclude Include="SwapChain.h" />
     <ClInclude Include="TableDescriptor.h" />
     <ClInclude Include="Texture.h" />
@@ -211,11 +213,13 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="Resources.cpp" />
     <ClCompile Include="RootSignature.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="SimpleMath.cpp" />
+    <ClCompile Include="Singleton.cpp" />
     <ClCompile Include="SwapChain.cpp" />
     <ClCompile Include="TableDescriptor.cpp" />
     <ClCompile Include="Texture.cpp" />

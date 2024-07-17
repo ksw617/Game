@@ -1,5 +1,4 @@
 
-//TRANSFORM 매개변수를 정의하는 상수 버퍼(b1 레지스터에 바인딩)
 cbuffer TRANSFORM_PARAMS : register(b0)
 {
    row_major matrix mat;
@@ -31,24 +30,24 @@ SamplerState sam_0 : register(s0);
 struct VS_IN
 {
     float3 pos : POSITION;
-    float4 color : COLOR;
+    //float4 color : COLOR; //컬러제거
     float2 uv : TEXCOORD;
 };
 
 struct VS_OUT
 {
     float4 pos : SV_Position;
-    float4 color : COLOR;  
+    //float4 color : COLOR; //컬러제거
     float2 uv : TEXCOORD; 
 };
 
 VS_OUT VS_Main(VS_IN input)
 {
     VS_OUT output = (VS_OUT) 0; 
-    //행렬(Matrix)을 이용하여 input의 위치값을 곱함
+  
     output.pos = mul(float4(input.pos, 1.f), mat);
     
-    output.color = input.color;
+   // output.color = input.color; //컬러제거
     output.uv = input.uv;
 
     

@@ -8,7 +8,8 @@
 
 #include "Camera.h"	
 #include "Transform.h" 
-#include "CameraMoveTest.h" // 포함
+#include "CameraMoveTest.h" 
+#include "Resources.h" // 포함
 
 
 void SceneManager::Render()
@@ -19,7 +20,7 @@ void SceneManager::Render()
 	const vector<shared_ptr<GameObject>>& gameObjects = currentScene->GetGameObjects();
 
 	for (auto& gameObject : gameObjects)
-	{										  
+	{
 		if (gameObject->GetCamera() == nullptr)
 			continue;
 
@@ -46,7 +47,7 @@ void SceneManager::Update()
 
 	currentScene->Update();
 	currentScene->LateUpdate();
-	
+
 	currentScene->FinalUpdate();
 }
 
@@ -55,87 +56,101 @@ shared_ptr<Scene> SceneManager::LoadSampleScene()
 {
 	shared_ptr<Scene> scene = make_shared<Scene>();
 
-#pragma region GameObject
+#pragma region Cube
 	{
-		shared_ptr<GameObject> gameObject = make_shared<GameObject>();
+		//Cube 오브젝트 생성
+		shared_ptr<GameObject> cube = make_shared<GameObject>();
+		cube->Init();
 
-		vector<Vertex> vec(4);
-		vec[0].pos = Vector3(-0.5f, 0.5f, 0.5f);
-		vec[0].color = Vector4(1.f, 0.f, 0.f, 1.f);
-		vec[0].uv = Vector2(0.f, 0.f);
-		vec[1].pos = Vector3(0.5f, 0.5f, 0.5f);
-		vec[1].color = Vector4(0.f, 1.f, 0.f, 1.f);
-		vec[1].uv = Vector2(1.f, 0.f);
-		vec[2].pos = Vector3(0.5f, -0.5f, 0.5f);
-		vec[2].color = Vector4(0.f, 0.f, 1.f, 1.f);
-		vec[2].uv = Vector2(1.f, 1.f);
-		vec[3].pos = Vector3(-0.5f, -0.5f, 0.5f);
-		vec[3].color = Vector4(0.f, 1.f, 0.f, 1.f);
-		vec[3].uv = Vector2(0.f, 1.f);
+		shared_ptr<Transform> transform = cube->GetTransform();
 
-		vector<UINT32> indexVertex;
-		indexVertex.push_back(0);
-		indexVertex.push_back(1);
-		indexVertex.push_back(2);
+		transform->SetLocalPosition(Vector3(150.f, 100.f, 200.f));	// 위치값
+		transform->SetLocalScale(Vector3(100.f, 100.f, 100.f));		// 크기값
 
-		indexVertex.push_back(0);
-		indexVertex.push_back(2);
-		indexVertex.push_back(3);
-
-		gameObject->Init();
-
-		shared_ptr<Transform> transform = gameObject->GetTransform();
-
-		transform->SetLocalPosition(Vector3(0.f, 100.f, 200.f));
-		transform->SetLocalScale(Vector3(100.f, 100.f, 1.f));
-
-
-		shared_ptr<MeshFilter> meshFilter = make_shared<MeshFilter>();
+		shared_ptr<MeshFilter> meshFilter = make_shared<MeshFilter>(); // MeshFilter 컴포넌트 생성
 
 		{
-			shared_ptr<Mesh> mesh = make_shared<Mesh>();
-			mesh->Init(vec, indexVertex);
-
+			//Cube Mesh 로드 및 생성
+			shared_ptr<Mesh> mesh = Resources::Get().LoadCubeMesh();
 			meshFilter->SetMesh(mesh);
 		}
-
 		{
+			//Shader 및 Texture 로드
 			shared_ptr<Shader> shader = make_shared<Shader>();
 			shared_ptr<Texture> texture = make_shared<Texture>();
 
 			shader->Init(L"..\\Resources\\Shader\\Default.hlsli");
 			texture->Init(L"..\\Resources\\Texture\\DirectX_Image.png");
 
+			//Material 생성 및 설정
 			shared_ptr<Material> material = make_shared<Material>();
-			material->SetShader(shader);
-			material->SetFloat(0, 0.3f);
-			material->SetFloat(1, 0.4f);
-			material->SetFloat(2, 0.3f);
-			material->SetTexture(0, texture);
-
-			meshFilter->SetMaterial(material);
-
+			material->SetShader(shader);		   //쉐이더 설정
+			material->SetTexture(0, texture);	   //텍스처 설정
+			meshFilter->SetMaterial(material);	   //MeshFilter에 Material 설정
 		}
 
-		gameObject->AddComponent(meshFilter);
-		scene->AddGameObject(gameObject);
+		//Cube 오브젝트에 MeshFilter 컴포넌트 추가
+		cube->AddComponent(meshFilter);
+		//Scene에 Cube 오브젝트 추가
+		scene->AddGameObject(cube);
 
 	}
 #pragma endregion
 
+#pragma region Sphere
+	{
+		//sphere 오브젝트 생성
+		shared_ptr<GameObject> sphere = make_shared<GameObject>();
+		sphere->Init();
+
+		shared_ptr<Transform> transform = sphere->GetTransform();
+
+		transform->SetLocalPosition(Vector3(0.f, 100.f, 200.f));	// 위치값
+		transform->SetLocalScale(Vector3(100.f, 100.f, 100.f));		// 크기값
+
+		shared_ptr<MeshFilter> meshFilter = make_shared<MeshFilter>(); // MeshFilter 컴포넌트 생성
+
+		{
+			//Cube Mesh 로드 및 생성
+			shared_ptr<Mesh> mesh = Resources::Get().LoadSphereMesh();
+			meshFilter->SetMesh(mesh);
+		}
+		{
+			//Shader 및 Texture 로드
+			shared_ptr<Shader> shader = make_shared<Shader>();
+			shared_ptr<Texture> texture = make_shared<Texture>();
+
+			shader->Init(L"..\\Resources\\Shader\\Default.hlsli");
+			texture->Init(L"..\\Resources\\Texture\\DirectX_Image.png");
+
+			//Material 생성 및 설정
+			shared_ptr<Material> material = make_shared<Material>();
+			material->SetShader(shader);		   //쉐이더 설정
+			material->SetTexture(0, texture);	   //텍스처 설정
+			meshFilter->SetMaterial(material);	   //MeshFilter에 Material 설정
+		}
+
+		//Cube 오브젝트에 MeshFilter 컴포넌트 추가
+		sphere->AddComponent(meshFilter);
+		//Scene에 Cube 오브젝트 추가
+		scene->AddGameObject(sphere);
+	}
+#pragma endregion
+
+
 #pragma region Camera
-	
-	shared_ptr<GameObject> camera = make_shared<GameObject>();
-	camera->AddComponent(make_shared<Transform>());
-	camera->AddComponent(make_shared<Camera>());
-	//카메라 움직여주는 커스텀 컴포넌트를 카메라에 붙임
-	camera->AddComponent(make_shared<CameraMoveTest>());
+	{
+		shared_ptr<GameObject> camera = make_shared<GameObject>();
+		camera->AddComponent(make_shared<Transform>());
+		camera->AddComponent(make_shared<Camera>());
+		//카메라 움직여주는 커스텀 컴포넌트를 카메라에 붙임
+		camera->AddComponent(make_shared<CameraMoveTest>());
 
-	camera->GetTransform()->SetLocalPosition(Vector3(0.f, 100.f, 0.f));
+		camera->GetTransform()->SetLocalPosition(Vector3(0.f, 100.f, 0.f));
 
 
-	scene->AddGameObject(camera);
-
+		scene->AddGameObject(camera);
+	}
 #pragma endregion
 
 

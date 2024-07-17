@@ -46,7 +46,6 @@ using namespace Microsoft::WRL;
 #endif
 
 
-//Matrix·Î º¯°æ
 struct TransformMatrix
 {
 	Matrix offset;
@@ -55,9 +54,14 @@ struct TransformMatrix
 
 struct Vertex
 {
+	Vertex() {}
+	Vertex(Vector3 p, Vector2 u, Vector3 n, Vector3 t)
+		: pos(p), uv(u), normal(n), tangent(t) {}
+
 	Vector3 pos;
-	Vector4 color;
 	Vector2 uv;
+	Vector3 normal;
+	Vector3 tangent;
 };
 
 enum class CBV_REGISTER : UINT8	 
