@@ -114,6 +114,21 @@ void ConstantBuffer::PushData(void* buffer, UINT32 size)
 	currentIndex++;
 }
 
+void ConstantBuffer::PushGlobalData(void* buffer, UINT32 size)
+{
+	//요소 크기가 256바이트 단위로 맞춰져 있는지 확인
+	assert(elementSize == ((size + 255) & ~255));
+
+
+	//매핑된 버퍼의 시작 부분에 데이터 복사
+	memcpy(&mappedBuffer[0], buffer, size);
+
+	//그래픽 명령 리스트의 루트 서명에 상수 버퍼 뷰를 설정
+	//루트 파라미터 인덱스 0번에 상수 버퍼의 GPU 가상 주소를 설정
+	Engine::Get().GetCmdQueue()->GetCmdList()->SetGraphicsRootConstantBufferView(0, GetGpuVirtualAddress(0));
+
+}
+
 D3D12_GPU_VIRTUAL_ADDRESS ConstantBuffer::GetGpuVirtualAddress(UINT32 index)
 {
 

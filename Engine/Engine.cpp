@@ -2,6 +2,7 @@
 #include "Engine.h"
 #include "Material.h" 
 #include "SceneManager.h"
+#include "Light.h" // Light 추가
 
 void Engine::Init(HWND _hwnd, int _width, int _height, bool _windowed)
 {
@@ -30,9 +31,12 @@ void Engine::Init(HWND _hwnd, int _width, int _height, bool _windowed)
 	swapChain->Init(hwnd, width, height, windowed, device->GetDevice(), device->GetDXGI(), cmdQueue->GetCmdQueue());
 	rootSignature->Init(device->GetDevice());
 
+	//b0은 LightParams 사용
+	CreateConstantBuffer(CBV_REGISTER::b0, sizeof(LightParams), 1);
 	
-	CreateConstantBuffer(CBV_REGISTER::b0, sizeof(XMFLOAT4), 256);
-	CreateConstantBuffer(CBV_REGISTER::b1, sizeof(MaterialParams), 256);
+	//b0제외한 b1,b2 사용
+	CreateConstantBuffer(CBV_REGISTER::b1, sizeof(TransformParams), 256);
+	CreateConstantBuffer(CBV_REGISTER::b2, sizeof(MaterialParams), 256);
 
 	tableDesc->Init(256);
 
@@ -47,7 +51,7 @@ void Engine::Render()
 {
 	RenderBegin();
 
-	SceneManager::Get().Render();  // Render 실행
+	SceneManager::Get().Render(); 
 
 	RenderEnd();
 }
@@ -57,7 +61,7 @@ void Engine::Update()
 	input->Update();
 	timer->Update();
 
-	SceneManager::Get().Update(); // Update 실행
+	SceneManager::Get().Update();
 
 	Render();
 

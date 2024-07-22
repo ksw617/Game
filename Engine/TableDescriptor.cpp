@@ -7,7 +7,7 @@ void TableDescriptor::Init(UINT32 count)
     groupCount = count;
 
     D3D12_DESCRIPTOR_HEAP_DESC desc = {};
-    desc.NumDescriptors = count * REGISTER_COUNT;
+    desc.NumDescriptors = count * (REGISTER_COUNT - 1); //b0~b4 => b1~b4 사용
     desc.Flags = D3D12_DESCRIPTOR_HEAP_FLAG_SHADER_VISIBLE; 
     desc.Type = D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV;    
 
@@ -15,7 +15,7 @@ void TableDescriptor::Init(UINT32 count)
 
     handleSize = Engine::Get().GetDevice()->GetDevice()->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV);
 
-    groupSize = handleSize * REGISTER_COUNT;
+    groupSize = handleSize * (REGISTER_COUNT - 1); //b0~b4 => b1~b4 사용
 }
 
 void TableDescriptor::Clear()
@@ -39,7 +39,6 @@ void TableDescriptor::SetCBV(D3D12_CPU_DESCRIPTOR_HANDLE srcHandle, CBV_REGISTER
 
 void TableDescriptor::SetSRV(D3D12_CPU_DESCRIPTOR_HANDLE srcHandle, SRV_REGISTER reg)
 {
-    //SetCBV 복붙
     D3D12_CPU_DESCRIPTOR_HANDLE destHandle = GetCPUHandle(reg);
 
     UINT32 destRange = 1;
@@ -64,14 +63,17 @@ void TableDescriptor::CommitTable()
 
 D3D12_CPU_DESCRIPTOR_HANDLE TableDescriptor::GetCPUHandle(CBV_REGISTER reg)
 {
-    //UINT8 로 변환
-    return GetCPUHandle(static_cast<UINT8>(reg));
+    //CBV_REGISTER는 b1부터 사용하게 하여 올바른 핸들을 얻음
+    UINT8 cbv_reg = static_cast<UINT8>(reg);
+    assert(cbv_reg > 0); //cbv_reg가 0보다 큰지 체크
+
+    //b0은 전역으로 사용할꺼니까 Reg를 1빼줌 b1~b4사용 
+    return GetCPUHandle(cbv_reg - 1);
 
 }
 
 D3D12_CPU_DESCRIPTOR_HANDLE TableDescriptor::GetCPUHandle(SRV_REGISTER reg)
 {
-    //UINT8 로 변환 GetCPUHandle의 CBV_REGISTER꺼 복사
     return GetCPUHandle(static_cast<UINT8>(reg));
 }
 

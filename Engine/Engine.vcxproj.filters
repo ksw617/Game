@@ -116,6 +116,9 @@
     <ClCompile Include="Resources.cpp">
       <Filter>Object\Resources</Filter>
     </ClCompile>
+    <ClCompile Include="Light.cpp">
+      <Filter>Object\Component</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h">
@@ -207,6 +210,9 @@
     </ClInclude>
     <ClInclude Include="Resources.h">
       <Filter>Object\Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="Light.h">
+      <Filter>Object\Component</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

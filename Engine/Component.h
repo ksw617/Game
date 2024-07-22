@@ -1,11 +1,12 @@
 #pragma once
-#include "Object.h" // Object 헤더 포함
+#include "Object.h"
 
 enum class COMPONENT_TYPE : UINT8
 {
 	TRANSFORM,		
 	MESH_FILTER,	
 	CAMERA, 
+	LIGHT, // LIGHT 추가
 
 	MONO_BEHAVIOUR, 
 
@@ -15,14 +16,12 @@ enum class COMPONENT_TYPE : UINT8
 
 enum
 {
-
 	FIXED_COMPONENT_COUNT = static_cast<UINT8>(COMPONENT_TYPE::END) - 1 
 };
 
 class GameObject;
 class Transform;
 
-//Object 상속
 class Component	: public Object
 {
 public:

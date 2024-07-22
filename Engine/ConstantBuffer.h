@@ -1,18 +1,18 @@
 #pragma once
 							 
-//용도별 CONSTANT_BUFFER 타입을 정의하는 열거형
+
 enum class CONSTANT_BUFFER_TYPE
 {
-	TRANSFORM,	//변환 행렬을 저장하는 상수 버퍼
-	MATERIAL,	//재질 정보를 저장하는 상수 버퍼
-	END,		//상수 버퍼 타입의 끝
+	GLOBAL,		//전역 데이터 관리
+	TRANSFORM,	
+	MATERIAL,	
+	END,		
 
 };
 
-//상수 버퍼의 총 갯수를 정의
 enum 
 {
-	CONSTANT_BUFFER_COUNT = static_cast<UINT8>(CONSTANT_BUFFER_TYPE::END) // 상수 버퍼 타입의 총 갯수
+	CONSTANT_BUFFER_COUNT = static_cast<UINT8>(CONSTANT_BUFFER_TYPE::END)
 
 };
 
@@ -46,6 +46,9 @@ public:
 	void Init(CBV_REGISTER reg, UINT32 size, UINT32 count);
 	void Clear();
 	void PushData(void* buffer, UINT32 size);
+
+	//전역 Data 넣기
+	void PushGlobalData(void* buffer, UINT32 size);
 
 
 };

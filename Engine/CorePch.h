@@ -46,9 +46,13 @@ using namespace Microsoft::WRL;
 #endif
 
 
-struct TransformMatrix
+struct TransformParams
 {
-	Matrix offset;
+	Matrix matWorld;		//월드 행렬 : 모델 좌표계를 월드 좌표계로 변환하는 행렬
+	Matrix matView;			//뷰 행렬 : 월드 좌표계를 카메라 좌표계로 변환하는 행렬
+	Matrix matProjection;	//투영 행렬 : 카메라 좌표계를 클립 공간으로 변환하는 행렬
+	Matrix matWV;			//월드-뷰 행렬 : 모델 좌표계를 카메라 좌표계로 변환하는 행렬(월드 행렬과 뷰 행렬의 곱)
+	Matrix matWVP;			//월드-뷰-프로젝션 행렬 : 모델 좌표계를 클립 공간으로 변환하는 행렬(월드-뷰 행렬과 투영 행렬의 곱)
 
 };
 
