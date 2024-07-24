@@ -3,7 +3,7 @@
 #include "Engine.h"
 
 
-void Shader::Init(const wstring& path)
+void Shader::Init(const wstring& path, ShaderInfo info)
 {
 	CreateVertexShader(path, "VS_Main", "vs_5_0");
 	CreatePixelShader(path, "PS_Main", "ps_5_0");
@@ -30,8 +30,60 @@ void Shader::Init(const wstring& path)
 	pipelineDesc.RTVFormats[0] = DXGI_FORMAT_R8G8_UNORM;
 	pipelineDesc.SampleDesc.Count = 1;
 
-	//DSVFormat 설정
+	
 	pipelineDesc.DSVFormat = Engine::Get().GetDepthStencilBuffer()->GetDSVFormat();
+
+	switch (info.rasterrizerType)		
+	{
+	case RASTERRIZER_TYPE::CULL_BACK:
+		//뒷면 컬링 사용하고, 솔리드 모드로 설정
+		pipelineDesc.RasterizerState.FillMode = D3D12_FILL_MODE_SOLID;
+		pipelineDesc.RasterizerState.CullMode = D3D12_CULL_MODE_BACK;
+		break;
+	case RASTERRIZER_TYPE::CULL_FRONT:
+		//앞면 컬링 사용하고, 솔리드 모드로 설정
+		pipelineDesc.RasterizerState.FillMode = D3D12_FILL_MODE_SOLID;
+		pipelineDesc.RasterizerState.CullMode = D3D12_CULL_MODE_FRONT;
+		break;
+	case RASTERRIZER_TYPE::CULL_NONE:
+		//컬링을 사용하지 않고, 솔리드 모드로 설정
+		pipelineDesc.RasterizerState.FillMode = D3D12_FILL_MODE_SOLID;
+		pipelineDesc.RasterizerState.CullMode = D3D12_CULL_MODE_NONE;
+		break;
+	case RASTERRIZER_TYPE::WIREFRAME:
+		//컬링을 사용하지 않고, 와이어 프레임 모드로 설정
+		pipelineDesc.RasterizerState.FillMode = D3D12_FILL_MODE_WIREFRAME;
+		pipelineDesc.RasterizerState.CullMode = D3D12_CULL_MODE_NONE;
+		break;
+	}
+
+	//깊이 스텐실 설정을 위한 switch문
+	switch (info.depthStencilType)
+	{
+	case DEPTH_STENCIL_TYPE::LESS:
+		//깊이 테스트를 활성화하고, LESS 비교 함수를 사용
+		pipelineDesc.DepthStencilState.DepthEnable = TRUE;
+		pipelineDesc.DepthStencilState.DepthFunc = D3D12_COMPARISON_FUNC_LESS;
+		break;
+	case DEPTH_STENCIL_TYPE::LESS_EQUAL:
+		//깊이 테스트를 활성화하고, LESS_EQUAL 비교 함수를 사용
+		pipelineDesc.DepthStencilState.DepthEnable = TRUE;
+		pipelineDesc.DepthStencilState.DepthFunc = D3D12_COMPARISON_FUNC_LESS_EQUAL;
+		break;
+	case DEPTH_STENCIL_TYPE::GREATER:
+		//깊이 테스트를 활성화하고, GREATER 비교 함수를 사용
+		pipelineDesc.DepthStencilState.DepthEnable = TRUE;
+		pipelineDesc.DepthStencilState.DepthFunc = D3D12_COMPARISON_FUNC_GREATER;
+		break;
+	case DEPTH_STENCIL_TYPE::GREATER_EQUAL:
+		//깊이 테스트를 활성화하고, GREATER_EQUAL 비교 함수를 사용
+		pipelineDesc.DepthStencilState.DepthEnable = TRUE;
+		pipelineDesc.DepthStencilState.DepthFunc = D3D12_COMPARISON_FUNC_GREATER_EQUAL;
+		break;
+
+	}
+
+
 
 	Engine::Get().GetDevice()->GetDevice()->CreateGraphicsPipelineState(&pipelineDesc, IID_PPV_ARGS(&pipelineState));
 
