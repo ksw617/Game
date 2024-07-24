@@ -85,24 +85,53 @@ shared_ptr<Scene> SceneManager::LoadSampleScene()
 
 #pragma region Directional Light
 	{
-		//새로운 게임 오브젝트 생성
 		shared_ptr<GameObject> light = make_shared<GameObject>();
-		//게임 오브젝트 초기화
 		light->Init();
-		//해당 게임 오브젝트에 라이트 컴포넌트 추가
 		light->AddComponent(make_shared<Light>());
-		//라이트 타입 설정(DIRECTIONAL_LIGHT)
 		light->GetLight()->SetLightType(LIGHT_TYPE::DIRECTIONAL_LIGHT);
-		//라이트의 방향 설정
-		light->GetLight()->SetLightDirection(Vector3(0.f, -1.f, 0.f));
-		//확산광 색상 설정(RGB)
-		light->GetLight()->SetDiffuse(Vector3(0.5f, 0.5f, 0.5f));
-		//주변 색상 설정(RGB)
-		light->GetLight()->SetAmbient(Vector3(0.1f, 0.1f, 0.1f));
-		//반사광 색상 설정(RGB)
-		light->GetLight()->SetSpecular(Vector3(0.3f, 0.f, 0.3f));
+		light->GetLight()->SetLightDirection(Vector3(1.f, -1.f, 1.f));
+		light->GetLight()->SetDiffuse(Vector3(0.7f, 0.f, 0.f));
+		light->GetLight()->SetAmbient(Vector3(0.3f, 0.f, 0.f));
+		light->GetLight()->SetSpecular(Vector3(0.3f, 0.3f, 0.3f));
+		scene->AddGameObject(light);
+	}
+#pragma endregion
 
-		//씬에 해당 게임 오브젝트 추가
+#pragma region Point Light
+	{
+		shared_ptr<GameObject> light = make_shared<GameObject>();
+		light->Init();
+		light->AddComponent(make_shared<Light>());
+		light->GetLight()->SetLightType(LIGHT_TYPE::POINT_LIGHT);
+		light->GetTransform()->SetLocalPosition(Vector3(-150.f, 100.f, 200.f));
+		light->GetLight()->SetDiffuse(Vector3(0.f, 0.7f, 0.f));
+		light->GetLight()->SetAmbient(Vector3(0.1f, 0.1f, 0.1f));
+		light->GetLight()->SetSpecular(Vector3(0.1f, 0.1f, 0.1f));
+
+		light->GetLight()->SetLightRange(10000.f);
+
+		scene->AddGameObject(light);
+	}
+#pragma endregion
+
+#pragma region Spot Light
+	{
+		shared_ptr<GameObject> light = make_shared<GameObject>();
+		light->Init();
+		light->AddComponent(make_shared<Light>());
+		//Spot Light 설정
+		light->GetLight()->SetLightType(LIGHT_TYPE::SPOT_LIGHT);
+		//위치 설정
+		light->GetLight()->SetLightDirection(Vector3(-1.f, 0.f, 0.f));
+		light->GetTransform()->SetLocalPosition(Vector3(150.f, 100.f, 200.f));
+		light->GetLight()->SetDiffuse(Vector3(0.f, 0.f, 0.7f));
+		light->GetLight()->SetAmbient(Vector3(0.1f, 0.1f, 0.1f));
+		light->GetLight()->SetSpecular(Vector3(0.1f, 0.1f, 0.1f));
+
+		light->GetLight()->SetLightRange(10000.f);
+		//광원의 각도 설정
+		light->GetLight()->SetLightAngle(XM_PI / 4);
+
 		scene->AddGameObject(light);
 	}
 #pragma endregion

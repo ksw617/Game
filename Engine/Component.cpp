@@ -3,7 +3,7 @@
 #include "GameObject.h"
 
 //타입 초기화
-Component::Component(COMPONENT_TYPE _type) : type(_type), Object(OBJECT_TYPE::COMPONENT)
+Component::Component(COMPONENT_TYPE _type) : componentType(_type), Object(OBJECT_TYPE::COMPONENT)
 {
 }
 

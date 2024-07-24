@@ -28,13 +28,13 @@ public:
 	Component(COMPONENT_TYPE _type);
 	virtual ~Component();
 protected:
-	COMPONENT_TYPE type;
+	COMPONENT_TYPE componentType;
 	weak_ptr<GameObject> gameObject;
 private:
 	friend class GameObject;	
 	void SetGameObject(shared_ptr<GameObject> _gameObject) { gameObject = _gameObject; }
 public:
-	COMPONENT_TYPE GetType() const { return type; }
+	COMPONENT_TYPE GetType() const { return componentType; }
 	bool IsValid() { return gameObject.expired() == false; }
 public:
 	virtual void Awake() {}
