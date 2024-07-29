@@ -3,22 +3,18 @@
 #include "Transform.h"
 #include "MeshFilter.h"
 #include "Camera.h"
-#include "Light.h" // Light 포함
+#include "Light.h"
 #include "MonoBehaviour.h"
-
 
 GameObject::GameObject() : Object(OBJECT_TYPE::GAMEOBJECT)
 {
+	//제거
 }
 
 GameObject::~GameObject()
 {
 }
 
-void GameObject::Init()
-{
-	AddComponent(make_shared<Transform>());
-}
 
 void GameObject::AddComponent(shared_ptr<Component> component)
 {
@@ -120,8 +116,6 @@ shared_ptr<Camera> GameObject::GetCamera()
 	return static_pointer_cast<Camera>(component);
 }
 
-
-//Light 반환
 shared_ptr<Light> GameObject::GetLight()
 {
 

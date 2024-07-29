@@ -5,7 +5,7 @@
 class Transform;
 class MeshFilter;
 class Camera;
-class Light; //Light 클라스 전방선언
+class Light; 
 
 class MonoBehaviour;
 
@@ -18,7 +18,6 @@ public:
 	GameObject();
 	virtual ~GameObject();
 public:
-	void Init();
 public:	
 	void Awake();
 	void Start();
@@ -30,7 +29,7 @@ public:
 	shared_ptr<MeshFilter> GetMeshFilter();
 	shared_ptr<Camera> GetCamera();
 	shared_ptr<Component> GetFixedComponent(COMPONENT_TYPE type);
-	shared_ptr<Light> GetLight(); // Light Get 함수
+	shared_ptr<Light> GetLight();
 public:
 
 	void AddComponent(shared_ptr<Component> component);
