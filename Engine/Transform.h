@@ -30,6 +30,9 @@ public:
 
 	weak_ptr<Transform> GetParent() { return parent; }
 
+	//Temp 지금은 구를 만들어 놨으니까 구의 좌표로 계산
+	float GetBoundingSphereRadius() const { return max(max(localScale.x, localScale.y), localScale.z); }
+
 public:
 	void SetParent(shared_ptr<Transform> _parent) { parent = _parent; }
 	void SetLocalPosition(const Vector3 position) { localPosition = position; }
@@ -40,7 +43,6 @@ public:
 	virtual void FinalUpdate() override;
 
 public:
-	//데이터를 최종적으로 GPU에 건내주기 위해
 	void PushDate();
 };
 

@@ -26,31 +26,44 @@ void Camera::FinalUpdate()
 	float width = static_cast<float>(Engine::Get().GetWidth());
 	float height = static_cast<float>(Engine::Get().GetHeight());
 
-	if (type == PROJECTION_TYPE::PERSPECTIVE)
+	if (projectionType == PROJECTION_TYPE::PERSPECTIVE)
 		matrixProjection = XMMatrixPerspectiveFovLH(fov, width / height, nearView, farView);
 	else
 		matrixProjection = XMMatrixOrthographicLH(width * size, height * size, nearView, farView);
 
-	StaticMatrixView = matrixView;
-	StaticMatrixProjection = matrixProjection;
+	//StaticMatrixView = matrixView;
+	//StaticMatrixProjection = matrixProjection;
+
+	viewFrustum.FinalUpdate();
 }
 
 void Camera::Render()
 {
-	//현재 씬을 가져옴
-	shared_ptr<Scene> scene = SceneManager::Get().GetCurrentScene();
+	//Render 쪽으로 이동
+	StaticMatrixView = matrixView;
+	StaticMatrixProjection = matrixProjection;
 
-	//현재 씬의 모든 게임 객체를 가져옴
+	shared_ptr<Scene> scene = SceneManager::Get().GetCurrentScene();
 	const vector<shared_ptr<GameObject>>& gameObjects = scene->GetGameObjects();
-									   
-	//각 gameObject에 대한 처리
+
 	for (auto& gameObject : gameObjects)
 	{
-		//gameObject에 MeshFilter가 없는 경우 건너띔
 		if (gameObject->GetMeshFilter() == nullptr)
 			continue;
 
-		//gameObject의 MeshFilter 컴포넌트 Render를 실행
+		//컬링 마스크에 해당 레이어가 해당 안되면 통과
+		if (IsCulled(gameObject->GetLayerIndex()))
+			continue;
+
+		if (gameObject->GetCullingMask())
+		{
+			Vector3 center = gameObject->GetTransform()->GetWorldPosition();
+			float radius = gameObject->GetTransform()->GetBoundingSphereRadius();
+
+			if (!viewFrustum.ContainsSphere(center, radius))
+				continue;
+		}
+
 		gameObject->GetMeshFilter()->Render();
 
 	}

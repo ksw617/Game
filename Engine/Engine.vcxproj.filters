@@ -119,6 +119,9 @@
     <ClCompile Include="Light.cpp">
       <Filter>Object\Component</Filter>
     </ClCompile>
+    <ClCompile Include="ViewFrustum.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h">
@@ -213,6 +216,9 @@
     </ClInclude>
     <ClInclude Include="Light.h">
       <Filter>Object\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="ViewFrustum.h">
+      <Filter>Engine</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
