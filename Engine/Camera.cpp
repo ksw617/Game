@@ -31,9 +31,6 @@ void Camera::FinalUpdate()
 	else
 		matrixProjection = XMMatrixOrthographicLH(width * size, height * size, nearView, farView);
 
-	//StaticMatrixView = matrixView;
-	//StaticMatrixProjection = matrixProjection;
-
 	viewFrustum.FinalUpdate();
 }
 

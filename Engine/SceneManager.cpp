@@ -56,23 +56,20 @@ shared_ptr<Scene> SceneManager::LoadSampleScene()
 #pragma endregion
 
 
-
 #pragma region Main Camera
 	{
 		shared_ptr<GameObject> camera = make_shared<GameObject>();
 
-		//카메라 이름 설정
 		camera->SetName(L"Main_Camera");
 
 		camera->AddComponent(make_shared<Transform>());
 		camera->AddComponent(make_shared<Camera>());
 		camera->AddComponent(make_shared<CameraMoveTest>());
 
-		camera->GetTransform()->SetLocalPosition(Vector3(0.f, 100.f, 0.f));
+		camera->GetTransform()->SetLocalPosition(Vector3(0.f, 0.f, 0.f));
 
-		//"UI" 레이어의 인덱스를 가져옴
 		UINT8 layerIndex = LayerNameToIndex(L"UI");
-		camera->GetCamera()->SetCullingMaskLayerOnOff(layerIndex, true);	//UI는 안찍음
+		camera->GetCamera()->SetCullingMaskLayerOnOff(layerIndex, true);	
 
 		scene->AddGameObject(camera);
 	}
@@ -80,27 +77,20 @@ shared_ptr<Scene> SceneManager::LoadSampleScene()
 
 #pragma region UI Camera
 	{
+		
 		shared_ptr<GameObject> camera = make_shared<GameObject>();
-
-		//카메라 이름 설정
 		camera->SetName(L"UI_Camera");
-
+		
 		camera->AddComponent(make_shared<Transform>());
 		camera->AddComponent(make_shared<Camera>());
-
-		//카메라 위치
 		camera->GetTransform()->SetLocalPosition(Vector3(0.f, 0.f, 0.f));
-
-		//카메라의 투영 타입을 ORTHOGRAPHIC타입으로 설정
 		camera->GetCamera()->SetProjectionType(PROJECTION_TYPE::ORTHOGRAPHIC);
-
-		//"UI" 레이어의 인덱스를 가져옴
+		
 		UINT8 layerIndex = LayerNameToIndex(L"UI");
-		//모든 컬링 마스크를 끄도록 설정
 		camera->GetCamera()->ClearCullingMask();
-		//"UI" 레이어만 찍도록 컬링 마스크 설정(UI레이어만 활성화)
-		camera->GetCamera()->SetCullingMaskLayerOnOff(layerIndex, false);
 
+		camera->GetCamera()->SetCullingMaskLayerOnOff(layerIndex, false);
+		
 		scene->AddGameObject(camera);
 	}
 #pragma endregion
@@ -141,24 +131,6 @@ shared_ptr<Scene> SceneManager::LoadSampleScene()
 
 #pragma endregion
 
-
-
-#pragma region Directional Light
-	{
-		shared_ptr<GameObject> light = make_shared<GameObject>();
-		light->AddComponent(make_shared<Transform>());
-
-		light->AddComponent(make_shared<Light>());
-		light->GetLight()->SetLightType(LIGHT_TYPE::DIRECTIONAL_LIGHT);
-		light->GetLight()->SetLightDirection(Vector3(1.f, -1.f, 1.f));
-		light->GetLight()->SetDiffuse(Vector3(0.7f, 0.7f, 0.7f));
-		light->GetLight()->SetAmbient(Vector3(0.3f, 0.3f, 0.3f));
-		light->GetLight()->SetSpecular(Vector3(0.3f, 0.3f, 0.3f));
-		scene->AddGameObject(light);
-	}
-#pragma endregion
-
-
 #pragma region Sphere
 	{
 		shared_ptr<GameObject> sphere = make_shared<GameObject>();
@@ -186,9 +158,11 @@ shared_ptr<Scene> SceneManager::LoadSampleScene()
 			normalMap->Init(L"..\\Resources\\Texture\\Stylized_Wood_Planks_002_normal.png");
 
 			shared_ptr<Material> material = make_shared<Material>();
+			
 			material->SetShader(shader);
 			material->SetTexture(0, texture);
 			material->SetTexture(1, normalMap);
+
 			meshFilter->SetMaterial(material);
 		}
 
@@ -196,6 +170,77 @@ shared_ptr<Scene> SceneManager::LoadSampleScene()
 		scene->AddGameObject(sphere);
 	}
 #pragma endregion
+
+#pragma region UI Plane
+	{
+		//게임 오브젝트 생성
+		shared_ptr<GameObject> plane = make_shared<GameObject>();
+
+		//게임 오브젝트 레이어 인덱스를 "UI" 레이어로 설정
+		plane->SetLayerIndex(LayerNameToIndex(L"UI"));
+
+		//Transform 컴포넌트 추가
+		plane->AddComponent(make_shared<Transform>());
+
+		//게임오브젝트 크기 설정
+		plane->GetTransform()->SetLocalScale(Vector3(100.f, 100.f, 100.f));
+		//게임오브젝트 위치 설정
+		plane->GetTransform()->SetLocalPosition(Vector3(0.f, 0.f, 500.f));
+
+		//MeshFilter 컴퍼넌트 만듬
+		shared_ptr<MeshFilter> meshFilter = make_shared<MeshFilter>();
+		{
+			//사각형 평면 매쉬 로드
+			shared_ptr<Mesh> mesh = Resources::Get().LoadRectangleMesh();
+
+			//MeshFilter에 매쉬 설정
+			meshFilter->SetMesh(mesh);
+		}
+
+		{
+
+			//쉐이더, 텍스처 할당
+			shared_ptr<Shader> shader = make_shared<Shader>();
+			shared_ptr<Texture> texture = make_shared<Texture>();
+
+			//쉐이더, 텍스처 해당 경로로 초기화
+			shader->Init(L"..\\Resources\\Shader\\Default.fx");
+			texture->Init(L"..\\Resources\\Texture\\Stylized_Wood_Planks_002_basecolor.png");
+
+			//매테리얼 생성 및 쉐이더 & 텍스처 설정
+			shared_ptr<Material> material = make_shared<Material>();
+			material->SetShader(shader);
+			material->SetTexture(0, texture);
+
+			//MeshFilter에 해당 메테리얼 설정
+			meshFilter->SetMaterial(material);
+		}
+
+		//게임오브젝트에 해당 MeshFilter 컴포넌트 추가
+		plane->AddComponent(meshFilter);
+		//현재 씬에 해당 게임오브젝트 추가
+		scene->AddGameObject(plane);
+	}
+
+
+#pragma endregion
+
+
+#pragma region Directional Light
+	{
+		shared_ptr<GameObject> light = make_shared<GameObject>();
+		light->AddComponent(make_shared<Transform>());
+
+		light->AddComponent(make_shared<Light>());
+		light->GetLight()->SetLightType(LIGHT_TYPE::DIRECTIONAL_LIGHT);
+		light->GetLight()->SetLightDirection(Vector3(1.f, -1.f, 1.f));
+		light->GetLight()->SetDiffuse(Vector3(0.7f, 0.7f, 0.7f));
+		light->GetLight()->SetAmbient(Vector3(0.3f, 0.3f, 0.3f));
+		light->GetLight()->SetSpecular(Vector3(0.3f, 0.3f, 0.3f));
+		scene->AddGameObject(light);
+	}
+#pragma endregion
+
 		 
 	return scene;
 }

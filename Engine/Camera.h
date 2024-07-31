@@ -44,7 +44,7 @@ public:
 	//카메라 투영 타입을 설정하는 set 함수
 	void SetProjectionType(PROJECTION_TYPE type) { projectionType = type; }
 	//카메라의 투영 타입을 반환하는 get 함수
-	PROJECTION_TYPE GetProjectionType() { return projectionType; }
+	PROJECTION_TYPE GetProjectionType() const { return projectionType; }
 
 public:
 	//모든 레이어의 컬링 마스크를 1로 설정하는 함수 1111 1111 1111 1111 1111 1111 1111 1111

@@ -31,8 +31,9 @@ public:
 	shared_ptr<T> GetResource(const wstring& key);
 
 public:
+	//평면 만들기
+	shared_ptr<Mesh> LoadRectangleMesh();
 	shared_ptr<Mesh> LoadCubeMesh();
-	//구 로드
 	shared_ptr<Mesh> LoadSphereMesh();
 };
 
