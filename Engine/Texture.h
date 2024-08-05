@@ -17,7 +17,7 @@ public:
 public:
 	D3D12_CPU_DESCRIPTOR_HANDLE GetCpuHandle() { return srvHandle; }
 public:
-	void Init(const wstring& path);
+	virtual void Load(const wstring& path) override;
 private:
 	void CreateTexture(const wstring& path);
 	void CreateView();

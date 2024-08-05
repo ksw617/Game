@@ -2,7 +2,8 @@
 #include "Engine.h"
 #include "Material.h" 
 #include "SceneManager.h"
-#include "Light.h" // Light 추가
+#include "Light.h" 
+#include "Resources.h"
 
 void Engine::Init(HWND _hwnd, int _width, int _height, bool _windowed)
 {
@@ -31,10 +32,7 @@ void Engine::Init(HWND _hwnd, int _width, int _height, bool _windowed)
 	swapChain->Init(hwnd, width, height, windowed, device->GetDevice(), device->GetDXGI(), cmdQueue->GetCmdQueue());
 	rootSignature->Init(device->GetDevice());
 
-	//b0은 LightParams 사용
 	CreateConstantBuffer(CBV_REGISTER::b0, sizeof(LightParams), 1);
-	
-	//b0제외한 b1,b2 사용
 	CreateConstantBuffer(CBV_REGISTER::b1, sizeof(TransformParams), 256);
 	CreateConstantBuffer(CBV_REGISTER::b2, sizeof(MaterialParams), 256);
 
@@ -43,6 +41,9 @@ void Engine::Init(HWND _hwnd, int _width, int _height, bool _windowed)
 
 	input->Init(hwnd);
 	timer->Init();
+
+	//리소스 초기화
+	Resources::Get().Init();
 
 	ResizeWindow(width, height);
 }

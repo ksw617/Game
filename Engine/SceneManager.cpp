@@ -69,7 +69,8 @@ shared_ptr<Scene> SceneManager::LoadSampleScene()
 		camera->GetTransform()->SetLocalPosition(Vector3(0.f, 0.f, 0.f));
 
 		UINT8 layerIndex = LayerNameToIndex(L"UI");
-		camera->GetCamera()->SetCullingMaskLayerOnOff(layerIndex, true);	
+		camera->GetCamera()->SetCullingMaskAll();
+		camera->GetCamera()->SetCullingMaskLayerOnOff(layerIndex, false);	
 
 		scene->AddGameObject(camera);
 	}
@@ -89,7 +90,7 @@ shared_ptr<Scene> SceneManager::LoadSampleScene()
 		UINT8 layerIndex = LayerNameToIndex(L"UI");
 		camera->GetCamera()->ClearCullingMask();
 
-		camera->GetCamera()->SetCullingMaskLayerOnOff(layerIndex, false);
+		camera->GetCamera()->SetCullingMaskLayerOnOff(layerIndex, true);
 		
 		scene->AddGameObject(camera);
 	}
@@ -110,11 +111,14 @@ shared_ptr<Scene> SceneManager::LoadSampleScene()
 		}
 	
 		{
-			shared_ptr<Shader> shader = make_shared<Shader>();
-			shared_ptr<Texture> texture = make_shared<Texture>();
+			//수정
+			shared_ptr<Shader> shader = Resources::Get().GetResource<Shader>(L"Skybox");
+			//수정
+			shared_ptr<Texture> texture = Resources::Get().Load<Texture>(L"SkyBox01", L"..\\Resources\\Texture\\skyBoxImage1.jpg");
+
 	
-			shader->Init(L"..\\Resources\\Shader\\SkyBox.fx", { RASTERRIZER_TYPE::CULL_NONE, DEPTH_STENCIL_TYPE::LESS_EQUAL });
-			texture->Init(L"..\\Resources\\Texture\\skyBoxImage1.jpg");
+			//shader->Init(L"..\\Resources\\Shader\\SkyBox.fx", { RASTERIZER_TYPE::CULL_NONE, DEPTH_STENCIL_TYPE::LESS_EQUAL });
+			//texture->Load(L"..\\Resources\\Texture\\skyBoxImage1.jpg");
 	
 			shared_ptr<Material> material = make_shared<Material>();
 			material->SetShader(shader);
@@ -149,13 +153,15 @@ shared_ptr<Scene> SceneManager::LoadSampleScene()
 			meshFilter->SetMesh(mesh);
 		}
 		{
-			shared_ptr<Shader> shader = make_shared<Shader>();
-			shared_ptr<Texture> texture = make_shared<Texture>();
-			shared_ptr<Texture> normalMap = make_shared<Texture>();
+			//수정
+			shared_ptr<Shader> shader = Resources::Get().GetResource<Shader>(L"Default");
+			shared_ptr<Texture> texture = Resources::Get().Load<Texture>(L"Wood", L"..\\Resources\\Texture\\Stylized_Wood_Planks_002_basecolor.png");
+			shared_ptr<Texture> normalMap = Resources::Get().Load<Texture>(L"Wood_Normal", L"..\\Resources\\Texture\\Stylized_Wood_Planks_002_normal.png");
 
-			shader->Init(L"..\\Resources\\Shader\\Default.fx");
-			texture->Init(L"..\\Resources\\Texture\\Stylized_Wood_Planks_002_basecolor.png");
-			normalMap->Init(L"..\\Resources\\Texture\\Stylized_Wood_Planks_002_normal.png");
+
+			//shader->Init(L"..\\Resources\\Shader\\Default.fx");
+			//texture->Load(L"..\\Resources\\Texture\\Stylized_Wood_Planks_002_basecolor.png");
+			//normalMap->Load(L"..\\Resources\\Texture\\Stylized_Wood_Planks_002_normal.png");
 
 			shared_ptr<Material> material = make_shared<Material>();
 			
@@ -199,13 +205,13 @@ shared_ptr<Scene> SceneManager::LoadSampleScene()
 
 		{
 
-			//쉐이더, 텍스처 할당
-			shared_ptr<Shader> shader = make_shared<Shader>();
-			shared_ptr<Texture> texture = make_shared<Texture>();
+			//수정
+			shared_ptr<Shader> shader = Resources::Get().GetResource<Shader>(L"Default");
+			shared_ptr<Texture> texture = Resources::Get().Load<Texture>(L"Wood", L"..\\Resources\\Texture\\Stylized_Wood_Planks_002_basecolor.png");
 
 			//쉐이더, 텍스처 해당 경로로 초기화
-			shader->Init(L"..\\Resources\\Shader\\Default.fx");
-			texture->Init(L"..\\Resources\\Texture\\Stylized_Wood_Planks_002_basecolor.png");
+			//shader->Init(L"..\\Resources\\Shader\\Default.fx");
+			//texture->Load(L"..\\Resources\\Texture\\Stylized_Wood_Planks_002_basecolor.png");
 
 			//매테리얼 생성 및 쉐이더 & 텍스처 설정
 			shared_ptr<Material> material = make_shared<Material>();

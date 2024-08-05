@@ -2,7 +2,7 @@
 #include "Texture.h"
 #include "Engine.h"
 
-void Texture::Init(const wstring& path)
+void Texture::Load(const wstring& path)
 {
 	//텍스처 생성
 	CreateTexture(path);

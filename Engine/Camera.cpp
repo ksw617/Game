@@ -49,7 +49,7 @@ void Camera::Render()
 			continue;
 
 		//컬링 마스크에 해당 레이어가 해당 안되면 통과
-		if (IsCulled(gameObject->GetLayerIndex()))
+		if (!IsCulled(gameObject->GetLayerIndex()))
 			continue;
 
 		if (gameObject->GetCullingMask())

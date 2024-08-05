@@ -29,9 +29,14 @@ public:
 
 	template<typename T>
 	shared_ptr<T> GetResource(const wstring& key);
+public:
+	//초기화 함수
+	void Init();
+private:
+	//불러올 쉐이더 만들기
+	void CreateShader();
 
 public:
-	//평면 만들기
 	shared_ptr<Mesh> LoadRectangleMesh();
 	shared_ptr<Mesh> LoadCubeMesh();
 	shared_ptr<Mesh> LoadSphereMesh();
@@ -69,7 +74,7 @@ inline shared_ptr<T> Resources::Load(const wstring& key, const wstring& path)
 
 	shared_ptr<T> object = make_shared<T>();
 	object->Load(path);
-	KeyObjMap[key] = object;
+	keyObjMap[key] = object;
 
 	return object;
 

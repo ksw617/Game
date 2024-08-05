@@ -2,7 +2,7 @@
 #include "Object.h"
 
 //래스터라이저 유형을 정의하는 열거형
-enum class RASTERRIZER_TYPE
+enum class RASTERIZER_TYPE
 {
 	CULL_NONE,		//컬링없음
 	CULL_FRONT,		//앞면 컬링
@@ -25,7 +25,7 @@ enum class DEPTH_STENCIL_TYPE
 struct ShaderInfo
 {
 	//기본적으로 뒷면 컬링을 사용
-	RASTERRIZER_TYPE rasterrizerType = RASTERRIZER_TYPE::CULL_BACK;
+	RASTERIZER_TYPE rasterrizerType = RASTERIZER_TYPE::CULL_BACK;
 
 	//기본적으로 깊이 값이 적을때 통과
 	DEPTH_STENCIL_TYPE depthStencilType = DEPTH_STENCIL_TYPE::LESS;

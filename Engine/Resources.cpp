@@ -106,6 +106,44 @@ shared_ptr<Mesh> Resources::LoadSphereMesh()
 }
 
 
+void Resources::Init()
+{
+    CreateShader();
+}
+
+void Resources::CreateShader()
+{
+    // Skybox 설정
+    {
+        // 셰이더 설정 정보 구조체 초기화
+        ShaderInfo info =
+        {
+            RASTERIZER_TYPE::CULL_NONE,     // 모든 면을 렌더링 (컬링 없음)
+            DEPTH_STENCIL_TYPE::LESS_EQUAL  // 깊이 값이 작거나 같은 경우 통과
+        };
+
+        // 셰이더 객체 생성 및 초기화
+        shared_ptr<Shader> shader = make_shared<Shader>();
+        shader->Init(L"..\\Resources\\Shader\\Skybox.fx", info); // Skybox 셰이더 파일 경로
+        Add<Shader>(L"Skybox", shader); // 리소스 매니저에 Skybox 셰이더 추가
+    }
+
+    // Default 설정 (기본)
+    {
+        // 셰이더 설정 정보 구조체 초기화 (기본값 사용)
+        ShaderInfo info =
+        {
+        };
+
+        // 셰이더 객체 생성 및 초기화
+        shared_ptr<Shader> shader = make_shared<Shader>();
+        shader->Init(L"..\\Resources\\Shader\\Default.fx", info); // Default 셰이더 파일 경로
+        Add<Shader>(L"Default", shader); // 리소스 매니저에 Default 셰이더 추가
+    }
+
+
+}
+
 shared_ptr<Mesh> Resources::LoadRectangleMesh()
 {
     //"Rectangle" 리소스를 검색하여 이미 존재하는지 확인

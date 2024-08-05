@@ -35,22 +35,22 @@ void Shader::Init(const wstring& path, ShaderInfo info)
 
 	switch (info.rasterrizerType)		
 	{
-	case RASTERRIZER_TYPE::CULL_BACK:
+	case RASTERIZER_TYPE::CULL_BACK:
 		//뒷면 컬링 사용하고, 솔리드 모드로 설정
 		pipelineDesc.RasterizerState.FillMode = D3D12_FILL_MODE_SOLID;
 		pipelineDesc.RasterizerState.CullMode = D3D12_CULL_MODE_BACK;
 		break;
-	case RASTERRIZER_TYPE::CULL_FRONT:
+	case RASTERIZER_TYPE::CULL_FRONT:
 		//앞면 컬링 사용하고, 솔리드 모드로 설정
 		pipelineDesc.RasterizerState.FillMode = D3D12_FILL_MODE_SOLID;
 		pipelineDesc.RasterizerState.CullMode = D3D12_CULL_MODE_FRONT;
 		break;
-	case RASTERRIZER_TYPE::CULL_NONE:
+	case RASTERIZER_TYPE::CULL_NONE:
 		//컬링을 사용하지 않고, 솔리드 모드로 설정
 		pipelineDesc.RasterizerState.FillMode = D3D12_FILL_MODE_SOLID;
 		pipelineDesc.RasterizerState.CullMode = D3D12_CULL_MODE_NONE;
 		break;
-	case RASTERRIZER_TYPE::WIREFRAME:
+	case RASTERIZER_TYPE::WIREFRAME:
 		//컬링을 사용하지 않고, 와이어 프레임 모드로 설정
 		pipelineDesc.RasterizerState.FillMode = D3D12_FILL_MODE_WIREFRAME;
 		pipelineDesc.RasterizerState.CullMode = D3D12_CULL_MODE_NONE;
