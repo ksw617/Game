@@ -30,11 +30,17 @@ public:
 	template<typename T>
 	shared_ptr<T> GetResource(const wstring& key);
 public:
-	//초기화 함수
 	void Init();
 private:
-	//불러올 쉐이더 만들기
 	void CreateShader();
+public:
+	// 텍스처를 생성하는 함수 맵핑
+	shared_ptr<Texture> CreateTexture(const wstring& name, DXGI_FORMAT format, UINT32 width, UINT32 height,
+		const D3D12_HEAP_PROPERTIES& heapProperty, D3D12_HEAP_FLAGS heapFlags,
+		D3D12_RESOURCE_FLAGS resFlags, Vector4 clearColor = Vector4());
+	// 리소스로부터 텍스처를 생성하는 함수 맵핑
+	shared_ptr<Texture> CreateTextureFromResource(const wstring& name, ComPtr<ID3D12Resource> tex2D);
+
 
 public:
 	shared_ptr<Mesh> LoadRectangleMesh();

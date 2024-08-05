@@ -118,6 +118,7 @@ void Resources::CreateShader()
         // 셰이더 설정 정보 구조체 초기화
         ShaderInfo info =
         {
+             SHADER_TYPE::FORWARD,
             RASTERIZER_TYPE::CULL_NONE,     // 모든 면을 렌더링 (컬링 없음)
             DEPTH_STENCIL_TYPE::LESS_EQUAL  // 깊이 값이 작거나 같은 경우 통과
         };
@@ -128,19 +129,62 @@ void Resources::CreateShader()
         Add<Shader>(L"Skybox", shader); // 리소스 매니저에 Skybox 셰이더 추가
     }
 
-    // Default 설정 (기본)
+    //Forward 설정
     {
-        // 셰이더 설정 정보 구조체 초기화 (기본값 사용)
         ShaderInfo info =
         {
+             SHADER_TYPE::FORWARD,
         };
 
-        // 셰이더 객체 생성 및 초기화
         shared_ptr<Shader> shader = make_shared<Shader>();
-        shader->Init(L"..\\Resources\\Shader\\Default.fx", info); // Default 셰이더 파일 경로
-        Add<Shader>(L"Default", shader); // 리소스 매니저에 Default 셰이더 추가
+        shader->Init(L"..\\Resources\\Shader\\Forward.fx", info);
+        Add<Shader>(L"Forward", shader);
     }
 
+    //Deffered  설정
+    {
+        ShaderInfo info =
+        {
+             SHADER_TYPE::DEFERRED,
+        };
+
+        shared_ptr<Shader> shader = make_shared<Shader>();
+        shader->Init(L"..\\Resources\\Shader\\Deferred.fx", info);
+        Add<Shader>(L"Deffered", shader);
+    }
+
+}
+
+shared_ptr<Texture> Resources::CreateTexture(const wstring& name, DXGI_FORMAT format, UINT32 width, UINT32 height, const D3D12_HEAP_PROPERTIES& heapProperty, D3D12_HEAP_FLAGS heapFlags, D3D12_RESOURCE_FLAGS resFlags, Vector4 clearColor)
+{
+    // Texture 객체 생성
+    shared_ptr<Texture> texture = make_shared<Texture>();
+
+    // 텍스처를 생성하고 초기화
+    texture->Create(format, width, height, heapProperty, heapFlags, resFlags, clearColor);
+
+    // Resources에 텍스처를 추가
+    Add(name, texture);
+
+    // 생성된 텍스처 반환
+    return texture;
+
+
+}
+
+shared_ptr<Texture> Resources::CreateTextureFromResource(const wstring& name, ComPtr<ID3D12Resource> tex2D)
+{
+    // Texture 객체 생성
+    shared_ptr<Texture> texture = make_shared<Texture>();
+
+    // 기존 리소스로부터 텍스처를 초기화
+    texture->CreateFromResource(tex2D);
+
+    // Resources에 텍스처를 추가
+    Add(name, texture);
+
+    // 생성된 텍스처 반환
+    return texture;
 
 }
 

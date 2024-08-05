@@ -111,15 +111,9 @@ shared_ptr<Scene> SceneManager::LoadSampleScene()
 		}
 	
 		{
-			//수정
 			shared_ptr<Shader> shader = Resources::Get().GetResource<Shader>(L"Skybox");
-			//수정
 			shared_ptr<Texture> texture = Resources::Get().Load<Texture>(L"SkyBox01", L"..\\Resources\\Texture\\skyBoxImage1.jpg");
 
-	
-			//shader->Init(L"..\\Resources\\Shader\\SkyBox.fx", { RASTERIZER_TYPE::CULL_NONE, DEPTH_STENCIL_TYPE::LESS_EQUAL });
-			//texture->Load(L"..\\Resources\\Texture\\skyBoxImage1.jpg");
-	
 			shared_ptr<Material> material = make_shared<Material>();
 			material->SetShader(shader);
 			material->SetTexture(0, texture);
@@ -153,15 +147,9 @@ shared_ptr<Scene> SceneManager::LoadSampleScene()
 			meshFilter->SetMesh(mesh);
 		}
 		{
-			//수정
-			shared_ptr<Shader> shader = Resources::Get().GetResource<Shader>(L"Default");
+			shared_ptr<Shader> shader = Resources::Get().GetResource<Shader>(L"Forward");
 			shared_ptr<Texture> texture = Resources::Get().Load<Texture>(L"Wood", L"..\\Resources\\Texture\\Stylized_Wood_Planks_002_basecolor.png");
 			shared_ptr<Texture> normalMap = Resources::Get().Load<Texture>(L"Wood_Normal", L"..\\Resources\\Texture\\Stylized_Wood_Planks_002_normal.png");
-
-
-			//shader->Init(L"..\\Resources\\Shader\\Default.fx");
-			//texture->Load(L"..\\Resources\\Texture\\Stylized_Wood_Planks_002_basecolor.png");
-			//normalMap->Load(L"..\\Resources\\Texture\\Stylized_Wood_Planks_002_normal.png");
 
 			shared_ptr<Material> material = make_shared<Material>();
 			
@@ -179,39 +167,24 @@ shared_ptr<Scene> SceneManager::LoadSampleScene()
 
 #pragma region UI Plane
 	{
-		//게임 오브젝트 생성
 		shared_ptr<GameObject> plane = make_shared<GameObject>();
-
-		//게임 오브젝트 레이어 인덱스를 "UI" 레이어로 설정
 		plane->SetLayerIndex(LayerNameToIndex(L"UI"));
-
-		//Transform 컴포넌트 추가
 		plane->AddComponent(make_shared<Transform>());
 
-		//게임오브젝트 크기 설정
 		plane->GetTransform()->SetLocalScale(Vector3(100.f, 100.f, 100.f));
-		//게임오브젝트 위치 설정
 		plane->GetTransform()->SetLocalPosition(Vector3(0.f, 0.f, 500.f));
 
-		//MeshFilter 컴퍼넌트 만듬
 		shared_ptr<MeshFilter> meshFilter = make_shared<MeshFilter>();
 		{
-			//사각형 평면 매쉬 로드
 			shared_ptr<Mesh> mesh = Resources::Get().LoadRectangleMesh();
-
-			//MeshFilter에 매쉬 설정
 			meshFilter->SetMesh(mesh);
 		}
 
 		{
 
 			//수정
-			shared_ptr<Shader> shader = Resources::Get().GetResource<Shader>(L"Default");
+			shared_ptr<Shader> shader = Resources::Get().GetResource<Shader>(L"Deffered");
 			shared_ptr<Texture> texture = Resources::Get().Load<Texture>(L"Wood", L"..\\Resources\\Texture\\Stylized_Wood_Planks_002_basecolor.png");
-
-			//쉐이더, 텍스처 해당 경로로 초기화
-			//shader->Init(L"..\\Resources\\Shader\\Default.fx");
-			//texture->Load(L"..\\Resources\\Texture\\Stylized_Wood_Planks_002_basecolor.png");
 
 			//매테리얼 생성 및 쉐이더 & 텍스처 설정
 			shared_ptr<Material> material = make_shared<Material>();

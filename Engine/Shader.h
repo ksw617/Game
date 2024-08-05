@@ -1,33 +1,40 @@
 #pragma once
 #include "Object.h"
 
+//쉐이더 타입
+enum class SHADER_TYPE : UINT8
+{
+	DEFERRED,
+	FORWARD,
+};
+
+
 //래스터라이저 유형을 정의하는 열거형
 enum class RASTERIZER_TYPE
 {
-	CULL_NONE,		//컬링없음
-	CULL_FRONT,		//앞면 컬링
-	CULL_BACK,		//뒷면 컬링
-	WIREFRAME,		//와이어 프레임 모드
+	CULL_NONE,		
+	CULL_FRONT,		
+	CULL_BACK,		
+	WIREFRAME,		
 
 };
 
 //깊이 스텐실 테스트 유형을 정의하는 열거형
 enum class DEPTH_STENCIL_TYPE
 {
-	LESS,			//깊이 값이 작을 때 통과
-	LESS_EQUAL,		//깊이 값이 작거나 같을 때 통과
-	GREATER,		//깊이 값이 클때 통과
-	GREATER_EQUAL,	//깊이 값이 크거나 같을 때 통과
+	LESS,			
+	LESS_EQUAL,		
+	GREATER,		
+	GREATER_EQUAL,	
 
 };
 
 //쉐이더 정보를 담고 있는 구조체
 struct ShaderInfo
 {
-	//기본적으로 뒷면 컬링을 사용
+	//쉐이더 타입 설정
+	SHADER_TYPE shaderType = SHADER_TYPE::FORWARD;
 	RASTERIZER_TYPE rasterrizerType = RASTERIZER_TYPE::CULL_BACK;
-
-	//기본적으로 깊이 값이 적을때 통과
 	DEPTH_STENCIL_TYPE depthStencilType = DEPTH_STENCIL_TYPE::LESS;
 };
 
