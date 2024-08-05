@@ -78,16 +78,35 @@ void Scene::PushLightData()
 
 void Scene::Render()
 {
-	//조명데이터 푸쉬
 	PushLightData();
 
-	//SceneManager에서 해줬던거 여기서
+	// SwapChain Group 초기화
+	// 현재 백 버퍼 인덱스를 가져와 초기화
+	UINT8 backIndex = Engine::Get().GetSwapChain()->GetBackBufferIndex();
+	Engine::Get().GetMRT(RENDER_TARGET_TYPE::SWAP_CHAIN)->ClearRenderTargetView(backIndex);
+
+
+	// Deferred Group 초기화
+	Engine::Get().GetMRT(RENDER_TARGET_TYPE::BUFFER)->ClearRenderTargetView();
+
 	for (auto& gameObject : gameObjects)
 	{
+		// 카메라 컴포넌트가 없는 오브젝트는 스킵
 		if (gameObject->GetCamera() == nullptr)
 			continue;
 
-		gameObject->GetCamera()->Render();
+		//gameObject->GetCamera()->Render();
+
+		// 게임 오브젝트를 정렬 (지연 렌더링과 전방 렌더링으로 분류)
+		gameObject->GetCamera()->SortGameObject();
+
+		// 지연 렌더링 OMSet (Output Merger State 설정)
+		Engine::Get().GetMRT(RENDER_TARGET_TYPE::BUFFER)->OMSetRenderTargets();
+		gameObject->GetCamera()->RenderDeferred();
+
+		// 스와체인 OMSet (Output Merger State 설정)
+		Engine::Get().GetMRT(RENDER_TARGET_TYPE::SWAP_CHAIN)->OMSetRenderTargets(1, backIndex);
+		gameObject->GetCamera()->RenderDeferred();
 	}
 }
 

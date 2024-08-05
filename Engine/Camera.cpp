@@ -6,7 +6,7 @@
 #include "SceneManager.h"
 #include "GameObject.h"
 #include "MeshFilter.h"
-
+#include "Material.h"  // 추가
 
 Matrix Camera::StaticMatrixView;
 Matrix Camera::StaticMatrixProjection;
@@ -34,17 +34,20 @@ void Camera::FinalUpdate()
 	viewFrustum.FinalUpdate();
 }
 
-void Camera::Render()
+void Camera::SortGameObject()
 {
-	//Render 쪽으로 이동
-	StaticMatrixView = matrixView;
-	StaticMatrixProjection = matrixProjection;
-
+	// 현재 씬 가져오기
 	shared_ptr<Scene> scene = SceneManager::Get().GetCurrentScene();
 	const vector<shared_ptr<GameObject>>& gameObjects = scene->GetGameObjects();
 
+	//Deferred용 Forward용 클리어
+	deferredObjs.clear();
+	forwardObjs.clear();
+
+	// 게임 오브젝트들을 순회하며 정렬
 	for (auto& gameObject : gameObjects)
 	{
+		// MeshFilter가 없으면 스킵
 		if (gameObject->GetMeshFilter() == nullptr)
 			continue;
 
@@ -52,6 +55,7 @@ void Camera::Render()
 		if (!IsCulled(gameObject->GetLayerIndex()))
 			continue;
 
+		//뷰 프러스텀 컬링
 		if (gameObject->GetCullingMask())
 		{
 			Vector3 center = gameObject->GetTransform()->GetWorldPosition();
@@ -61,7 +65,59 @@ void Camera::Render()
 				continue;
 		}
 
+		//해당 게임 오브젝트 쉐이더 타입 받아오기
+		SHADER_TYPE shaderType = gameObject->GetMeshFilter()->GetMaterial()->GetShader()->GetShaderType();
+		switch (shaderType)
+		{
+			//쉐이더 타입이 DEFERRED 경우
+			case SHADER_TYPE::DEFERRED:
+				//deferredObjs에 해당 gameObject 넣어주기
+				deferredObjs.push_back(gameObject);
+				break;
+				//쉐이더 타입이 FORWARD 경우
+			case SHADER_TYPE::FORWARD:
+				//forwardObjs에 해당 gameObject 넣어주기
+				forwardObjs.push_back(gameObject);
+				break;
+		default:
+			break;
+		}
+	}
+
+	
+}
+
+void Camera::RenderDeferred()
+{
+	// 정적 뷰 및 투영 행렬 설정
+	StaticMatrixView = matrixView;
+	StaticMatrixProjection = matrixProjection;
+
+	//deferredObjs 랜더
+	for (auto& gameObject : deferredObjs)
+	{
+
 		gameObject->GetMeshFilter()->Render();
 
 	}
 }
+
+void Camera::RenderForward()
+{
+	// 정적 뷰 및 투영 행렬 설정
+	StaticMatrixView = matrixView;
+	StaticMatrixProjection = matrixProjection;
+
+	//forwardObjs 랜더
+	for (auto& gameObject : forwardObjs)
+	{
+
+		gameObject->GetMeshFilter()->Render();
+
+	}
+}
+
+//삭제
+//void Camera::Render()
+//{
+//}

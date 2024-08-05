@@ -189,6 +189,7 @@
     <ClInclude Include="DepthStencilBuffer.h" />
     <ClInclude Include="Device.h" />
     <ClInclude Include="Engine.h" />
+    <ClInclude Include="MultipleRenderTarget.h" />
     <ClInclude Include="ViewFrustum.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="Input.h" />
@@ -222,6 +223,7 @@
     <ClCompile Include="DepthStencilBuffer.cpp" />
     <ClCompile Include="Device.cpp" />
     <ClCompile Include="Engine.cpp" />
+    <ClCompile Include="MultipleRenderTarget.cpp" />
     <ClCompile Include="ViewFrustum.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="Input.cpp" />

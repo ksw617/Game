@@ -147,7 +147,8 @@ shared_ptr<Scene> SceneManager::LoadSampleScene()
 			meshFilter->SetMesh(mesh);
 		}
 		{
-			shared_ptr<Shader> shader = Resources::Get().GetResource<Shader>(L"Forward");
+			//Deffered로 수정
+			shared_ptr<Shader> shader = Resources::Get().GetResource<Shader>(L"Deffered");
 			shared_ptr<Texture> texture = Resources::Get().Load<Texture>(L"Wood", L"..\\Resources\\Texture\\Stylized_Wood_Planks_002_basecolor.png");
 			shared_ptr<Texture> normalMap = Resources::Get().Load<Texture>(L"Wood_Normal", L"..\\Resources\\Texture\\Stylized_Wood_Planks_002_normal.png");
 
@@ -166,13 +167,15 @@ shared_ptr<Scene> SceneManager::LoadSampleScene()
 #pragma endregion
 
 #pragma region UI Plane
+	for (int i = 0; i < 3; i++)
 	{
 		shared_ptr<GameObject> plane = make_shared<GameObject>();
 		plane->SetLayerIndex(LayerNameToIndex(L"UI"));
 		plane->AddComponent(make_shared<Transform>());
 
 		plane->GetTransform()->SetLocalScale(Vector3(100.f, 100.f, 100.f));
-		plane->GetTransform()->SetLocalPosition(Vector3(0.f, 0.f, 500.f));
+		//위치값 수정
+		plane->GetTransform()->SetLocalPosition(Vector3(-350.f + i * 160.f, 250.f, 500.f));
 
 		shared_ptr<MeshFilter> meshFilter = make_shared<MeshFilter>();
 		{
@@ -182,22 +185,19 @@ shared_ptr<Scene> SceneManager::LoadSampleScene()
 
 		{
 
-			//수정
-			shared_ptr<Shader> shader = Resources::Get().GetResource<Shader>(L"Deffered");
-			shared_ptr<Texture> texture = Resources::Get().Load<Texture>(L"Wood", L"..\\Resources\\Texture\\Stylized_Wood_Planks_002_basecolor.png");
+			//Forward로 수정
+			shared_ptr<Shader> shader = Resources::Get().GetResource<Shader>(L"Forward");
+			shared_ptr<Texture> texture = Engine::Get().GetMRT(RENDER_TARGET_TYPE::BUFFER)->GetRTTexture(i);
+			//shared_ptr<Texture> texture = Resources::Get().Load<Texture>(L"Wood", L"..\\Resources\\Texture\\Stylized_Wood_Planks_002_basecolor.png");
 
-			//매테리얼 생성 및 쉐이더 & 텍스처 설정
 			shared_ptr<Material> material = make_shared<Material>();
 			material->SetShader(shader);
 			material->SetTexture(0, texture);
 
-			//MeshFilter에 해당 메테리얼 설정
 			meshFilter->SetMaterial(material);
 		}
 
-		//게임오브젝트에 해당 MeshFilter 컴포넌트 추가
 		plane->AddComponent(meshFilter);
-		//현재 씬에 해당 게임오브젝트 추가
 		scene->AddGameObject(plane);
 	}
 

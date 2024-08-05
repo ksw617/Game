@@ -5,15 +5,15 @@
 
 void Shader::Init(const wstring& path, ShaderInfo info)
 {
+	shaderInfo = info;
+
 	CreateVertexShader(path, "VS_Main", "vs_5_0");
 	CreatePixelShader(path, "PS_Main", "ps_5_0");
 
 	D3D12_INPUT_ELEMENT_DESC desc[] = {
 
 		{"POSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 0, D3D12_INPUT_CLASSIFICATION_PER_VERTEX_DATA, 0},
-		//{"COLOR", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 12, D3D12_INPUT_CLASSIFICATION_PER_VERTEX_DATA, 0},
 		{"TEXCOORD", 0, DXGI_FORMAT_R32G32_FLOAT, 0, 12, D3D12_INPUT_CLASSIFICATION_PER_VERTEX_DATA, 0},
-		//Normal & Tangent 추가
 		{"NORMAL", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 20, D3D12_INPUT_CLASSIFICATION_PER_VERTEX_DATA, 0},
 		{"TANGENT", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 32, D3D12_INPUT_CLASSIFICATION_PER_VERTEX_DATA, 0},
 	};
@@ -25,58 +25,72 @@ void Shader::Init(const wstring& path, ShaderInfo info)
 	pipelineDesc.BlendState = CD3DX12_BLEND_DESC(D3D12_DEFAULT);
 	pipelineDesc.DepthStencilState = CD3DX12_DEPTH_STENCIL_DESC(D3D12_DEFAULT);
 	pipelineDesc.SampleMask = UINT_MAX;
-	pipelineDesc.PrimitiveTopologyType = D3D12_PRIMITIVE_TOPOLOGY_TYPE_TRIANGLE;
+	//토폴로지를 다른 타입으로도 선택 할수 있게
+	pipelineDesc.PrimitiveTopologyType = info.topologyType;
 	pipelineDesc.NumRenderTargets = 1;
 	pipelineDesc.RTVFormats[0] = DXGI_FORMAT_R8G8_UNORM;
 	pipelineDesc.SampleDesc.Count = 1;
 
+	switch (info.shaderType)	
+	{
+		//Deferred 쉐이더 타입
+	case SHADER_TYPE::DEFERRED:
+		//렌더 타겟 갯수를 3으로 설정(Position, Normal, Color)
+		pipelineDesc.NumRenderTargets = RENDER_TARGET_BUFFER_MEMBER_COUNT;
+
+		pipelineDesc.RTVFormats[0] = DXGI_FORMAT_R32G32B32A32_FLOAT; // Position
+		pipelineDesc.RTVFormats[1] = DXGI_FORMAT_R32G32B32A32_FLOAT; //	Normal
+		pipelineDesc.RTVFormats[2] = DXGI_FORMAT_R8G8B8A8_UNORM;	 // Color
+		break;
+		//Forward 쉐이더 타입
+	case SHADER_TYPE::FORWARD:
+		//렌더 타겟 갯수를 1로 설정
+		pipelineDesc.NumRenderTargets = 1;
+		//렌더 타겟의 포맷 설정
+		pipelineDesc.RTVFormats[0] = DXGI_FORMAT_R8G8B8A8_UNORM; // Position
+		break;
+	default:
+		break;
+	}
 	
-	pipelineDesc.DSVFormat = Engine::Get().GetDepthStencilBuffer()->GetDSVFormat();
+	//삭제
+	//pipelineDesc.DSVFormat = Engine::Get().GetDepthStencilBuffer()->GetDSVFormat();
 
 	switch (info.rasterrizerType)		
 	{
 	case RASTERIZER_TYPE::CULL_BACK:
-		//뒷면 컬링 사용하고, 솔리드 모드로 설정
 		pipelineDesc.RasterizerState.FillMode = D3D12_FILL_MODE_SOLID;
 		pipelineDesc.RasterizerState.CullMode = D3D12_CULL_MODE_BACK;
 		break;
 	case RASTERIZER_TYPE::CULL_FRONT:
-		//앞면 컬링 사용하고, 솔리드 모드로 설정
 		pipelineDesc.RasterizerState.FillMode = D3D12_FILL_MODE_SOLID;
 		pipelineDesc.RasterizerState.CullMode = D3D12_CULL_MODE_FRONT;
 		break;
 	case RASTERIZER_TYPE::CULL_NONE:
-		//컬링을 사용하지 않고, 솔리드 모드로 설정
 		pipelineDesc.RasterizerState.FillMode = D3D12_FILL_MODE_SOLID;
 		pipelineDesc.RasterizerState.CullMode = D3D12_CULL_MODE_NONE;
 		break;
 	case RASTERIZER_TYPE::WIREFRAME:
-		//컬링을 사용하지 않고, 와이어 프레임 모드로 설정
 		pipelineDesc.RasterizerState.FillMode = D3D12_FILL_MODE_WIREFRAME;
 		pipelineDesc.RasterizerState.CullMode = D3D12_CULL_MODE_NONE;
 		break;
 	}
 
-	//깊이 스텐실 설정을 위한 switch문
 	switch (info.depthStencilType)
 	{
 	case DEPTH_STENCIL_TYPE::LESS:
-		//깊이 테스트를 활성화하고, LESS 비교 함수를 사용
 		pipelineDesc.DepthStencilState.DepthEnable = TRUE;
 		pipelineDesc.DepthStencilState.DepthFunc = D3D12_COMPARISON_FUNC_LESS;
 		break;
 	case DEPTH_STENCIL_TYPE::LESS_EQUAL:
-		//깊이 테스트를 활성화하고, LESS_EQUAL 비교 함수를 사용
 		pipelineDesc.DepthStencilState.DepthEnable = TRUE;
 		pipelineDesc.DepthStencilState.DepthFunc = D3D12_COMPARISON_FUNC_LESS_EQUAL;
 		break;
 	case DEPTH_STENCIL_TYPE::GREATER:
-		//깊이 테스트를 활성화하고, GREATER 비교 함수를 사용
 		pipelineDesc.DepthStencilState.DepthEnable = TRUE;
 		pipelineDesc.DepthStencilState.DepthFunc = D3D12_COMPARISON_FUNC_GREATER;
 		break;
 	case DEPTH_STENCIL_TYPE::GREATER_EQUAL:
-		//깊이 테스트를 활성화하고, GREATER_EQUAL 비교 함수를 사용
 		pipelineDesc.DepthStencilState.DepthEnable = TRUE;
 		pipelineDesc.DepthStencilState.DepthFunc = D3D12_COMPARISON_FUNC_GREATER_EQUAL;
 		break;

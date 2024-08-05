@@ -51,13 +51,21 @@ void CommandQueue::RenderBegin(const D3D12_VIEWPORT* vp, const D3D12_RECT* rect)
 	cmdAlloc->Reset();
 	cmdList->Reset(cmdAlloc.Get(), nullptr);
 
-	D3D12_RESOURCE_BARRIER barrier = CD3DX12_RESOURCE_BARRIER::Transition(
-		swapChain->GetBackRTVBuffer().Get(), D3D12_RESOURCE_STATE_PRESENT, D3D12_RESOURCE_STATE_RENDER_TARGET);
+	//swapChain에서 BufferIndex값 불러오기
+	UINT8 backBufferIndex = swapChain->GetBackBufferIndex();
 
+	//수정
+	//D3D12_RESOURCE_BARRIER barrier = CD3DX12_RESOURCE_BARRIER::Transition(
+	//	swapChain->GetBackRTVBuffer().Get(), D3D12_RESOURCE_STATE_PRESENT, D3D12_RESOURCE_STATE_RENDER_TARGET);
+	
+	//변경
+	//swapChain->GetBackRTVBuffer().Get() 이것을
+	//Engine::Get().GetMRT(RENDER_TARGET_TYPE::SWAP_CHAIN)->GetRTTexture(backBufferIndex)->GetTexture2D().Get()	 이걸로 변경
+	D3D12_RESOURCE_BARRIER barrier = CD3DX12_RESOURCE_BARRIER::Transition(
+		Engine::Get().GetMRT(RENDER_TARGET_TYPE::SWAP_CHAIN)->GetRTTexture(backBufferIndex)->GetTexture2D().Get(), D3D12_RESOURCE_STATE_PRESENT, D3D12_RESOURCE_STATE_RENDER_TARGET);
 	
 	cmdList->SetGraphicsRootSignature(Engine::Get().GetRootSignature()->GetSignature().Get());
 	
-	//변경
 	Engine::Get().GetConstantBuffer(CONSTANT_BUFFER_TYPE::TRANSFORM)->Clear();
 	Engine::Get().GetConstantBuffer(CONSTANT_BUFFER_TYPE::MATERIAL)->Clear();
 
@@ -71,20 +79,32 @@ void CommandQueue::RenderBegin(const D3D12_VIEWPORT* vp, const D3D12_RECT* rect)
 	cmdList->RSSetScissorRects(1, rect);
 
 
-	D3D12_CPU_DESCRIPTOR_HANDLE backBufferView = swapChain->GetBackRTV();
-
-	cmdList->ClearRenderTargetView(backBufferView, Colors::Black, 0, nullptr);
-
-	D3D12_CPU_DESCRIPTOR_HANDLE depthStencilView = Engine::Get().GetDepthStencilBuffer()->GetDSVCPUHandle();
-
-	cmdList->OMSetRenderTargets(1, &backBufferView, FALSE, &depthStencilView);
-	cmdList->ClearDepthStencilView(depthStencilView, D3D12_CLEAR_FLAG_DEPTH, 1.0f, 0, 0, nullptr);
+	//사용안함
+	//D3D12_CPU_DESCRIPTOR_HANDLE backBufferView = swapChain->GetBackRTV();
+	//
+	//cmdList->ClearRenderTargetView(backBufferView, Colors::Black, 0, nullptr);
+	//
+	//D3D12_CPU_DESCRIPTOR_HANDLE depthStencilView = Engine::Get().GetDepthStencilBuffer()->GetDSVCPUHandle();
+	//
+	//cmdList->OMSetRenderTargets(1, &backBufferView, FALSE, &depthStencilView);
+	//cmdList->ClearDepthStencilView(depthStencilView, D3D12_CLEAR_FLAG_DEPTH, 1.0f, 0, 0, nullptr);
 }
 
 void CommandQueue::RenderEnd()
 {
+
+	//swapChain에서 BufferIndex값 불러오기
+	UINT8 backBufferIndex = swapChain->GetBackBufferIndex();
+
+	//D3D12_RESOURCE_BARRIER barrier = CD3DX12_RESOURCE_BARRIER::Transition(
+	//	swapChain->GetBackRTVBuffer().Get(), D3D12_RESOURCE_STATE_RENDER_TARGET, D3D12_RESOURCE_STATE_PRESENT);
+
+	//변경
+	//swapChain->GetBackRTVBuffer().Get() 이것을
+	//Engine::Get().GetMRT(RENDER_TARGET_TYPE::SWAP_CHAIN)->GetRTTexture(backBufferIndex)->GetTexture2D().Get()	 이걸로 변경
 	D3D12_RESOURCE_BARRIER barrier = CD3DX12_RESOURCE_BARRIER::Transition(
-		swapChain->GetBackRTVBuffer().Get(), D3D12_RESOURCE_STATE_RENDER_TARGET, D3D12_RESOURCE_STATE_PRESENT);
+		Engine::Get().GetMRT(RENDER_TARGET_TYPE::SWAP_CHAIN)->GetRTTexture(backBufferIndex)->GetTexture2D().Get(), D3D12_RESOURCE_STATE_PRESENT, D3D12_RESOURCE_STATE_RENDER_TARGET);
+
 
 	cmdList->ResourceBarrier(1, &barrier);
 

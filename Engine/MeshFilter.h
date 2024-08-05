@@ -15,12 +15,13 @@ public:
 	virtual ~MeshFilter() {}
 
 public:
+	//material Get 함수
+	shared_ptr<Material> GetMaterial() { return material; }
+public:
 	void SetMesh(shared_ptr<Mesh> _mesh) { mesh = _mesh; }
 	void SetMaterial(shared_ptr<Material> _mat) { material = _mat; }
 public:
 	void Render();
-	//삭제
-	//virtual void Update() override { Render(); }
 
 };
 

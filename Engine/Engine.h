@@ -1,5 +1,5 @@
 #pragma once
-#include "Singleton.h"  // Singleton 호출
+#include "Singleton.h"  
 #include "Device.h"
 #include "CommandQueue.h"
 #include "SwapChain.h"
@@ -14,9 +14,10 @@
 #include "Input.h" 
 #include "Timer.h"
 
+#include "MultipleRenderTarget.h" // 추가
+
 class Engine : public Singleton<Engine>
 {
-	//Singleton 클라스가 private 생성자에 접근할수 있게
 	friend class Singleton<Engine>;
 
 private:   
@@ -37,7 +38,10 @@ private:
 	shared_ptr<SwapChain> swapChain; 
 	shared_ptr<RootSignature> rootSignature;
 	shared_ptr<TableDescriptor> tableDesc;
-	shared_ptr<DepthStencilBuffer> depthStencilBuffer;	
+	//shared_ptr<DepthStencilBuffer> depthStencilBuffer;	
+
+	//MultipleRenderTarget 갯수만큼 배열
+	array<shared_ptr<MultipleRenderTarget>, RENDER_TARGET_COUNT> mrts;
 
 	shared_ptr<Input> input; 
 	shared_ptr<Timer> timer; 
@@ -49,12 +53,15 @@ public:
 	shared_ptr<SwapChain> GetSwapChain() { return swapChain; }
 	shared_ptr<RootSignature> GetRootSignature() { return rootSignature; }
 	shared_ptr<TableDescriptor> GetTableDesc() { return tableDesc; }
-	shared_ptr<DepthStencilBuffer> GetDepthStencilBuffer() { return depthStencilBuffer; }
+	//shared_ptr<DepthStencilBuffer> GetDepthStencilBuffer() { return depthStencilBuffer; }
 
 	shared_ptr<Input> GetInput() { return input; }
 	shared_ptr<Timer> GetTimer() { return timer; }
 
 	shared_ptr<ConstantBuffer> GetConstantBuffer(CONSTANT_BUFFER_TYPE type) { return constantBuffers[static_cast<UINT8>(type)]; }
+
+	//MultipleRenderTarget Get 함수
+	shared_ptr<MultipleRenderTarget> GetMRT(RENDER_TARGET_TYPE type) { return mrts[static_cast<UINT8>(type)]; }
 
 	int GetWidth() const { return width; }
 	int GetHeight() const { return height; }
@@ -66,6 +73,9 @@ public:
 	void ShowFPS(); 
 
 	void CreateConstantBuffer(CBV_REGISTER reg, UINT32 bufferSize, UINT32 count);
+
+	//MultipleRenderTarget 만들어 주는 함수
+	void CreateMultipleRenderTarget();
 public:
 	void RenderBegin();
 	void RenderEnd();

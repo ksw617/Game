@@ -122,6 +122,9 @@
     <ClCompile Include="ViewFrustum.cpp">
       <Filter>Engine</Filter>
     </ClCompile>
+    <ClCompile Include="MultipleRenderTarget.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h">
@@ -218,6 +221,9 @@
       <Filter>Object\Component</Filter>
     </ClInclude>
     <ClInclude Include="ViewFrustum.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="MultipleRenderTarget.h">
       <Filter>Engine</Filter>
     </ClInclude>
   </ItemGroup>

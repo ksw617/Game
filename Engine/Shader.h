@@ -1,15 +1,12 @@
 #pragma once
 #include "Object.h"
 
-//쉐이더 타입
 enum class SHADER_TYPE : UINT8
 {
 	DEFERRED,
 	FORWARD,
 };
 
-
-//래스터라이저 유형을 정의하는 열거형
 enum class RASTERIZER_TYPE
 {
 	CULL_NONE,		
@@ -19,7 +16,6 @@ enum class RASTERIZER_TYPE
 
 };
 
-//깊이 스텐실 테스트 유형을 정의하는 열거형
 enum class DEPTH_STENCIL_TYPE
 {
 	LESS,			
@@ -29,18 +25,20 @@ enum class DEPTH_STENCIL_TYPE
 
 };
 
-//쉐이더 정보를 담고 있는 구조체
 struct ShaderInfo
 {
-	//쉐이더 타입 설정
 	SHADER_TYPE shaderType = SHADER_TYPE::FORWARD;
 	RASTERIZER_TYPE rasterrizerType = RASTERIZER_TYPE::CULL_BACK;
 	DEPTH_STENCIL_TYPE depthStencilType = DEPTH_STENCIL_TYPE::LESS;
+	//토폴로지도 추가
+	D3D12_PRIMITIVE_TOPOLOGY_TYPE topologyType = D3D12_PRIMITIVE_TOPOLOGY_TYPE_TRIANGLE;
 };
 
 class Shader : public Object
 {
 private:
+	//쉐이더 정보 들고 있게
+	ShaderInfo shaderInfo;
 	ComPtr<ID3DBlob> vsBlob; 
 	ComPtr<ID3DBlob> psBlob; 
 	ComPtr<ID3DBlob> errBlob;
@@ -50,12 +48,15 @@ private:
 public:
 	Shader() : Object(OBJECT_TYPE::SHADER) {}
 	virtual ~Shader() {}
+public:
+	//쉐이더 타입 Get 함수
+	SHADER_TYPE GetShaderType() const { return shaderInfo.shaderType; }
 private:
 	void CreateShader(const wstring& path, const string& name, const string& version, ComPtr<ID3DBlob>& blob, D3D12_SHADER_BYTECODE& shaderByteCode);
 	void CreateVertexShader(const wstring& path, const string& name, const string& version);
 	void CreatePixelShader(const wstring& path, const string& name, const string& version);
 public:
-	//초기화
+
 	void Init(const wstring& path, ShaderInfo info = ShaderInfo());
 	void Update();
 	
